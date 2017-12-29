@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}My Website{% endblock %}</title>
-  </head>
-  <body>
-    {% block body %}
-      {% for post in posts %}
-        {{ post.title }}
-      {% endfor %}
-    {% endblock body %}
-  </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Home - {{ block.super }}{% endblock %}
+
+{% block body %}
+  <a href="{% url 'blog' %}">Blog</a>
+{% endblock body %}
