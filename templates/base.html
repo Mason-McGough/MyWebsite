@@ -14,6 +14,9 @@
         <div id="WebGL-Canvas" class="backdrop"></div>
       {% endblock backdrop %}
 
+      <!-- fixes bug involving container margin -->
+      <div style="height: 1px;"></div>
+
       <div class="container rounded mainwindow">
         {% block content %}
         {% endblock content %}

@@ -1,6 +1,6 @@
-/*body {
+body {
     overflow: hidden;
-}*/
+}
 
 .backdrop {
     position: fixed;
@@ -8,13 +8,14 @@
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: #00aaff;
+    background: #000000;
     z-index: -100;
 }
 
 .mainwindow {
     min-height: 80%;
     width: 80%;
-    margin: 20px auto 40px auto; 
+    padding: 10px 10px 20px 20px;
+    margin: 60px auto 60px auto; 
     background-color: white;
 }
