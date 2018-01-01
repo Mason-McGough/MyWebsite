@@ -19,6 +19,7 @@ var seafloorBobTimeScale = 0.0005;
 var sphereYBounds = [-sphereSpread/2, sphereSpread/2];
 
 init();
+window.addEventListener( 'resize', onWindowResize, false );
 container.addEventListener('mouseover', onEventMouseOverCanvas, false);
 container.addEventListener('mouseout', onEventMouseLeftCanvas, false);
 container.addEventListener('mousemove', onEventGetMouseCoordinates, false);
@@ -108,6 +109,13 @@ function init() {
     }
     
     animate();
+}
+
+function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function randomlyDistribute(object) {
