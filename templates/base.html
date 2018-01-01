@@ -8,6 +8,13 @@
   </head>
   <body>
     {% block body %}
+      <!-- ADD A NAVIGATION BAR -->
+
+      <div class="backdrop">
+        {% block backdrop %}
+        {% endblock backdrop %}
+      </div>
+
       <div class="container rounded mainwindow">
         {% block content %}
         {% endblock content %}
