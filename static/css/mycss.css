@@ -1,3 +1,7 @@
+/*body {
+    overflow: hidden;
+}*/
+
 .backdrop {
     position: fixed;
     margin: 0;
