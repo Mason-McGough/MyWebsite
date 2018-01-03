@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=64, unique=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=128)
 
 class Comment(models.Model):

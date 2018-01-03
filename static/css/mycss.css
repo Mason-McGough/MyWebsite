@@ -19,3 +19,26 @@ body {
     margin: 60px auto 60px auto; 
     background-color: white;
 }
+
+.page-title {
+    padding: 10px 10px 10px 20px;
+}
+
+.page-content {
+
+}
+
+/* BLOG */
+.post-link {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.post-date {
+    font-size: 16px;
+    font-color: gray;
+}
+
+.post-description {
+    font-size: 16px;
+}
