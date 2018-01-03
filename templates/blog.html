@@ -11,12 +11,12 @@
     <ul class="posts">
       {% for post in posts %}
         <li>
-          <div class="post-link"><a>{{ post.title }}</a></div>
+          <div class="post-link"><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></div>
           <div class="post-date">{{ post.date_posted }}</div>
           <div class="post-description">{{ post.description }}</div>
         </li>
         <li>
-          <div class="post-link"><a>{{ post.title }}</a></div>
+          <div class="post-link"><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></div>
           <div class="post-date">{{ post.date_posted }}</div>
           <div class="post-description">{{ post.description }}</div>
         </li>
