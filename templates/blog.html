@@ -8,12 +8,17 @@
   </div>
 
   <div class="page-content">
-    <ul>
+    <ul class="posts">
       {% for post in posts %}
         <li>
-          <a class="post-link">{{ post.title }}</a>
-          <span class="post-date">{{ post.date_posted }}</span>
-          <span class="post-description">{{ post.description }}</span>
+          <div class="post-link"><a>{{ post.title }}</a></div>
+          <div class="post-date">{{ post.date_posted }}</div>
+          <div class="post-description">{{ post.description }}</div>
+        </li>
+        <li>
+          <div class="post-link"><a>{{ post.title }}</a></div>
+          <div class="post-date">{{ post.date_posted }}</div>
+          <div class="post-description">{{ post.description }}</div>
         </li>
       {% endfor %}
     </ul>

@@ -29,6 +29,14 @@ body {
 }
 
 /* BLOG */
+.posts {
+    list-style-type: none;
+}
+
+.posts li {
+    margin-bottom: 30px;
+}
+
 .post-link {
     font-size: 24px;
     font-weight: bold;
