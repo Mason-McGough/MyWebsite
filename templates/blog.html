@@ -30,19 +30,26 @@
 
 {% block extra_js %}
   <script>
-    // links to blog posts
-    $("#posts-list").click(function (e) {
-        if (e.target !== e.currentTarget && $(e.target).hasClass('post-link')) {
-            $.ajax({
-                method: "GET",
-                url: "{% url 'blog' %}" + e.target.id + '/',
-                success: function(response) {
-                    $("#blog-holder").replaceWith(response);
-                }
-            })
-        }
+      var blog_holder_original = $("#blog-holder").html();
+  
+      // links to blog posts
+      $("#blog-holder").click(function(e) {
+          if (e.target !== e.currentTarget && $(e.target).hasClass('post-link')) {
+              $.ajax({
+                  method: "GET",
+                  url: "{% url 'blog' %}" + e.target.id + '/',
+                  success: function(response) {
+                      $("#blog-holder").html(response);
 
-        return false;
-    });
+                      // can only attach listener after it is rendered
+                      $(".blog-return-link").click(function(e) {
+                          $("#blog-holder").html(blog_holder_original);
+                      });
+                  }
+              })
+          }
+  
+          return false;
+      });
   </script>
 {% endblock extra_js %}
