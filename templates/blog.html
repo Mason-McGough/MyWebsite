@@ -4,38 +4,40 @@
 {% block title %}Blog - {{ block.super }}{% endblock %}
 
 {% block content %}
-  <div class="page-title">
-    <h1>Blog</h1>
-  </div>
-
-  <div class="page-content">
-    <ul id="posts-list" class="posts">
-      {% for post in posts %}
-        <li>
-          <div class="post-link-div"><a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a></div>
-          <div class="post-date">{{ post.date_posted }}</div>
-          <div class="post-description">{{ post.description }}</div>
-        </li>
-        <li>
-          <div class="post-link-div"><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></div>
-          <div class="post-date">{{ post.date_posted }}</div>
-          <div class="post-description">{{ post.description }}</div>
-        </li>
-      {% endfor %}
-    </ul>
+  <div id="blog-holder">
+    <div class="page-title">
+      <h1>Blog</h1>
+    </div>
+  
+    <div class="page-content">
+      <ul id="posts-list" class="posts">
+        {% for post in posts %}
+          <li>
+            <div class="post-link-div"><a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a></div>
+            <div class="post-date">{{ post.date_posted }}</div>
+            <div class="post-description">{{ post.description }}</div>
+          </li>
+          <li>
+            <div class="post-link-div"><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></div>
+            <div class="post-date">{{ post.date_posted }}</div>
+            <div class="post-description">{{ post.description }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 {% endblock content %}
 
 {% block extra_js %}
   <script>
     // links to blog posts
-    $('#posts-list').click(function (e) {
+    $("#posts-list").click(function (e) {
         if (e.target !== e.currentTarget && $(e.target).hasClass('post-link')) {
             $.ajax({
                 method: "GET",
-                url: "{% url 'blog' %}" + '/' + e.target.id + '/',
+                url: "{% url 'blog' %}" + e.target.id + '/',
                 success: function(response) {
-                    console.log(response);
+                    $("#blog-holder").replaceWith(response);
                 }
             })
         }
