@@ -1,7 +1,12 @@
 body {
     overflow: hidden;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* font-family: 'Roboto Mono', monospace;
+   font-family: 'Poppins', sans-serif; */
+
+/* BACKGROUNDS */
 .backdrop {
     position: fixed;
     margin: 0;
@@ -12,6 +17,7 @@ body {
     z-index: -100;
 }
 
+/* MAIN WINDOW & NAVBAR */
 .mainwindow {
     min-height: 80%;
     width: 60%;
@@ -20,11 +26,15 @@ body {
 }
 
 .page-title {
-    padding: 10px 10px 10px 20px;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .page-content {
     padding: 10px 10px 20px 20px;
+}
+
+.nav-link {
+    font-family: 'Roboto Mono', monospace;
 }
 
 /* BLOG */
