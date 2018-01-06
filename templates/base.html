@@ -31,6 +31,9 @@
   <script src="{% static 'js/popper.min.js' %}"></script>
   <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
+  {% block extra_js %}
+  {% endblock extra_js %}
+
   {% block backdrop_js %}
     <script src="{% static 'js/three/three.min.js' %}"></script>
     <script src="{% static 'js/three/FBXLoader2.js' %}"></script>

@@ -133,7 +133,6 @@ function randomlyDistribute(object) {
 
 function onEventMouseOverCanvas() {
     isMouseOverCanvas = true;
-    console.log("ENTERED!");
 }
 
 function onEventMouseLeftCanvas() {
