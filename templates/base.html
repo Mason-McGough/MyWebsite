@@ -8,18 +8,17 @@
   </head>
   <body>
     {% block body %}
-      <!-- ADD A NAVIGATION BAR -->
-
       {% block backdrop %}
         <div id="WebGL-Canvas" class="backdrop"></div>
       {% endblock backdrop %}
 
-      <!-- fixes container margin bug -->
-      <div style="height: 1px;"></div>
+      <div class="mainwindow rounded-bottom">
+        {% include 'navbar.html' %}
 
-      <div class="container rounded mainwindow">
-        {% block content %}
-        {% endblock content %}
+        <div class="container page-content">
+          {% block content %}
+          {% endblock content %}
+        </div>
       </div>
     {% endblock body %}
   </body>

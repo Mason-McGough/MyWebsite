@@ -14,9 +14,8 @@ body {
 
 .mainwindow {
     min-height: 80%;
-    width: 80%;
-    padding: 10px 10px 20px 20px;
-    margin: 60px auto 60px auto; 
+    width: 60%;
+    margin: 0px auto 60px auto; 
     background-color: white;
 }
 
@@ -25,7 +24,7 @@ body {
 }
 
 .page-content {
-
+    padding: 10px 10px 20px 20px;
 }
 
 /* BLOG */
