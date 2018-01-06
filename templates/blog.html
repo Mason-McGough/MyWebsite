@@ -35,21 +35,43 @@
       // links to blog posts
       $("#blog-holder").click(function(e) {
           if (e.target !== e.currentTarget && $(e.target).hasClass('post-link')) {
-              $.ajax({
-                  method: "GET",
-                  url: "{% url 'blog' %}" + e.target.id + '/',
-                  success: function(response) {
-                      $("#blog-holder").html(response);
-
-                      // can only attach listener after it is rendered
-                      $(".blog-return-link").click(function(e) {
-                          $("#blog-holder").html(blog_holder_original);
-                      });
-                  }
-              })
+              loadBlogPost(e.target.id, blog_holder_original);
           }
   
           return false;
       });
+
+      function loadBlogPost(post_id) {
+          $.ajax({
+              method: "GET",
+              url: "{% url 'blog' %}" + post_id + '/',
+              success: function(response) {
+                  $("#blog-holder").html(response);
+
+                  // can only attach listener after it is rendered
+                  $(".blog-return-link").click(function(e) {
+                      $("#blog-holder").html(blog_holder_original);
+                  });
+              }
+          })
+      };
+
+      // open post with query string
+      var getQueryString = function ( field, url ) {
+          var href = url ? url : window.location.href;
+          var reg = new RegExp( '[?&]' + field + '=([^&#]*)/', 'i' );
+          var string = reg.exec(href);
+          console.log(string);
+          return string ? string[1] : null;
+      };
+
+      window.onload = function() {
+          var post_id = getQueryString("post-id", window.location.href);
+          if (post_id === null || post_id === undefined) {
+              return;
+          } else {
+              loadBlogPost(post_id);
+          }
+      };
   </script>
 {% endblock extra_js %}
