@@ -16,10 +16,8 @@
       <div class="mainwindow rounded-bottom">
         {% include 'navbar.html' %}
 
-        <div class="container page-content">
-          {% block content %}
-          {% endblock content %}
-        </div>
+        {% block content %}
+        {% endblock content %}
       </div>
     {% endblock body %}
   </body>

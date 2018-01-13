@@ -3,5 +3,11 @@
 {% block title %}Home - {{ block.super }}{% endblock %}
 
 {% block content %}
-  <a href="{% url 'blog' %}">Blog</a>
+  <div id="home-banner">
+    
+  </div>
+
+  <div class="container page-content">
+    <a href="{% url 'blog' %}">Blog</a>
+  </div>
 {% endblock content %}
