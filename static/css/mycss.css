@@ -1,3 +1,9 @@
+html, body { 
+    height: 100%; 
+    width: 100%; 
+    margin: 0; 
+}
+
 body {
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
@@ -39,6 +45,7 @@ body {
 
 /* HOME */
 #home-banner {
+    position: relative; /* needed to align home-banner-card to bottom */
     width: 100%;
     height: 500px;
     background-image: url('../images/bg-1.jpg');
@@ -46,6 +53,20 @@ body {
     background-size: cover;
 /*    -webkit-filter: blur(2px);
     filter: blur(2px);*/
+}
+
+#home-banner-card {
+    position: absolute;
+    margin-left: 10%;
+    width: 90%;
+    height: 50%;
+    bottom: 0;
+}
+
+.circular-portrait {
+    border: 4px solid white;
+    border-radius: 50%;
+    float: left;
 }
 
 /* BLOG */
