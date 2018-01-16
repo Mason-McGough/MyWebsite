@@ -27,7 +27,7 @@ body {
 .mainwindow {
     min-height: 80%;
     width: 60%;
-    margin: 0px auto 60px auto; 
+    margin: 0px auto 120px auto; 
     background-color: white;
 }
 
@@ -114,12 +114,13 @@ body {
 
 #timeline-container {
     height: 500px;
-    padding: 6px 12px 6px 12px;
+    padding: 6px 32px 6px 32px;
     background-color: #00ddff;
 }
 
-.timeline-row {
-    /*display: block;*/
+.timeline-when {
+    display: inline-block;
+    width: 120px;
 }
 
 /* BLOG */
