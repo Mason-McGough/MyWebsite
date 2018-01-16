@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-    overflow: hidden;
+    /*overflow: hidden;*/
     font-family: 'Poppins', sans-serif;
 }
 
@@ -113,7 +113,8 @@ body {
 }
 
 #timeline-container {
-    padding: 12px 32px 6px 32px;
+    height: 500px;
+    padding: 6px 0px 6px 0px;
     background-color: #00ddff;
 }
 
