@@ -59,14 +59,62 @@ body {
     position: absolute;
     margin-left: 10%;
     width: 90%;
-    height: 50%;
+    height: 40%;
     bottom: 0;
 }
 
+#home-banner-spacer {
+    display: inline-block;
+    margin-left: 12px;
+}
+
+#home-banner-textbox {
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    background-color: #00ddff;
+}
+
+#home-banner-name {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+#home-banner-description {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: -8px;
+}
+
+#home-banner-social-icons {
+    display: block;
+}
+
+.social-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 8px;
+    background-color: #00ffaa;
+}
+
 .circular-portrait {
+    position: static;
+    display: inline;
     border: 4px solid white;
     border-radius: 50%;
     float: left;
+    height: 100%;
+}
+
+#biography-container {
+    padding: 12px 32px 6px 32px;
+    text-align: justify;
+}
+
+#timeline-container {
+    padding: 12px 32px 6px 32px;
+    background-color: #00ddff;
 }
 
 /* BLOG */

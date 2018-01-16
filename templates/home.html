@@ -6,11 +6,34 @@
 {% block content %}
   <div id="home-banner">
     <div id="home-banner-card">
-      <img class="circular-portrait" height="150" width="150" src="{% static 'images/portrait.jpg' %}" />
+      <img class="circular-portrait" src="{% static 'images/portrait.jpg' %}" />
+
+      <div id="home-banner-spacer">
+        <div id="home-banner-textbox">
+          <div id="home-banner-name">Mason McGough</div>
+  
+          <div id="home-banner-description">M.S. in Biomedical Engineering</div>
+  
+          <div id="home-banner-icons">
+            <div class="social-icon"></div>
+            <div class="social-icon"></div>
+            <div class="social-icon"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="container page-content">
-    <a href="{% url 'blog' %}">Blog</a>
+  <div id="biography-container">
+    <b>Biography:</b>
+
+    <p>"Goober Peas" is a traditional folk song probably originating in the Southern United States. It was popular with Confederate soldiers during the American Civil War, and is still sung frequently in the South to this day. It has been recorded and sung by scores of artists, including Burl Ives, Tennessee Ernie Ford and The Kingston Trio.
+
+    The lyrics of "Goober Peas" are a description of daily life during the last few years of the Civil War for Southerners. After being cut off from the rail lines and their farm land, they had little to eat aside from boiled peanuts (or "goober peas") which often served as an emergency ration. Peanuts were also known as pindars and goobers.
+
+    Publication date on the earliest sheet music is 1866, published by A. E. Blackmar in New Orleans. Blackmar humorously lists A. Pindar as the lyricist and P. Nutt as the composer.</p>
+  </div>
+
+  <div id="timeline-container">
   </div>
 {% endblock content %}
