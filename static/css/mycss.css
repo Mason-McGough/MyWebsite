@@ -50,12 +50,14 @@ body {
 
 #navbar-home-link {
     display: inline-block;
+    width: 15%;
     font-size: 32px;
 }
 
 .navbar-menu-list {
     display: inline-flex;
     justify-content: flex-end;
+    width: 75%;
     margin: 0 0 0 auto;
     list-style-type: none;
 }
