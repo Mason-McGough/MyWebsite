@@ -10,6 +10,10 @@ body {
     color: black;
 }
 
+a {
+    text-decoration: none;
+}
+
 .font-roboto {
     font-family: 'Roboto Mono', monospace;
 }
@@ -19,7 +23,7 @@ body {
 }
 
 .background-dark {
-    background-color: #343a40;
+    background-color: #101320;
 }
 
 .rounded-bottom {
@@ -45,7 +49,8 @@ body {
 .mainwindow {
     min-height: 80%;
     width: 60%;
-    margin: 0px auto 120px auto; 
+    margin: 0 auto 120px auto; 
+    padding: 0 0 24px 0;
     background-color: white;
 }
 
@@ -57,7 +62,6 @@ body {
     display: inline-block;
     width: 15%;
     font-size: 32px;
-    text-decoration: none;
 }
 
 .navbar-menu-list {
@@ -74,7 +78,6 @@ body {
 
 .navbar-menu-link {
     font-size: 18px;
-    text-decoration: none;
 }
 
 /* HOME */
@@ -95,7 +98,7 @@ body {
     width: 90%;
     height: 50%;
     bottom: 0;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
 }
 
 #home-banner-spacer {
@@ -132,22 +135,18 @@ body {
     margin-right: 8px;
 }
 
-.circular-portrait {
+.home-banner-portrait {
     position: static;
     display: inline;
-    border: 8px solid black;
+    border: 6px solid black;
     border-radius: 50%;
     float: left;
     height: 100%;
 }
 
-#biography-container {
-    padding: 12px 32px 12px 32px;
-    text-align: justify;
-}
-
-#timeline-container {
+.text-container {
     padding: 0px 32px 12px 32px;
+    text-align: justify;
 }
 
 .timeline-when {

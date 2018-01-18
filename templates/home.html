@@ -6,7 +6,7 @@
 {% block content %}
   <div id="home-banner">
     <div id="home-banner-card">
-      <img class="circular-portrait" src="{% static 'images/portrait.jpg' %}" />
+      <img class="home-banner-portrait" src="{% static 'images/portrait.jpg' %}" />
 
       <div id="home-banner-spacer">
         <div id="home-banner-textbox">
@@ -30,13 +30,13 @@
     </div>
   </div>
 
-  <div id="biography-container">
+  <div class="text-container">
     <h2>Biography:</h2>
 
     {% lorem 4 p %}
   </div>
 
-  <div id="timeline-container">
+  <div class="text-container">
     <div id="timeline-header">
       <h2>Timeline:</h2>
     </div>

@@ -1,15 +1,17 @@
-<div class="page-title">
+<div class="text-container">
   <h1>{{ post.title }}</h1>
 </div>
 
-<a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}">SHARE</a>
+<div class="text-container">
+  <a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}">SHARE</a>
 
-<a class="blog-return-link" href="#">RETURN</a>
+  <a class="blog-return-link" href="#">RETURN</a>
 
-<div class="page-content">
-  <ul class="posts">
-    <span>{{ post.description }}</span>
-  </ul>
+  <div class="page-content">
+    <ul class="posts">
+      <span>{{ post.description }}</span>
+    </ul>
 
-  <!-- INCLUDE DISQUS COMMENTS LATER -->
+    <!-- INCLUDE DISQUS COMMENTS LATER -->
+  </div>
 </div>
