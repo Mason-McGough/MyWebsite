@@ -22,6 +22,11 @@ body {
     background-color: #343a40;
 }
 
+.rounded-bottom {
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
 /* font-family: 'Roboto Mono', monospace;
    font-family: 'Poppins', sans-serif; */
 
@@ -52,6 +57,7 @@ body {
     display: inline-block;
     width: 15%;
     font-size: 32px;
+    text-decoration: none;
 }
 
 .navbar-menu-list {
@@ -59,17 +65,16 @@ body {
     justify-content: flex-end;
     width: 75%;
     margin: 0 0 0 auto;
-    list-style-type: none;
 }
 
 .navbar-menu-list-item {
     display: inline-block;
     margin: 0 0 0 12px;
-    list-style-type: none;
 }
 
 .navbar-menu-link {
     font-size: 18px;
+    text-decoration: none;
 }
 
 /* HOME */
