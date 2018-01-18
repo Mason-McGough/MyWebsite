@@ -1,29 +1,18 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand page-title" href="{% url 'home' %}">Horse</a>
+<nav id="navbar" class="font-roboto background-dark">
+  <a class="color-white" id="navbar-home-link" href="{% url 'home' %}">Horse</a>
 
-    <div class="collapse navbar-collapse" id="mainMenu">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog' %}">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog' %}">Research</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog' %}">Hobbies</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ul class="navbar-menu-list">
+    <li class="navbar-menu-list-item">
+      <a class="navbar-menu-link color-white" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="navbar-menu-list-item">
+      <a class="navbar-menu-link color-white" href="{% url 'blog' %}">Blog</a>
+    </li>
+    <li class="navbar-menu-list-item">
+      <a class="navbar-menu-link color-white" href="{% url 'blog' %}">Research</a>
+    </li>
+    <li class="navbar-menu-list-item">
+      <a class="navbar-menu-link color-white" href="{% url 'blog' %}">Hobbies</a>
+    </li>
+  </ul>
 </nav>

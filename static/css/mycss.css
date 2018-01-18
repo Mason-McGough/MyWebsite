@@ -10,10 +10,22 @@ body {
     color: black;
 }
 
+.font-roboto {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.color-white {
+    color: white;
+}
+
+.background-dark {
+    background-color: #343a40;
+}
+
 /* font-family: 'Roboto Mono', monospace;
    font-family: 'Poppins', sans-serif; */
 
-/* BACKGROUNDS */
+/* BACKDROPS */
 .backdrop {
     position: fixed;
     margin: 0;
@@ -32,16 +44,30 @@ body {
     background-color: white;
 }
 
-.page-title {
-    font-family: 'Roboto Mono', monospace;
+#navbar {
+    padding: 12px 20px 12px 20px;
 }
 
-/*.page-content {
-    padding: 10px 10px 20px 20px;
-}*/
+#navbar-home-link {
+    display: inline-block;
+    font-size: 32px;
+}
 
-.nav-link {
-    font-family: 'Roboto Mono', monospace;
+.navbar-menu-list {
+    display: inline-flex;
+    justify-content: flex-end;
+    margin: 0 0 0 auto;
+    list-style-type: none;
+}
+
+.navbar-menu-list-item {
+    display: inline-block;
+    margin: 0 0 0 12px;
+    list-style-type: none;
+}
+
+.navbar-menu-link {
+    font-size: 18px;
 }
 
 /* HOME */
