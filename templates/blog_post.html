@@ -2,6 +2,8 @@
   <h1>{{ post.title }}</h1>
 </div>
 
+<a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}">SHARE</a>
+
 <a class="blog-return-link" href="#">RETURN</a>
 
 <div class="page-content">
