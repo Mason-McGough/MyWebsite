@@ -13,7 +13,7 @@
       <ul id="posts-list" class="posts">
         {% for post in posts %}
           <li>
-            <div class="post-link"><a id="{{ post.pk }}" href="#">{{ post.title }}</a></div>
+            <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
             <div class="post-date">{{ post.date_posted }}</div>
             <div class="post-description">{{ post.description }}</div>
           </li>
