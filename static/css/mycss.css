@@ -73,11 +73,16 @@ a {
 
 .navbar-menu-list-item {
     display: inline-block;
-    margin: 0 0 0 12px;
+    margin: 0 0 0 18px;
 }
 
-.navbar-menu-link {
+.navbar-menu-list-item a {
     font-size: 18px;
+}
+
+.navbar-menu-list-item a:hover {
+    color: #00ddff;
+    text-decoration-color: #00ddff;
 }
 
 /* HOME */
@@ -120,12 +125,12 @@ a {
 #home-banner-description {
     font-size: 20px;
     font-weight: 400;
-    margin-top: -8px;
+    margin-top: -12px;
 }
 
 #home-banner-social-icons {
     display: block;
-    margin-bottom: 24px;
+    margin: 6px 0 24px 0;
 }
 
 .social-icon {
