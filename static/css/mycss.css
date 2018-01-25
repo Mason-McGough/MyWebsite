@@ -82,7 +82,6 @@ a {
 
 .navbar-menu-list-item a:hover {
     color: #00ddff;
-    text-decoration-color: #00ddff;
 }
 
 /* HOME */
@@ -179,9 +178,13 @@ a {
     margin-bottom: 30px;
 }
 
-.post-link-div {
+.post-link {
     font-size: 24px;
     font-weight: bold;
+}
+
+.post-link a:hover {
+    color: #00ddff;
 }
 
 .post-date {
