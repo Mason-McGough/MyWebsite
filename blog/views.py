@@ -4,7 +4,7 @@ from .models import Post
 # Create your views here.
 def home(request):
     max_posts = 3
-    posts = Post.objects.all()
+    posts = Post.objects.all()[:max_posts]
     return render(request, 'home.html', {'posts': posts, 'max_posts': max_posts})
 
 def blog(request):
