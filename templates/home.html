@@ -31,15 +31,13 @@
   </div>
 
   <div class="text-container">
-    <h2>Biography:</h2>
+    <h2>Biography</h2>
 
     {% lorem 4 p %}
   </div>
 
   <div class="text-container">
-    <div id="timeline-header">
-      <h2>Timeline:</h2>
-    </div>
+    <h2>Timeline</h2>
 
     <div class="timeline-row">
       <b class="timeline-when">2017-Present:</b>
@@ -66,5 +64,24 @@
       <em class="timeline-what">BSc in Electrical Engineering</em>
       <span class="timeline-where">at University of North Florida</span>
     </div>
+  </div>
+
+<!--   <div class="text-container">
+    <h2>Projects</h2>
+  </div> -->
+  <div class="text-container">
+    <h2>Blog</h2>
+  
+    <ul id="posts-list" class="posts">
+      {% for post in posts %}
+        {% if forloop.counter0 < max_posts %}
+          <li>
+            <div class="post-link-div"><a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a></div>
+            <div class="post-date">{{ post.date_posted }}</div>
+            <div class="post-description">{{ post.description }}</div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
   </div>
 {% endblock content %}
