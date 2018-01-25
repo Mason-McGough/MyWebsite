@@ -76,7 +76,7 @@
       {% for post in posts %}
         {% if forloop.counter0 < max_posts %}
           <li>
-            <div class="post-link"><a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a></div>
+            <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
             <div class="post-date">{{ post.date_posted }}</div>
             <div class="post-description">{{ post.description }}</div>
           </li>

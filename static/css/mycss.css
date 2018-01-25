@@ -183,7 +183,7 @@ a {
     font-weight: bold;
 }
 
-.post-link a:hover {
+.post-link:hover {
     color: #00ddff;
 }
 
