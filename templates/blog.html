@@ -44,7 +44,7 @@
                   $("#blog-holder").html(response);
 
                   // can only attach listener after it is rendered
-                  $(".blog-return-link").click(function(e) {
+                  $("#blog-return-link").click(function(e) {
                       $("#blog-holder").html(blog_holder_original);
                   });
               }

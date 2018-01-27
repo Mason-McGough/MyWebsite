@@ -1,11 +1,17 @@
+{% load static %}
+
 <div class="text-container">
   <h1>{{ post.title }}</h1>
 </div>
 
 <div class="text-container">
-  <a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}">SHARE</a>
+  <a id="blog-return-link" href="#">
+    <img class="link-icon mirror-horz" src="{% static 'vectors/iconmonstr-arrow-61.svg' %}" alt="Return" />
+  </a>
 
-  <a class="blog-return-link" href="#">RETURN</a>
+  <a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}">
+    <img class="link-icon" src="{% static 'vectors/iconmonstr-share-1.svg' %}" alt="Share" />
+  </a>
 
   <div class="page-content">
     <ul class="posts">
