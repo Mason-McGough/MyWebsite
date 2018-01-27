@@ -18,7 +18,11 @@
       <span>{{ post.description }}</span>
     </ul>
 
-    {% include post.filename %}
+    {% if post.get_html %}
+      {{ post.get_html }}
+    {% else %}
+      ERROR
+    {% endif %}
 
     <!-- INCLUDE DISQUS COMMENTS LATER -->
   </div>
