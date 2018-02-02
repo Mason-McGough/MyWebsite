@@ -22,5 +22,5 @@ class Post(models.Model):
 class Comment(models.Model):
     content = models.CharField(max_length=255)
     date_posted = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey(Post, related_name='comments')
-    commentor = models.ForeignKey(User, related_name='comments')
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    commentor = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
