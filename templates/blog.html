@@ -13,9 +13,14 @@
       <ul id="posts-list" class="posts">
         {% for post in posts %}
           <li>
-            <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
-            <div class="post-date">{{ post.date_posted }}</div>
-            <div class="post-description">{{ post.description }}</div>
+            <div class="post-thumbnail">
+              <img src="{% static 'images/portrait.jpg' %}" alt="{{ post.title }}" />
+            </div>
+            <div class="post-text">
+              <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
+              <div class="post-date">{{ post.date_posted }}</div>
+              <div class="post-description">{{ post.description }}</div>
+            </div>
           </li>
         {% endfor %}
       </ul>
