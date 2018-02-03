@@ -55,14 +55,7 @@ function init() {
     }, loadManager.onProgress, loadManager.onError);
     
     // assign background cube
-    var path = cubemap_url;
-    var format = ".jpg";
-    var urls = [ 
-                    path + 'posx' + format, path + 'negx' + format,
-                    path + 'posy' + format, path + 'negy' + format,
-                    path + 'posz' + format, path + 'negz' + format
-                ];
-    var textureCube = new THREE.CubeTextureLoader().load(urls);
+    var textureCube = new THREE.CubeTextureLoader().load(cubemap_urls);
     textureCube.format = THREE.RGBFormat;
     
     // ambient lighting
