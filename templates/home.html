@@ -6,7 +6,7 @@
 {% block content %}
   <div id="home-banner">
     <div id="home-banner-card">
-      <img class="home-banner-portrait" src="{% static 'images/portrait.jpg' %}" />
+      <img class="home-banner-portrait" src="{% static 'images/portrait.jpg' %}" alt="Mason McGough" />
 
       <div id="home-banner-spacer">
         <div id="home-banner-textbox">
@@ -68,8 +68,21 @@
     </div>
   </div>
 
-<!--   <div class="text-container">
+  <div class="text-container">
     <h2>Projects</h2>
+    <div class="project-container">
+      <div class="project-thumbnail">
+        <img src="{% static 'images/portrait.jpg' %}" alt="Project 1" \>
+      </div>
+      <div class="project-description">
+        <h3>What doth friendship?</h3>
+        {% lorem 1 p %}
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="text-container">
+    <h2>Skills & Proficiencies</h2>
   </div> -->
   <div class="text-container">
     <h2>Recent Posts</h2>
