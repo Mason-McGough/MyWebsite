@@ -14,7 +14,7 @@
         {% for post in posts %}
           <li>
             <div class="post-thumbnail">
-              <img src="{% static post.thumbnail %}" alt="{{ post.title }}" />
+              <img src="{% static post.thumbnail %}" alt="{{ post.title }}" width="70px" height="70px" />
             </div>
             <div class="post-text">
               <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
