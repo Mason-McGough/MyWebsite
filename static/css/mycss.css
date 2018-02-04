@@ -140,8 +140,7 @@ a {
     margin-top: -12px;
 }
 
-
-@media (max-width: 768px) {
+@/*media screen and (max-width: 768px) {
     #home-banner-name {
         font-size: 32px;
     }
@@ -149,7 +148,7 @@ a {
     #home-banner-description {
         font-size: 16px;
     }
-}
+}*/
 
 #home-banner-social-icons {
     display: block;
