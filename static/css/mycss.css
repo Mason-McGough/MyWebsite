@@ -197,6 +197,10 @@ a {
     height: 100%;
 }
 
+.skills-label {
+    padding-right: 18px;
+}
+
 /* BLOG */
 .posts {
     list-style-type: none;
