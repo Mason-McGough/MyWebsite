@@ -4,6 +4,7 @@ to-do.md
 **/migrations
 **/__pycache__
 **/MyWebsiteEnv
+**/workspace
 **/static/admin
 
 *.pyc
