@@ -15,10 +15,11 @@ class Post(models.Model):
         ordering = ['-date_posted']
 
     def get_html(self):
+        files_dir = 'posts/'
         try:
-            return render_to_string(self.filename)
+            return render_to_string(files_dir + self.filename)
         except template.TemplateDoesNotExist:
-            return render_to_string('not-found.html')
+            return render_to_string(files_dir + 'not-found.html')
 
 class Comment(models.Model):
     content = models.CharField(max_length=255)
