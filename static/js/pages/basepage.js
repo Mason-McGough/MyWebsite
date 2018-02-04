@@ -50,7 +50,7 @@ function init() {
     loader.load(seafloor_url, function(object) {
         seafloor = object;
         seafloor.scale.set(sphereSpread/8, sphereSpread/8, sphereSpread/8);
-        seafloor.position.y = -sphereSpread/2-50;
+        seafloor.position.y = -sphereSpread/2-20;
         scene.add(seafloor);
     }, loadManager.onProgress, loadManager.onError);
     
