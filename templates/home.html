@@ -29,6 +29,27 @@
       </div>
     </div>
   </div>
+  
+  <div class="text-container">
+    <h2>Recent Posts</h2>
+  
+    <ul id="posts-list" class="posts">
+      {% for post in posts %}
+        {% if forloop.counter0 < max_posts %}
+          <li>
+            <div class="post-thumbnail">
+              <img src="{% static post.thumbnail %}" alt="{{ post.title }}" />
+            </div>
+            <div class="post-text">
+              <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
+              <div class="post-date">{{ post.date_posted }}</div>
+              <div class="post-description">{{ post.description }}</div>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
 
   <div class="text-container">
     <h2>Biography</h2>
@@ -70,38 +91,50 @@
 
   <div class="text-container">
     <h2>Projects</h2>
-    <div class="project-container">
-      <div class="project-thumbnail">
-        <img src="{% static 'images/portrait.jpg' %}" alt="Project 1" \>
-      </div>
-      <div class="project-description">
-        <h3>What doth friendship?</h3>
-        {% lorem 1 p %}
-      </div>
-    </div>
+    <ul>
+      <li class="project-container">
+        <div class="project-thumbnail">
+          <img src="{% static 'images/portrait.jpg' %}" alt="Project 1" \>
+        </div>
+        <div class="project-description">
+          <h3>CytoInformatics Website & Analysis Portal</h3>
+          {% lorem 1 p %}
+        </div>
+      </li>
+
+      <li class="project-container">
+        <div class="project-thumbnail">
+          <img src="{% static 'images/portrait.jpg' %}" alt="Project 1" \>
+        </div>
+        <div class="project-description">
+          <h3>Scopal: In-Browser Medical Image Analysis Tool</h3>
+          {% lorem 1 p %}
+        </div>
+      </li>
+
+      <li class="project-container">
+        <div class="project-thumbnail">
+          <img src="{% static 'images/portrait.jpg' %}" alt="Project 1" \>
+        </div>
+        <div class="project-description">
+          <h3>MuscleMiner: C++ Refactor</h3>
+          {% lorem 1 p %}
+        </div>
+      </li>
+
+      <li class="project-container">
+        <div class="project-thumbnail">
+          <img src="{% static 'images/portrait.jpg' %}" alt="Project 1" \>
+        </div>
+        <div class="project-description">
+          <h3>MDNET / Deep Doctor</h3>
+          {% lorem 1 p %}
+        </div>
+      </li>
+    </ul>
   </div>
 
   <!-- <div class="text-container">
     <h2>Skills & Proficiencies</h2>
   </div> -->
-  <div class="text-container">
-    <h2>Recent Posts</h2>
-  
-    <ul id="posts-list" class="posts">
-      {% for post in posts %}
-        {% if forloop.counter0 < max_posts %}
-          <li>
-            <div class="post-thumbnail">
-              <img src="{% static post.thumbnail %}" alt="{{ post.title }}" />
-            </div>
-            <div class="post-text">
-              <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
-              <div class="post-date">{{ post.date_posted }}</div>
-              <div class="post-description">{{ post.description }}</div>
-            </div>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
 {% endblock content %}
