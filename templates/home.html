@@ -41,7 +41,7 @@
               <img src="{% static post.thumbnail %}" alt="{{ post.title }}" width="70px" height="70px" />
             </div>
             <div class="post-text">
-              <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
+              <a class="post-link" href="{% url 'blog' %}?post-id={{ post.pk }}">{{ post.title }}</a>
               <div class="post-date">{{ post.date_posted }}</div>
               <div class="post-description">{{ post.description }}</div>
             </div>
