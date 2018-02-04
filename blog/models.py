@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     title = models.CharField(max_length=64, unique=True)
     filename = models.CharField(max_length=64)
+    thumbnail = models.CharField(max_length=64)
     date_posted = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=128)
 

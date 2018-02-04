@@ -210,6 +210,8 @@ a {
 .post-thumbnail {
     display: inline-block;
     height: 100%;
+    border: 6px solid black;
+    border-radius: 15%;
 }
 
 .post-thumbnail img {
