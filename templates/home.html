@@ -38,7 +38,7 @@
         {% if forloop.counter0 < max_posts %}
           <li>
             <div class="post-thumbnail">
-              <img src="{% static post.thumbnail %}" alt="{{ post.title }}" width="70px" height="70px" />
+              <img src="{% static 'images/blog/' %}{{ post.thumbnail }}" alt="{{ post.title }}" width="70px" height="70px" />
             </div>
             <div class="post-text">
               <a class="post-link" href="{% url 'blog' %}?post-id={{ post.pk }}">{{ post.title }}</a>
