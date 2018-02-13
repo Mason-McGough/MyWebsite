@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class="text-container">
+  <img src="{% static 'images/portrait.jpg' %}" alt="Setting Up This Server" />
+
+  <p>If you happen to be reading this blog post, I want to thank you. Constructing this website from scratch has been a very enlightening and entertaining experience for me. I hope that you like what you see and that I can help you make something of your own creation in the future.</p>
+
+  <p>As the first full post I will be making on this blog, I figured it would be interesting for me to discuss how I made this website in the first place. This post will introduce you to setting up a simple server on Amazon AWS using their Elastic Compute Cloud (EC2) product and getting a fork of this website running. Going into all of the bells and whistles, such as the animated background and some of the stylings, will take a bit longer to delve into in any substantial degree, so I will save that for another blog post.</p>
+
+  <p>Although AWS has another very powerful product called Elastic Beanstalk which makes server configuration and auto-scaling a (comparatively) trivial task, I opted to use a plain-old EC2 server running Ubuntu 16.04. Why, you might ask? Why forgo the virtues of quick deployment for dozens of boring console commands just to arrive at the same place?</p> 
+
+  <p>From my experience Elastic Beanstalk can sometimes behave unpredictably, resetting itself and generating new instances, often without apparent warning. This is all a part of its autoscaling paradigm, which makes it a powerful option for applications that need to scale dynamically to changing demands and loads. Performing low-level server maintenance such as changing file permissions, copying folders, or manually configuring server settings also becomes a non-trivial task, as each reset restores the server to its default state. If you want specific, persistent server configurations, you specify them in a configuration file and upload it with your application source code. Also, every time one of these new instances replaces one of your old ones, the IP address changes, which can get annoying quickly. Running Elastic Beanstalk makes it straightforward to get relatively standard server configurations up-and-running almost immediately and, most importantly, allows the server infrastructure to adjust dynamically to fluctuations in demand. It's remarkably useful for applications like my company website, but overkill for a personal website like this and can be a pain to work with during the experimentation phase.</p>
+
+  <p>With that bit of explanation out of the way, it's time to get our AWS server started. Go ahead to the <a href="https://aws.amazon.com/">aws.amazon.com</a> and create your account. Don't worry, everything we will be using is covered under the Free Tier, so nothing to pay out-of-pocket.</p>
+
+
+</div>
