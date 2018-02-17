@@ -260,3 +260,19 @@ a {
 .post-description {
     font-size: 16px;
 }
+
+.code-block {
+    padding: 8px 0 8px 0;
+    border: 3px inset gray;
+    background-color: #dddddd;
+    overflow: auto;
+    text-align: left;
+}
+
+.code-block div {
+    padding: 0 8px 0 16px;
+}
+
+.code-block div:nth-child(even) {
+    background-color: #bbbbbb;
+}
