@@ -3,15 +3,58 @@
 <div class="text-container">
   <img src="{% static 'images/portrait.jpg' %}" alt="Setting Up This Server" />
 
-  <p>If you happen to be reading this blog post, I want to thank you. Constructing this website from scratch has been a very enlightening and entertaining experience for me. I hope that you like what you see and that I can help you make something of your own creation in the future.</p>
+  <p>As the first full post I will be making on this blog, I figured it would be interesting for me to discuss how I made this website in the first place. This post will introduce you to setting up a simple server on <a href="https://aws.amazon.com/">Amazon AWS</a> using their <b>Elastic Compute Cloud (EC2)</b> service and getting a fork of this website running.</p>
 
-  <p>As the first full post I will be making on this blog, I figured it would be interesting for me to discuss how I made this website in the first place. This post will introduce you to setting up a simple server on Amazon AWS using their Elastic Compute Cloud (EC2) product and getting a fork of this website running. Going into all of the bells and whistles, such as the animated background and some of the stylings, will take a bit longer to delve into in any substantial degree, so I will save that for another blog post.</p>
+  <p>Although AWS has another very powerful service called <a href="https://aws.amazon.com/elasticbeanstalk/">Elastic Beanstalk</a> which makes server configuration and auto-scaling a (comparatively) trivial task, I opted to use a plain-old EC2 server running Ubuntu 16.04. Why, you might ask? Why forgo the virtues of quick deployment for dozens of boring console commands just to arrive at the same place?</p> 
 
-  <p>Although AWS has another very powerful product called Elastic Beanstalk which makes server configuration and auto-scaling a (comparatively) trivial task, I opted to use a plain-old EC2 server running Ubuntu 16.04. Why, you might ask? Why forgo the virtues of quick deployment for dozens of boring console commands just to arrive at the same place?</p> 
+  <p>From my experience Elastic Beanstalk often behaves unpredictably, resetting itself and generating new instances, often without apparent warning. This is all a part of its autoscaling paradigm, which makes it a powerful option for applications that need to scale dynamically to changing demands and loads. As a consequence, performing low-level server maintenance such as changing file permissions, copying folders, or manually configuring server settings becomes a non-trivial task, as each reset restores the server to its default state (from a machine image, which you can specify). If you want specific, persistent server configurations, you can do one of two things: either specify your changes in a configuration file and upload it with your application source code (preferred) or make your desired changes to the server, <i>quickly</i> create a machine image, and then replace the previous image in the Elastic Beanstalk settings.</p>
 
-  <p>From my experience Elastic Beanstalk can sometimes behave unpredictably, resetting itself and generating new instances, often without apparent warning. This is all a part of its autoscaling paradigm, which makes it a powerful option for applications that need to scale dynamically to changing demands and loads. Performing low-level server maintenance such as changing file permissions, copying folders, or manually configuring server settings also becomes a non-trivial task, as each reset restores the server to its default state. If you want specific, persistent server configurations, you specify them in a configuration file and upload it with your application source code. Also, every time one of these new instances replaces one of your old ones, the IP address changes, which can get annoying quickly. Running Elastic Beanstalk makes it straightforward to get relatively standard server configurations up-and-running almost immediately and, most importantly, allows the server infrastructure to adjust dynamically to fluctuations in demand. It's remarkably useful for applications like my company website, but overkill for a personal website like this and can be a pain to work with during the experimentation phase.</p>
+  <p>Running Elastic Beanstalk makes it straightforward to get relatively standard server configurations up-and-running almost immediately and, most importantly, allows the server infrastructure to adjust dynamically to fluctuations in demand. It's remarkably useful for applications like my company website, but overkill for a personal website like this and can be a pain to work with during the experimentation phase.</p>
 
   <p>With that bit of explanation out of the way, it's time to get our AWS server started. Go ahead to the <a href="https://aws.amazon.com/">aws.amazon.com</a> and create your account. Don't worry, everything we will be using is covered under the Free Tier, so nothing to pay out-of-pocket.</p>
 
+  <h2>Launching Your EC2 Server</h2>
 
+  <p>Once you have registered your account and logged in, you should be at the AWS Console. From here you can see a list of the many services that AWS has to offer. Click on the EC2 service from the list or search for EC2 in the search bar. This will take you to the EC2 Dashboard, from which you can see your running EC2 servers, manage their security settings in <b>Security Groups</b>, manage the <b>Key Pairs</b> that will allow you to connect to EC2 servers via SSH, and plenty more. Here is where you will probably spend most of your time on AWS, and where we will launch our first EC2 server.</p>
+
+  <p>You should see a big "Launch Instance" button. Press it. A wizard should begin, asking you to pick from a variety of <b>Amazon Machine Images (AMI)</b>, preconfigured servers with different operating systems, settings, and hardware. Pick the "Ubuntu Server 16.04 LTS" option.</p>
+
+  <p>Next it will ask for an instance type, which determines the CPU, memory, and disk space of your instance. Go with the Free Tier "t2.micro" since we want to keep this cheap. For now, use the default settings for the other options, including the Security Groups, which we will modify later.</p>
+
+  <p>Once you have reviewed your settings, click "Launch." It should ask you for one more thing: to create a new Key Pair or select an existing one. Let us create a new one. This will generate a <b>public key</b> on AWS corresponding to this instance and a <b>private key</b> which you can and should download. Give it a name, download it, and keep it safe.</p>
+
+  <h2>Connect To Your Server</h2>
+
+  <p>AWS should now be hard at work to generate your new instance. Go back to the EC2 Dashboard and click "Instances." You should see your new fella there, hopefully with an <b>Instance State</b> of "running." Click on your instance to view information about the little rascal. Under the "Description" tab, go ahead and copy the value under "IPv4 Public IP."</p>
+
+  <p>Next we will try to connect to the instance using SSH. If you are on a Mac or Linux-based machine, this is a fairly straightforward process. If you're running Windows, I sincerely apologize because this will get a bit more complicated. Skip on ahead to the next section. Otherwise, complete this section and skip the following section once you're done. 
+
+  Open up a fresh console the way you prefer (I use <i>ctrl+alt+t</i> on my Ubuntu machine). Then, locate the private key you downloaded in the previous section and enter the following into the terminal:</p>
+
+  <div class="code-block">
+    <div>ssh -i /path/to/private_key.pem ubuntu@ip.address</div>
+  </div>
+
+  <p>replacing "ip.address" with the address you copied from the EC2 Dashboard. You might get "UNPROTECTED PRIVATE KEY FILE" or a similar warning. This can be easily fixed by changing the permissions on the file:</p>
+
+  <div class="code-block">
+    <div>chmod 0600 /path/to/private_key.pem</div>
+  </div>
+
+  <p>Try the <i>ssh</i> command again and it should let you in this time.</p>
+
+  <h3>(Windows) Connect To Your Server</h3>
+
+  <p>Windows, unlike Linux systems, doesn't support the use of OpenSSH from the command line. Instead, you will have to download and install <b><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a></b>, an SSH client with a helpful GUI made for Windows users. This installer should also install <b>PuTTYgen</b>, which you will need to convert your private key <i>.pem</i> file (which PuTTY doesn't like) to a <i>.ppk</i> file (which PuTTY does like).</p>
+
+  <p>Install PuTTY, then launch PuTTYgen. Click the "Load" button and find and select your <i>.pem</i> file. Next click "Save private key" to create your new <i>.ppk</i> file. If it asks you if you wish to save it without a passphrase, select "Yes."</p>
+
+  <p>*exhales* Almost there. Lastly, launch PuTTY. In the "Category" menu, select "Session" if it is not already selected. Enter the IP address you copied under "Host Name (or IP address). Now load the <i>.ppk</i> file by selecting "Connection->SSH->Auth" and then clicking "Browse..." next to the "Private key file for authentication" field. Go back to "Session" and hit "Open." If you so wish, you can even give this session a name under "Saved Sessions" and click "Save" to store these settings for later. If the fates are smiling upon you, a terminal should open to ask you which user you would like to use. Type "ubuntu," hit enter, and whisper "I'm in" just loud enough so that nobody else asks what you just said.</p> 
+
+  <h2>Setting Up Python And Your Web Server</h2> 
+
+  <p></p>
+
+
+  <p>If you happen to be reading this blog post, I want to thank you. Constructing this website from scratch has been a very enlightening and entertaining experience for me. I hope that you like what you see and that I can help you make something of your own creation in the future.</p>
 </div>
