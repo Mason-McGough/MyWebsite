@@ -29,9 +29,9 @@
 
   <p>AWS should now be hard at work to generate your new instance. Go back to the EC2 Dashboard and click "Instances." You should see your new fella there, hopefully with an <b>Instance State</b> of "running." Click on your instance to view information about the little rascal. Under the "Description" tab, go ahead and copy the value under "IPv4 Public IP."</p>
 
-  <p>Next we will try to connect to the instance using SSH. If you are on a Mac or Linux-based machine, this is a fairly straightforward process. If you're running Windows, I sincerely apologize because this will get a bit more complicated. Skip on ahead to the next section. Otherwise, complete this section and skip the following section once you're done. 
+  <p>Next we will try to connect to the instance using SSH. If you are on a Mac or Linux-based machine, this is a fairly straightforward process. If you're running Windows, I sincerely apologize because this will get a bit more complicated. Skip on ahead to the next section. Otherwise, complete this section and skip the following section once you're done.</p>
 
-  Open up a fresh console the way you prefer (I use <i>ctrl+alt+t</i> on my Ubuntu machine). Then, locate the private key you downloaded in the previous section and enter the following into the terminal:</p>
+  <p>Open up a fresh console the way you prefer (I use <i>ctrl+alt+t</i> on my Ubuntu machine). Then, locate the private key you downloaded in the previous section and enter the following into the terminal:</p>
 
   <div class="code-block">
     <div>ssh -i /path/to/private_key.pem ubuntu@ip.address</div>
@@ -61,12 +61,12 @@
 
   <div class="code-block">
     <div>sudo apt-get update</div>
-    <div>sudo apt-get install apache2 apache2-dev python3-pip libapache2-mod-wsgi</div>
+    <div>sudo apt-get install apache2 apache2-dev python3-pip libapache2-mod-wsgi ahahahahahahahah</div>
   </div>
 
   <div class="code-block">
-    <div>pip3 install --upgrade pip</div>
-    <div>pip3 install virtualenv</div>
+    <div>sudo pip3 install --upgrade pip</div>
+    <div>sudo pip3 install virtualenv</div>
   </div>
 
   <div class="code-block">
@@ -82,31 +82,25 @@
 
   <p>Go back to the EC2 Dashboard and select your instance. Under "Description," find the field "Security Groups" and click on the link corresponding to the name of its Security Group. This will take you to the Security Group menu. Select the Security Group, then click on the "Inbound" tab next to the "Description" tab. You should see a table with only one rule for SSH using port 22. Click "Edit" so that we can add an additional rule for HTTP access. Click "Add Rule" to add a new row to the table, then change the Type to "HTTP." This will set the port to 80 and should set the port to "0.0.0.0/0, ::/0." This will allow access to port 80 from any IP address. This is generally considered unsafe, so if it makes you feel better, you can select "My IP" from the Source menu and it will fill the field with your own IP address. However you will only be able to access it from the computer you are currently using. Either option will work for this tutorial.</p>
 
-  <p>Now let's test out this server to make sure everything is in order. Run this:</p>
-
-  <div class="code-block">
-    <div>mod_wsgi-express start-server</div>
-  </div>
-
-  <p>Now copy and paste the server IP address into your browser. It should take you to the <b>Apache2 Default Page</b>. That's great! That means the Apache server is working.</p>
+  <p>Now let's test out this server to make sure everything is in order. Copy and paste the server IP address into your browser. It should take you to the <b>Apache2 Default Page</b>. That's great! That means the Apache server is working.</p>
 
   <p>We would prefer, however, to have Apache serve the website that you just downloaded from my GitHub rather than serving its own default page. For that, we will need to edit the file <span class="code-inline">/etc/apache2/sites-available/000-default.conf</span>. Open this file using <span class="code-inline">nano</span> or your preferred text editor and add the following to the bottom, right above the <span class="code-inline">\</VirtualHost></span> line:</p>
 
   <div class="code-block">
-    Alias /static /home/ubuntu/thiswebsite/MyWebsite/static
-    <Directory /home/ubuntu/thiswebsite/MyWebsite/static>
-        Require all granted
-    </Directory>
-    
-    <Directory /home/ubuntu/thiswebsite/MyWebsite/mywebsite>
-        <Files wsgi.py>
-            Require all granted
-        </Files>
-    </Directory>
-  
-    WSGIDaemonProcess thiswebsite python-home=/home/ubuntu/thiswebsite/thiswebsite-env python-path=/home/ubuntu/MyWebsite
-    WSGIProcessGroup thiswebsite
-    WSGIScriptAlias / /home/ubuntu/thiswebsite/MyWebsite/mywebsite/wsgi.py
+    <div>Alias /static /home/ubuntu/thiswebsite/MyWebsite/static</div>
+    <div>&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/static&gt;</div>
+    <div>&emsp;Require all granted</div>
+    <div>&lt;/Directory&gt;</div>
+    <div><br \></div>
+    <div>&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/mywebsite&gt;</div>
+    <div>&emsp;&lt;Files wsgi.py&gt;</div>
+    <div>&emsp;&emsp;Require all granted</div>
+    <div>&emsp;&lt;/Files&gt;</div>
+    <div>&lt;/Directory&gt;</div>
+    <div><br \></div>
+    <div>WSGIDaemonProcess thiswebsite python-home=/home/ubuntu/thiswebsite/thiswebsite-env python-path=/home/ubuntu/thiswebsite/MyWebsite</div>
+    <div>WSGIProcessGroup thiswebsite</div>
+    <div>WSGIScriptAlias / /home/ubuntu/thiswebsite/MyWebsite/mywebsite/wsgi.py</div>
   </div>
 
   <p>Real quick, check that this configuration is correct by running the following:</p>
@@ -120,26 +114,29 @@
   <p>In addition, we will need to prepare the Django code to be run via the WSGI interface rather than manually by command line. Open <span class="code-inline">/home/ubuntu/thiswebsite/MyWebsite/mywebsite/settings.py</span> and make the following modifications:</p>
 
   <div class="code-block">
-    ...
-    # change DEBUG to False
-    DEBUG = False
-
-    # replace the previous value for ALLOWED_HOSTS with the server IP
-    ALLOWED_HOSTS = ["ip.address"]
-    ...
-    # add this on the next line after STATIC_URL
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    <div>...</div>
+    <div># change DEBUG to False</div>
+    <div>DEBUG = False</div>
+    <div><br \></div>
+    <div># replace the previous value for ALLOWED_HOSTS with the server IP</div>
+    <div>ALLOWED_HOSTS = ["ip.address"]</div>
+    <div>...</div>
+    <div># replace the line containing STATICFILES_DIRS with this one</div>
+    <div>STATIC_ROOT = os.path.join(BASE_DIR, 'static/')</div>
   </div>
 
   <p>Just a few more things. Since Apache uses the <span class="code-inline">www-data</span> user instead of <span class="code-inline">ubuntu</span> or <span class="code-inline">root</span>, we will need to modify some file and folder permissions so the server can access them. Run the following:</p>
 
   <div class="code-block">
-    <div>sudo chmod 664 /home/ubuntu/thisproject/MyProject/db.sqlite3</div>
-    <div>sudo chown :www-data ~/thisproject/MyProject/db.sqlite3</div>
-    </div>sudo chown :www-data ~/thisproject/MyProject</div>
+    <div>cd MyWebsite</div>
+    <div>python manage.py makemigrations</div>
+    <div>python manage.py migrate</div>
+    <div>sudo chmod 664 db.sqlite3</div>
+    <div>sudo chown :www-data db.sqlite3</div>
+    <div>sudo chown :www-data .</div>
   </div>
 
-  <p>Lastly, enter this:</p>
+  <p>Now, enter this:</p>
 
   <div class="code-block">
     <div>sudo ufw allow 'Apache Full'</div>
@@ -149,6 +146,12 @@
 
   <div class="code-block">
     <div>python3 manage.py collectstatic</div>
+  </div>
+
+  <p>And lastly, let's restart the Apache2 server to make sure it reloads those changes we made.</p>
+
+  <div class="code-block">
+    <div>sudo systemctl restart apache2</div>
   </div>
 
 

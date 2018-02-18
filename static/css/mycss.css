@@ -267,6 +267,7 @@ a {
     background-color: #dddddd;
     overflow: auto;
     text-align: left;
+    white-space: nowrap;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -275,10 +276,10 @@ a {
 }
 
 .code-block div:nth-child(even) {
-    background-color: #bbbbbb;
+    background-color: #cccccc;
 }
 
 .code-inline {
-    background-color: #dddddd;
+    background-color: #cccccc;
     font-family: 'Roboto Mono', monospace;
 }
