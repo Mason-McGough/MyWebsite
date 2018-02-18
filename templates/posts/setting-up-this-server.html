@@ -67,6 +67,9 @@
   <div class="code-block">
     <div>pip3 install --upgrade pip</div>
     <div>pip3 install virtualenv</div>
+  </div>
+
+  <div class="code-block">
     <div>mkdir thiswebsite</div>
     <div>cd thiswebsite</div>
     <div>git clone https://github.com/JimBoonie/MyWebsite.git</div>
@@ -118,21 +121,13 @@
 
   <div class="code-block">
     ...
+    # change DEBUG to False
+    DEBUG = False
+
     # replace the previous value for ALLOWED_HOSTS with the server IP
     ALLOWED_HOSTS = ["ip.address"]
-    
     ...
-
-    # add this to the list of INSTALLED_APPS
-    INSTALLED_APPS = [
-        ...
-        mod_wsgi.server,
-        ...
-    ]
-
-    ...
-
-    # add this beneath STATIC_URL
+    # add this on the next line after STATIC_URL
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
   </div>
 
@@ -155,6 +150,9 @@
   <div class="code-block">
     <div>python3 manage.py collectstatic</div>
   </div>
+
+
+
 
   <p>If you happen to be reading this blog post, I want to thank you. Constructing this website from scratch has been a very enlightening and entertaining experience for me. I hope that you like what you see and that I can help you make something of your own creation in the future.</p>
 </div>
