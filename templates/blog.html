@@ -55,7 +55,7 @@
                   });
 
                   // attach copy buttons to all code blocks
-                  $(".code-block").prepend(getCopyButtonTemplate());
+                  addCopyButtons();
               }
           })
       };
@@ -69,19 +69,33 @@
       };
 
       function getCopyButtonTemplate() {
-          var copyButton = $("#copy-button-template").clone();
-          copyButton.removeAttr("id");
-          copyButton.removeClass("hidden");
-          return copyButton;
+          var copy_button = $("#copy-button-template").clone();
+          copy_button.removeAttr("id");
+          copy_button.removeClass("hidden");
+          copy_button.click(copyToClipboard)
+          return copy_button;
       };
 
-      var addCopyButton = function() {
-          var copyButton = "button";
-
+      function addCopyButtons() {
+          $(".code-block").prepend(getCopyButtonTemplate());
       };
 
       var copyToClipboard = function() {
+          var contents = "";
+          $(this).siblings("div").each(function() {
+              contents += this.innerText + "\n";
+          });
 
+          // must add to dom to copy
+          var copied_div = document.createElement("div");
+          // copied_div.style.display = "none";
+          copied_div.value = contents;
+          document.body.appendChild(copied_div);
+          console.log(copied_div);
+          // copied_div.select();
+          // var success = document.execCommand("copy");
+
+          // console.log(success);
       };
 
       window.onload = function() {
