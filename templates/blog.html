@@ -31,6 +31,7 @@
 {% block extra_js %}
   <script>
       var blog_holder_original = $("#blog-holder").html();
+      var copy_button_template = ""
   
       // links to blog posts
       $("#blog-holder").click(function(e) {
@@ -48,20 +49,39 @@
               success: function(response) {
                   $("#blog-holder").html(response);
 
-                  // can only attach listener after it is rendered
+                  // attach listener for return button after post is rendered
                   $("#blog-return-link").click(function(e) {
                       $("#blog-holder").html(blog_holder_original);
                   });
+
+                  // attach copy buttons to all code blocks
+                  $(".code-block").prepend(getCopyButtonTemplate());
               }
           })
       };
 
       // open post with query string
-      var getQueryString = function ( field, url ) {
+      var getQueryString = function(field, url) {
           var href = url ? url : window.location.href;
           var reg = new RegExp('[?&]' + field + '=([^&#/]*)', 'i');
           var string = reg.exec(href);
           return string ? string[1] : null;
+      };
+
+      function getCopyButtonTemplate() {
+          var copyButton = $("#copy-button-template").clone();
+          copyButton.removeAttr("id");
+          copyButton.removeClass("hidden");
+          return copyButton;
+      };
+
+      var addCopyButton = function() {
+          var copyButton = "button";
+
+      };
+
+      var copyToClipboard = function() {
+
       };
 
       window.onload = function() {

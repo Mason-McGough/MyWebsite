@@ -15,6 +15,10 @@ a {
     text-decoration: none;
 }
 
+.hidden {
+    display: none;
+}
+
 .font-roboto {
     font-family: 'Roboto Mono', monospace;
 }
@@ -286,4 +290,15 @@ a {
 .code-inline {
     background-color: #cccccc;
     font-family: 'Roboto Mono', monospace;
+}
+
+.copy-button {
+    /*position: absolute;
+    right: 0;*/
+    padding-left: 8px;
+    opacity: 0.4;
+}
+
+.copy-button:hover {
+    opacity: 1.0;
 }
