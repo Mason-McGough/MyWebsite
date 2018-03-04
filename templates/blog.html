@@ -28,8 +28,6 @@
   </div>
 
   <textarea id="copy-holder"></textarea>
-
-  <div id="copy-holder" class="hidden">mngodsfnjgosdjo</div>
 {% endblock content %}
 
 {% block extra_js %}
@@ -76,7 +74,7 @@
           var copy_button = $("#copy-button-template").clone();
           copy_button.removeAttr("id");
           copy_button.removeClass("hidden");
-          copy_button.click(copyToClipboard)
+          copy_button.click(copyCodeBlockToClipboard)
           return copy_button;
       };
 
@@ -84,18 +82,26 @@
           $(".code-block").prepend(getCopyButtonTemplate());
       };
 
-      var copyToClipboard = function() {
-          var contents = "";
-          $(this).siblings("div").each(function() {
-              contents += this.innerText + "\n";
-          });
-
+      var copyToClipboard = function(contents) {
           var copy_holder = document.getElementById("copy-holder");
           copy_holder.value = contents;
           copy_holder.select();
           var success = document.execCommand("copy");
           copy_holder.value = "";
       };
+
+      var copyLinkToClipboard = function(element) {
+          var contents = element.href;
+          copyToClipboard(contents);
+      }
+
+      var copyCodeBlockToClipboard = function() {
+          var contents = "";
+          $(this).siblings("div").each(function() {
+              contents += this.innerText + "\n";
+          });
+          copyToClipboard(contents);
+      }
 
       window.onload = function() {
           var post_id = getQueryString("post-id", window.location.href);

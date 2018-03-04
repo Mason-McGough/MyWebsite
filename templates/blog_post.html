@@ -9,7 +9,7 @@
     <img class="link-icon mirror-horz" src="{% static 'vectors/iconmonstr-arrow-61.svg' %}" alt="Return" />
   </a>
 
-  <a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}">
+  <a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}" onclick="copyLinkToClipboard(this)">
     <img class="link-icon" src="{% static 'vectors/iconmonstr-share-1.svg' %}" alt="Share" />
   </a>
 
