@@ -27,6 +27,8 @@
     </div>
   </div>
 
+  <textarea id="copy-holder"></textarea>
+
   <div id="copy-holder" class="hidden">mngodsfnjgosdjo</div>
 {% endblock content %}
 
@@ -88,27 +90,11 @@
               contents += this.innerText + "\n";
           });
 
-          var copy_holder = $("#copy-holder");
+          var copy_holder = document.getElementById("copy-holder");
           copy_holder.value = contents;
-          console.log(copy_holder.value);
-
           copy_holder.select();
           var success = document.execCommand("copy");
-          console.log(success);
-
-          // must add to dom to copy
-          // var copied_div = document.createElement("div");
-          // copied_div.style.display = "none";
-          // var new_textnode = document.createTextNode(contents);
-          // copied_div.appendChild(new_textnode);
-          // var new_element = document.body.appendChild(copied_div);
-
-          // console.log(copied_div.innerText);
-          // new_element.select();
-          // var success = document.execCommand("copy");
-
-          // console.log(success);
-          // document.body.removeChild(copied_div);
+          copy_holder.value = "";
       };
 
       window.onload = function() {

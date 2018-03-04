@@ -302,3 +302,9 @@ a {
 .copy-button:hover {
     opacity: 1.0;
 }
+
+#copy-holder {
+    position: absolute;
+    left: -9999px;
+    font-size: 8px;
+}
