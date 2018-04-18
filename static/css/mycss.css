@@ -292,6 +292,10 @@ a {
     font-family: 'Roboto Mono', monospace;
 }
 
+.share-blog-post-button {
+    position: relative;
+}
+
 .copy-button {
     /*position: absolute;
     right: 0;*/
@@ -307,4 +311,14 @@ a {
     position: absolute;
     left: -9999px;
     font-size: 2px;
+}
+
+.copied-message {
+    position: absolute;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-radius: 0.2em;
+    color: white;
+    background-color: #101320;
+    pointer-events: none;
+    opacity: 0.0;
 }

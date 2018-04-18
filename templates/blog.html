@@ -93,6 +93,25 @@
       var copyLinkToClipboard = function(element) {
           var contents = element.href;
           copyToClipboard(contents);
+
+          var copied_message = $(element).children(".copied-message")[0];
+          fadeInFadeOut(copied_message);
+      }
+
+      var fadeInFadeOut = function(element) {
+        var _fadeOut = function() {
+          $(element).animate(
+            {opacity: 0.0},
+            {duration: 500}
+          )
+        };
+
+        $(element).animate(
+          {opacity: 1.0},
+          {duration: 500, done: function() {
+            setTimeout(_fadeOut, 1000);
+          }}
+        );
       }
 
       var copyCodeBlockToClipboard = function() {

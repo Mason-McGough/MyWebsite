@@ -11,6 +11,7 @@
 
   <a class="share-blog-post-button" href="{% url 'blog' %}?post-id={{ post.pk }}" onclick="copyLinkToClipboard(this)">
     <img class="link-icon" src="{% static 'vectors/iconmonstr-share-1.svg' %}" alt="Share" />
+    <div class="copied-message">Copied!</div>
   </a>
 
   <a id="copy-button-template" class="copy-button hidden" href="#">
