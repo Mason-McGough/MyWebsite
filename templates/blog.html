@@ -120,6 +120,9 @@
               contents += this.innerText + "\n";
           });
           copyToClipboard(contents);
+
+          var copied_message = $(this).children(".copied-message")[0];
+          fadeInFadeOut(copied_message);
       }
 
       window.onload = function() {

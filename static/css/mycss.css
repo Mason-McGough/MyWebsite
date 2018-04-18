@@ -317,8 +317,8 @@ a {
     position: absolute;
     padding: 0.2em 0.5em 0.2em 0.5em;
     border-radius: 0.2em;
-    color: white;
-    background-color: #101320;
+    color: white !important;
+    background-color: #101320 !important;
     pointer-events: none;
     opacity: 0.0;
 }
