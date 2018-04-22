@@ -32,12 +32,14 @@
 
 {% block extra_js %}
   <script>
+      var blog_page_title = document.title;
       var blog_holder_original = $("#blog-holder").html();
       var copy_button_template = ""
   
       // links to blog posts
       $("#blog-holder").click(function(e) {
           if (e.target !== e.currentTarget && $(e.target).hasClass('post-link')) {
+              // replace page html
               loadBlogPost(e.target.id, blog_holder_original);
           }
   
@@ -54,7 +56,11 @@
                   // attach listener for return button after post is rendered
                   $("#blog-return-link").click(function(e) {
                       $("#blog-holder").html(blog_holder_original);
+                      document.title = blog_page_title;
                   });
+
+                  // replace page title
+                  document.title = $("#title-tag")[0].innerText;
 
                   // attach copy buttons to all code blocks
                   addCopyButtons();
