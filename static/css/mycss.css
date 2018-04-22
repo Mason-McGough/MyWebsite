@@ -223,26 +223,28 @@ a {
     list-style-type: none;
 }
 
-.posts li {
-    height: 70px;
+.posts > li {
+    display: flex;
     margin-bottom: 30px;
 }
 
 .post-thumbnail {
     display: inline-block;
-    height: 100%;
+    flex: 0 0 70px;
+    height: 70px;
+    width: 70px;
     border: 6px solid black;
     border-radius: 15%;
     overflow: hidden;
 }
 
 .post-thumbnail img {
-    max-width: 100%;
     height: 100%;
 }
 
 .post-text {
     display: inline-block;
+    flex: 4 0 50%;
     padding: 0 0 0 12px;
     height: 100%;
 }
@@ -263,6 +265,7 @@ a {
 
 .post-description {
     font-size: 16px;
+    line-height: 95%;
 }
 
 .post-img {
