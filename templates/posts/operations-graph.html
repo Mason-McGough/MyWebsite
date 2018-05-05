@@ -37,11 +37,42 @@
   <!-- ADD IMG OF TWO-NODE GRAPH WITH ONE PIPE -->
   <canvas id="graphCanvas" resize style="width: 100%; height: 300px"></canvas>
 
-  <p>We now have the basic building blocks of an operations graph. However, there is one big remaining practical issue that remains to be solved. How do I know the proper order in which to run these nodes? For linear graphs, we may be able to get away with running the nodes in order. For complex graphs with many branches, however, it may not be clear what this proper "order" is. Running nodes arbitrarily will be a problem, as we could be running nodes before they receive fresh inputs.
+  <p>We now have the basic building blocks of an operations graph. However, there is one big practical issue that remains to be solved. How do I know the proper order in which to run these nodes? For linear graphs, we may be able to get away with running the nodes in order. For complex graphs with many branches, however, it may not be clear what this proper "order" is. Running nodes arbitrarily will be a problem, as we could be running nodes before they receive fresh inputs.
+
+  <h2>Node Traversal</h2>
+
+  <p>Let us treat an acyclic, unidirectional function graph like a tree with nodes and edges, where the edges represent the connection between one node's output and another node's input. Such a tree would naturally have both "root" nodes and "leaf" nodes. These root nodes are the nodes that contain inputs with no pipe. In other words, these are where the input value does not stem from the graph itself. We would therefore need to provide an input into the graph, in our case with a user interface. Likewise, the leaf nodes are where we get the outputs of our graph.</p>
+
+  <p>With this definition in mind, we can devise a simple graph traversal scheme to walk from roots to leaves, breadth-first, and ascribe an order to each node. The following procedure will be used to assign a depth to each node:</p>
+
+  <div class="code-block">
+    <div>def get_root_nodes(self):</div>
+    <div>&emsp;rootnodes = []</div>
+    <div>&emsp;for node in self.nodes:</div>
+    <div>&emsp;&emsp;if node.is_root():</div>
+    <div>&emsp;&emsp;&emsp;rootnodes.append(node)</div>
+    <div><br \></div>
+    <div>&emsp;return rootnodes</div>
+    <div><br \></div>
+    <div>def walk_pipes(node, depth=0):</div>
+    <div>&emsp;new_depth = depth</div>
+    <div>&emsp;for output in node.outputs:</div>
+    <div>&emsp;&emsp;if output.contains_pipe():</div>
+    <div>&emsp;&emsp;&emsp;dest_node = output.node</div>
+    <div>&emsp;&emsp;&emsp;new_depth = min(depth, walk_pipes(dest_node, depth + 1))</div>
+    <div><br \></div>
+    <div>&emsp;node.depth = new_depth</div>
+    <div><br \></div>
+    <div>def compute_depths():</div>
+    <div>&emsp;rootnodes = get_root_nodes()</div>
+    <div><br \></div>
+    <div>&emsp;for rootnode in rootnodes:</div>
+    <div>&emsp;&emsp;walk_pipes(rootnode)</div>
+  </div>
 
   <h3>Set Up Graph Demo</h3>
 
-  <p>I have prepared a project on Github to demonstrate this graph. Note that this demo requires that you install and launch a Flask server. If you do not already have Flask installed, I recommend creating a virtual environment first. Open a terminal and use the following instructions to get your graph running:</p>
+  <p>I have prepared a project on Github to demonstrate this graph concept. Note that this demo requires that you install and launch a Flask server. If you do not already have Flask installed, I recommend creating a virtual environment first. Open a terminal and use the following instructions to get your graph running:</p>
 
   <h4>Clone Graph Demo</h4>
 
@@ -73,7 +104,7 @@
 
   <p>On the left is a buttons panel with two options: "Simple Graph" and "Complex Graph". You should be seeing the "Simple Graph" now. Now, on the bottom-right is a floating menu with an input field and a button that says "Run". Go ahead and click "Run". The output of the last node should be visible on the bottom-left.</p> 
 
-  <p>If you look at the nodes, each should now display a pair of numbers. The first of these numbers indicates the node depth discussed. Recall that the depth determines the execution order of each node. The second number in the pair indicates the order in which each node was run. Try doing the same for the "Complex Graph" and take note of the relationship between the nodes and their depth and execution order.</p>
+  <p>If you look at the nodes, each should now display a pair of numbers. The first of these numbers indicates the node depth discussed. Recall that the depth determines the execution order of each node. The second number in the pair indicates the order in which each node was run. Try doing the same for the "Complex Graph" and take note of the relationship between the nodes and their depth and execution order. Note how every node receives inputs only from nodes with a lower depth value than itself.</p>
 
 </div>
 
