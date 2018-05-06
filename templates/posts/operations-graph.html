@@ -1,54 +1,53 @@
 {% load static %}
-
-<!--
-
-* Make git repo with basic example of graph
-  - client: buttons on left for selecting graphs and "run", graph on right
-  - server: one route for each graph, import opnet
-* Display depth of each node when run
-
--->
-
 <div class="text-container">
-  <img class="post-img" src="{% static 'images/blog/homepage.png' %}" alt="Operations Graph" />
+  <img class="post-img" src="{% static 'images/blog/ops-graph-simple.png' %}" alt="Operations Graph" />
 
   <p>If you have ever performed any data science or scientific computing, chances are your workflow went something like this:</p>
 
   <ol>
     <li>Load some data into a new variable</li>
     <li>Process variable through some function</li>
-    <li>Pass to another function</li>
+    <li>Pass output(s) to another function and so on...</li>
   </ol>
 
-  <p>It's a very general workflow, particularly for anyone coming from using MATLAB or any deep learning frameworks such as Torch or TensorFlow. Writing workflows like these in code is straightforward, but for tasks with shifting demands that require workflows to constantly change, it is neither efficient nor satisfying to keep piecing together sequences of functions in code alone.</p>
+  <p>It's a very general workflow, particularly for anyone coming from using MATLAB or any deep learning frameworks such as Torch or TensorFlow. Writing workflows like these in code is straightforward, but for tasks with shifting demands that require frequent manual modifications and exploration, it is neither efficient nor satisfying to keep piecing together sequences of functions in code alone.</p>
 
-  <p>Now, would it be faster to design such sequences of operations visually? Say we were to treat functions as nodes in some sort of visual "operations graph" in a graphical user interface. We could then specify an "input" to pipe data into this node. Conversely, the node would also have an "output" from which data could leave, perhaps passing to the input of another node. If you have ever created a flowchart in Visio before (or circuit design software such as MultiSim) the concept should be familiar.</p>
+  <p>Now, would it be faster to design such sequences of operations visually? Say we were to treat functions as nodes in some sort of visual "operations graph" in a graphical user interface. We could then specify an "input" to pipe data into this node. Conversely, the node would also have an "output" from which data could leave, perhaps passing to the input of another node. The concept is similar in principle to Simulink, but if you have used software like Visio, MultiSim, or even the ShaderFX graphs in Autodesk Maya, the concept should be familiar.</p>
 
-  <p>A graphical software to design operations graphs would allow complex workflows to be designed rapidly, flexibly, and intuitively, providing the user with a sense of exactly what is happening to their data and where. It would also demand that many details be implemented very thoroughly, and carefully. How will I make sure that this function can accept the <i>uint8</i> images coming from this other function? What if I need to pass the same variable to multiple functions and then pool their outputs somehow? Most importantly, how can I make sure that I run these operations in an order that makes sure each function runs only once it receives the input it needs from all its preceding functions?</p>
+  <p>A graphical software to design operations graphs would allow complex workflows to be designed rapidly, flexibly, and intuitively, providing the user with a sense of exactly what is happening to their data and where. It would also demand that many details be implemented thoroughly, and carefully. How will I make sure that this function can accept the <i>uint8</i> images coming from this other function? What if I need to pass the same variable to multiple functions and then pool their outputs somehow? Most importantly, how can I make sure that I run these operations in an order such that each function runs only once it receives the inputs it needs from all preceding functions?</p>
 
-  <p>This post is concerned primarily with solving the latter problem. I put together a solution to this problem as part of a larger project at my day job. </p>
+  <p>This post is concerned primarily with solving the latter problem. I put together a solution to this problem as part of a larger project at my day job. The solution is quite simple, but requires that we define a few terms first.</p>
 
   <h2>A Graph of Operations</h2>
 
-  <p>First, let's define a few terms. A single function is represented as a "node" in our operations graph. Each node will have zero or more "inputs" and "outputs", which correspond to the arguments and return values of the function, respectively. For instance, a node of Python's <span class="code-inline">range([start], stop[, step])</span> function would contain three possible inputs, with only the required <i>stop</i> input requiring a value.</p>
+  <p>A single function is represented as a "node" in our operations graph. Each node will have zero or more "inputs" and "outputs", which correspond to the arguments and return values of the function, respectively. For instance, a node of Python's <span class="code-inline">range([start], stop[, step])</span> function would contain three possible inputs, with only the required <i>stop</i> input requiring a value.</p>
 
   <p>A node by itself does not mean much without its connections to other nodes. We can connect the output of one node to the input of another node by defining a "pipe" between the two. When we "run" a node, this pipe essentially passes the return value generated by the node's function from its output to the input of the next node.</p>
 
-  <!-- ADD IMG OF TWO-NODE GRAPH WITH ONE PIPE -->
-  <canvas id="graphCanvas" resize style="width: 100%; height: 300px"></canvas>
+  <canvas id="canvas-1" resize style="width: 100%; height: 300px"></canvas>
 
   <p>We now have the basic building blocks of an operations graph. However, there is one big practical issue that remains to be solved. How do I know the proper order in which to run these nodes? For linear graphs, we may be able to get away with running the nodes in order. For complex graphs with many branches, however, it may not be clear what this proper "order" is. Running nodes arbitrarily will be a problem, as we could be running nodes before they receive fresh inputs.
 
   <h2>Node Traversal</h2>
 
-  <p>Let us treat an acyclic, unidirectional function graph like a tree with nodes and edges, where the edges represent the connection between one node's output and another node's input. Such a tree would naturally have both "root" nodes and "leaf" nodes. These root nodes are the nodes that contain inputs with no pipe. In other words, these are where the input value does not stem from the graph itself. We would therefore need to provide an input into the graph, in our case with a user interface. Likewise, the leaf nodes are where we get the outputs of our graph.</p>
+  <p>Let us treat an acyclic, unidirectional function graph like a tree with nodes and edges, where the edges represent the connection between one node's output and another node's input. Such a tree would naturally have both "root" nodes and "leaf" nodes. These root nodes are the nodes that only contain inputs with no pipe connected to them. Such nodes do not depend on any other node's output in order to execute. We users would therefore need to provide values to these inputs with something like a form. Likewise, the leaf nodes are nodes which contain unconnected outputs, i.e. no other node depends on their outputs. We might want to monitor such outputs, experimenting with different network configurations and input values to get the outputs we desire.</p>
 
-  <p>With this definition in mind, we can devise a simple graph traversal scheme to walk from roots to leaves, breadth-first, and ascribe an order to each node. The following procedure will be used to assign a depth to each node:</p>
+  <p>For example, say we wanted to load an RGB image into memory, convert it to grayscale, and then make a binary mask using a simple threshold. We also want to blend the mask with the original RGB image to visualize what we thresholded. Such a workflow might have a graph that looks like this:</p>
+
+  <canvas id="canvas-2" resize style="width: 100%; height: 500px"></canvas>
+
+  <p>The order of execution is obvious in this example: first, we must call <span class="code-inline">load()</span> to load the image from <span class="code-inline">path</span>, then pass the loaded image to <span class="code-inline">rgb2gray()</span>. Next, we supply the output and <span class="code-inline">t</span> to <span class="code-inline">thresh()</span>. Lastly, we combine the outputs from <span class="code-inline">load()</span> and <span class="code-inline">thresh()</span> using <span class="code-inline">blend()</span>.</p>
+
+  <p>We know we must run <span class="code-inline">load()</span> first because it is the only node that doesn't depend on any other nodes to run. Looking only at <span class="code-inline">load()</span> however, it is not clear which node to run next: <span class="code-inline">rgb2gray()</span> or <span class="code-inline">blend()</span>. Both are connected to the output of <span class="code-inline">load()</span>, but one depends on outputs that have not been determined yet.</p>
+
+  <p>One solution is to walk all of the possible paths from <span class="code-inline">load()</span> and keep track of the "depth" of the node, or the maximum number of steps it takes to reach each node. In this case, <span class="code-inline">rgb2gray()</span> would have a depth of 1 whereas <span class="code-inline">blend()</span> a depth of 3.</p>
+
+  <p>We can devise a simple graph traversal scheme to walk from roots to leaves, breadth-first, and ascribe an order to each node. The following Python functions will assign a depth to each node using this method:</p>
 
   <div class="code-block">
-    <div>def get_root_nodes(self):</div>
+    <div>def get_root_nodes(nodes):</div>
     <div>&emsp;rootnodes = []</div>
-    <div>&emsp;for node in self.nodes:</div>
+    <div>&emsp;for node in nodes:</div>
     <div>&emsp;&emsp;if node.is_root():</div>
     <div>&emsp;&emsp;&emsp;rootnodes.append(node)</div>
     <div><br \></div>
@@ -69,6 +68,8 @@
     <div>&emsp;for rootnode in rootnodes:</div>
     <div>&emsp;&emsp;walk_pipes(rootnode)</div>
   </div>
+
+  <p>One thing to keep in mind with this implementation is that it does not handle loops. A simple way of fixing this is to keep track of which nodes have been visited during each recursion and stop the recursion when the same node has been traversed twice. You could also prevent the user from forming any loop connections on the interface side. 
 
   <h3>Set Up Graph Demo</h3>
 
@@ -102,18 +103,18 @@
 
   <p>On the right is the graph canvas. This is where the operations graph is depicted, complete with nodes and pipes. The complete application enables you to create, connect, and modify these nodes and pipes, however this stripped-down version is good enough for demonstration.</p>
 
-  <p>On the left is a buttons panel with two options: "Simple Graph" and "Complex Graph". You should be seeing the "Simple Graph" now. Now, on the bottom-right is a floating menu with an input field and a button that says "Run". Go ahead and click "Run". The output of the last node should be visible on the bottom-left.</p> 
+  <p>On the left is a buttons panel with two options: "Simple Graph" and "Complex Graph". You should be seeing the "Simple Graph" now. Now, on the bottom-right is a floating menu with an input field and a button that says "Run". Go ahead and click "Run". The output of the last node should be visible on the bottom-right.</p> 
 
-  <p>If you look at the nodes, each should now display a pair of numbers. The first of these numbers indicates the node depth discussed. Recall that the depth determines the execution order of each node. The second number in the pair indicates the order in which each node was run. Try doing the same for the "Complex Graph" and take note of the relationship between the nodes and their depth and execution order. Note how every node receives inputs only from nodes with a lower depth value than itself.</p>
+  <p>If you look at the nodes, each should now display a pair of numbers. The first of these numbers indicates the node depth discussed. Recall that the depth determines the execution priority of each node, so a <span class="code-inline">depth</span> node will not be executed until all nodes with <span class="code-inline">depth - 1</span> run first. The second number in the pair indicates the order in which each node was run. Try doing the same for the "Complex Graph" and take note of the relationship between the nodes and their depth and execution order. Note how every node receives inputs only from nodes with a lower depth value than itself.</p>
 
 </div>
 
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'js/paper-full.min.js' %}"></script>
-<script type="text/paperscript" canvas="graphCanvas">
+<script type="text/javascript">
   var box_defaults = {
     strokeColor: 'black',
-    fillColor: 'blue',
+    fillColor: 'white',
     strokeWidth: 10,
     hoverStrokeColor: 'green'
   };
@@ -141,7 +142,7 @@
   }
 
   function newBox(position, dimensions) {
-    var box = new Path.Rectangle({
+    var box = new paper.Path.Rectangle({
       point: position,
       size: dimensions,
     }); 
@@ -157,12 +158,15 @@
     return box;
   }
 
-  function newPort(center, radius) {
-    var port_path = new Path.Circle({
+  function newPort(center, radius, output) {
+    var port_path = new paper.Path.Circle({
         center: center, 
         radius: radius
     });
     assignProperties(port_path, port_defaults);
+    if (output) {
+      port_path.hoverFillColor = 'red';
+    }
     port_path.onMouseEnter = function(event) {
         this.previousFillColor = this.fillColor;
         this.fillColor = this.hoverFillColor;
@@ -175,14 +179,14 @@
   }
 
   function newLine(startpoint, endpoint) {
-    var line = new Path.Line(startpoint, endpoint);
+    var line = new paper.Path.Line(startpoint, endpoint);
     assignProperties(line, line_defaults);
 
     return line;
   }
 
   function newText(position, value) {
-    var text = new PointText({
+    var text = new paper.PointText({
       point: position,
       content: value  
     });
@@ -190,16 +194,45 @@
 
     return text;
   }
-
+</script>
+<script type="text/paperscript" canvas="canvas-1">
   var line1 = newLine([180, 150], [320, 150]);
   var box1 = newBox([80, 100], [100, 100]);
   var box2 = newBox([320, 100], [100, 100]);
-  var port1 = newPort([180, 150], 20);
-  var port2 = newPort([320, 150], 20);
+  var port1 = newPort([180, 150], 20, true);
+  var port2 = newPort([320, 150], 20, false);
 
   var box_text = newText([130, 80], "Node");
   var pipe_text = newText([250, 130], "Pipe");
   var out_text = newText([215, 180], "Output");
   var in_text = newText([285, 180], "Input");
+</script>
+<script type="text/paperscript" canvas="canvas-2">
+  var line1 = newLine([250, 120], [130, 180]);
+  var line2 = newLine([130, 280], [130, 350]);
+  var line3 = newLine([180, 400], [300, 400]);
+  var line4 = newLine([250, 120], [300, 400]);
+  var load_box = newBox([200, 20], [100, 100]);
+  var rgb2gray_box = newBox([80, 180], [100, 100]);
+  var thresh_box = newBox([80, 350], [100, 100]);
+  var blend_box = newBox([300, 350], [100, 100]);
+  var port1 = newPort([250, 120], 20, true);
+  var port2 = newPort([130, 180], 20, false);
+  var port3 = newPort([130, 280], 20, true);
+  var port4 = newPort([130, 350], 20, false);
+  var port5 = newPort([180, 400], 20, true);
+  var port6 = newPort([300, 400], 20, false);
+  var port6 = newPort([300, 400], 20, false);
+  var port7 = newPort([200, 70], 20, false);
+  var port8 = newPort([80, 400], 20, false);
+  var port8 = newPort([400, 400], 20, true);
+
+  var loadimage_input_text = newText([150, 75], "path");
+  var thresh_input_text = newText([50, 405], "t");
+  var loadimage_text = newText([250, 70], "load()");
+  var rgb2gray_text = newText([130, 230], "rgb2gray()");
+  var thresh_text = newText([130, 400], "thresh()");
+  var blend_text = newText([350, 400], "blend()");
+  var output_text = newText([450, 405], "output");
 </script>
 {% endblock extra_js %}
