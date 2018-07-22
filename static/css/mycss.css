@@ -55,6 +55,18 @@ a {
     width: 50px;
     height: 50px;
     margin-right: 8px;
+    
+    -webkit-transition: height 0.1s ease-out;
+    -moz-transition: height 0.1s ease-out;
+    -o-transition: height width 0.1s ease-out;
+    transition: height 0.1s ease-out;
+}
+
+.link-icon:hover {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .social-link:nth-child(1) {
@@ -191,7 +203,7 @@ a {
     position: absolute;
     margin-left: 10%;
     width: 90%;
-    height: 50%;
+    height: 200px;
     bottom: 0;
     margin-bottom: 36px;
 }
@@ -270,21 +282,19 @@ a {
 .home-banner-portrait-div {
     position: static;
     display: inline;
-    height: 100%;
-    width: 224px;
 }
 
 .home-banner-portrait {
+    display: block;
     border: 12px solid black;
     border-radius: 50%;
     float: left;
     height: 100%;
 
     animation-name: portraitFlipIn;
-    opacity: 0.0;
     animation-delay: 1s;
     animation-duration: 1s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
 }
 
 @keyframes portraitFlipIn {
