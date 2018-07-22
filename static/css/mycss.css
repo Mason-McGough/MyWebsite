@@ -136,7 +136,7 @@ a {
     width: 90%;
     height: 50%;
     bottom: 0;
-    margin-bottom: 24px;
+    margin-bottom: 36px;
 }
 
 #home-banner-spacer {
@@ -176,13 +176,36 @@ a {
     margin: 6px 0 24px 0;
 }
 
-.home-banner-portrait {
+.home-banner-portrait-div {
     position: static;
     display: inline;
-    border: 6px solid black;
+    height: 100%;
+    width: 224px;
+}
+
+.home-banner-portrait {
+    border: 12px solid black;
     border-radius: 50%;
     float: left;
     height: 100%;
+    opacity: 0.0;
+
+    animation-name: flipin;
+    animation-delay: 1s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes flipin {
+    from {
+        transform: rotateY(90deg);
+        opacity: 0.0;
+    }
+
+    to {
+        transform: rotateY(0deg);
+        opacity: 1.0;
+    }
 }
 
 .timeline-when {
