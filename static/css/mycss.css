@@ -57,6 +57,63 @@ a {
     margin-right: 8px;
 }
 
+.social-link:nth-child(1) {
+    animation-name: socialLink1SlideIn;
+    animation-delay: 1.6s;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes socialLink1SlideIn {
+    from {
+        transform: translateY(-12px);   
+        opacity: 0.0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1.0;
+    }
+}
+
+.social-link:nth-child(2) {
+    animation-name: socialLink2SlideIn;
+    animation-delay: 1.8s;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes socialLink2SlideIn {
+    from {
+        transform: translateY(-12px);   
+        opacity: 0.0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1.0;
+    }
+}
+
+.social-link:nth-child(3) {
+    animation-name: socialLink3SlideIn;
+    animation-delay: 2.0s;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes socialLink3SlideIn {
+    from {
+        transform: translateY(-12px);   
+        opacity: 0.0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1.0;
+    }
+}
+
 .mirror-horz {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
@@ -153,12 +210,46 @@ a {
 #home-banner-name {
     font-size: 42px;
     font-weight: 600;
+
+    animation-name: nameSlideIn;
+    animation-delay: 1.2s;
+    animation-duration: 1.0s;
+    animation-fill-mode: both;
+}
+
+@keyframes nameSlideIn {
+    from {
+        transform: translateY(-12px);
+        opacity: 0.0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1.0;
+    }
 }
 
 #home-banner-description {
     font-size: 20px;
     font-weight: 400;
     margin-top: -12px;
+
+    animation-name: descriptionSlideIn;
+    animation-delay: 1.4s;
+    animation-duration: 1.0s;
+    animation-fill-mode: both;
+}
+
+@keyframes descriptionSlideIn {
+    from {
+        transform: translateY(-12px);
+        opacity: 0.0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1.0;
+    }
 }
 
 @/*media screen and (max-width: 768px) {
@@ -188,9 +279,9 @@ a {
     border-radius: 50%;
     float: left;
     height: 100%;
-    opacity: 0.0;
 
     animation-name: portraitFlipIn;
+    opacity: 0.0;
     animation-delay: 1s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
