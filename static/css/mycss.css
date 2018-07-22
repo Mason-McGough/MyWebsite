@@ -190,13 +190,13 @@ a {
     height: 100%;
     opacity: 0.0;
 
-    animation-name: flipin;
+    animation-name: portraitFlipIn;
     animation-delay: 1s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
-@keyframes flipin {
+@keyframes portraitFlipIn {
     from {
         transform: rotateY(90deg);
         opacity: 0.0;
