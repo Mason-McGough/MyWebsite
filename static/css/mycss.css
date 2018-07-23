@@ -314,6 +314,21 @@ a {
     width: 120px;
 }
 
+#carousel-gallery{
+    width: 100%;
+    height: 800px;
+}
+
+    #carousel-canvas {
+        width: 100%;
+        height: 75%;
+    }
+
+    #carousel-list {
+        width: 100%;
+        height: 25%;
+    }
+
 .project-container {
     display: block;
     width: 100%;
