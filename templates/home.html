@@ -40,7 +40,7 @@
         {% if forloop.counter0 < max_posts %}
           <li>
             <div class="post-thumbnail">
-              <img src="{% static 'images/blog/' %}{{ post.thumbnail }}" alt="{{ post.title }}" width="70px" height="70px" />
+              <img src="{% static 'images/blog/' %}{{ post.thumbnail }}" alt="{{ post.title }}" width="100px" height="100px" />
             </div>
             <div class="post-text">
               <a class="post-link" href="{% url 'blog' %}?post-id={{ post.pk }}">{{ post.title }}</a>
@@ -97,7 +97,9 @@
     <div id="carousel-gallery">
       <div id="carousel-canvas"></div>
 
-      <div id="carousel-list"></div>
+      <div id="carousel-list">
+        
+      </div>
     </div>
 
     <ul>

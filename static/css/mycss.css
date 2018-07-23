@@ -1,4 +1,12 @@
 /* GENERAL */
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 html, body { 
     height: 100%; 
     width: 100%; 
@@ -6,7 +14,6 @@ html, body {
 }
 
 body {
-    /*overflow: hidden;*/
     font-family: 'Poppins', sans-serif;
     color: black;
 }
@@ -163,7 +170,7 @@ a {
 }
 
 #navbar-home-link {
-    font-size: 32px;
+    font-size: 2em;
 }
 
 .navbar-menu-left {
@@ -180,7 +187,7 @@ a {
 }
 
 .navbar-menu-list-item a {
-    font-size: 18px;
+    font-size: 1.25em;
 }
 
 .navbar-menu-list-item a:hover {
@@ -203,7 +210,7 @@ a {
     position: absolute;
     margin-left: 10%;
     width: 90%;
-    height: 200px;
+    height: 236px;
     bottom: 0;
     margin-bottom: 36px;
 }
@@ -220,7 +227,7 @@ a {
 }
 
 #home-banner-name {
-    font-size: 42px;
+    font-size: 2em;
     font-weight: 600;
 
     animation-name: nameSlideIn;
@@ -242,7 +249,7 @@ a {
 }
 
 #home-banner-description {
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 400;
     margin-top: -12px;
 
@@ -264,13 +271,13 @@ a {
     }
 }
 
-@/*media screen and (max-width: 768px) {
+/*@media screen and (max-width: 768px) {
     #home-banner-name {
-        font-size: 32px;
+        font-size: 1.25em;
     }
 
     #home-banner-description {
-        font-size: 16px;
+        font-size: 0.8em;
     }
 }*/
 
@@ -369,9 +376,9 @@ a {
 
 .post-thumbnail {
     display: inline-block;
-    flex: 0 0 70px;
-    height: 70px;
-    width: 70px;
+    flex: 0 0 100px;
+    height: 100px;
+    width: 100px;
     border: 6px solid black;
     border-radius: 15%;
     overflow: hidden;
@@ -389,7 +396,7 @@ a {
 }
 
 .post-link {
-    font-size: 24px;
+    font-size: 1.5em;
     font-weight: bold;
 }
 
@@ -398,12 +405,12 @@ a {
 }
 
 .post-date {
-    font-size: 16px;
+    font-size: 1em;
     font-color: gray;
 }
 
 .post-description {
-    font-size: 16px;
+    font-size: 1em;
     line-height: 95%;
 }
 
