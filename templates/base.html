@@ -35,15 +35,15 @@
   
     <!-- STATIC RESOURCES -->
     <script>
-      var audio_url = "{% static '3d_assets/audio/aquaticAmbience.mp3' %}";
-      var seafloor_url = "{% static '3d_assets/seafloor.fbx' %}";
-      var cubemap = "{% static '3d_assets/cubemaps/ame_nebula/' %}";
-      var format = ".png";
-      var cubemap_urls = [ 
-        cubemap + 'posx' + format, cubemap + 'negx' + format,
-        cubemap + 'posy' + format, cubemap + 'negy' + format,
-        cubemap + 'posz' + format, cubemap + 'negz' + format
-      ];
+        var audio_url = "{% static '3d_assets/audio/aquaticAmbience.mp3' %}";
+        var seafloor_url = "{% static '3d_assets/seafloor.fbx' %}";
+        var cubemap = "{% static '3d_assets/cubemaps/ame_nebula/' %}";
+        var format = ".png";
+        var cubemap_urls = [ 
+            cubemap + 'posx' + format, cubemap + 'negx' + format,
+            cubemap + 'posy' + format, cubemap + 'negy' + format,
+            cubemap + 'posz' + format, cubemap + 'negz' + format
+        ];
     </script>
     <script src="{% static 'js/pages/basepage.js' %}"></script>
   {% endblock backdrop_js %}
