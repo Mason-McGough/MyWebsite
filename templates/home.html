@@ -96,7 +96,7 @@
 
     <div id="carousel-gallery">
       <div id="carousel-list">
-        <div id="carousel-thumbnail-1" class="carousel-thumbnail">
+        <div id="carousel-thumbnail-1" class="carousel-thumbnail selected">
           <img src="{% static 'images/website.png' %}" alt="Website" \>
         </div>
 
@@ -116,7 +116,7 @@
           <img src="{% static 'images/muscleminer.png' %}" alt="MuscleMiner" \>
         </div>
       </div>
-      
+
       <div id="carousel-canvas" class="project-container">
         <div id="project-1" class="project">
           <div class="project-thumbnail">
@@ -197,6 +197,9 @@
                   return;
               }
               var idx = target.id.split('-').slice(-1)[0];
+
+              $('#carousel-list').children().removeClass('selected');
+              $(target).addClass('selected');
 
               $('#carousel-canvas').children().addClass('hidden');
               $('#carousel-canvas').children().removeClass('appear');
