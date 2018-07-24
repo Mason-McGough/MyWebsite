@@ -95,6 +95,28 @@
     <h2>Projects</h2>
 
     <div id="carousel-gallery">
+      <div id="carousel-list">
+        <div id="carousel-thumbnail-1" class="carousel-thumbnail">
+          <img src="{% static 'images/website.png' %}" alt="Website" \>
+        </div>
+
+        <div id="carousel-thumbnail-2" class="carousel-thumbnail">
+          <img src="{% static 'images/analysis_portal.png' %}" alt="Analysis Portal" \>
+        </div>
+        
+        <div id="carousel-thumbnail-3" class="carousel-thumbnail">
+          <img src="{% static 'images/image_analysis.png' %}" alt="Image Analysis" \>
+        </div>
+        
+        <div id="carousel-thumbnail-4" class="carousel-thumbnail">
+          <img src="{% static 'images/scopal.png' %}" alt="Scopal" \>
+        </div>
+        
+        <div id="carousel-thumbnail-5" class="carousel-thumbnail">
+          <img src="{% static 'images/muscleminer.png' %}" alt="MuscleMiner" \>
+        </div>
+      </div>
+      
       <div id="carousel-canvas" class="project-container">
         <div id="project-1" class="project">
           <div class="project-thumbnail">
@@ -156,28 +178,6 @@
           </div>
         </div>
       </div>
-
-      <div id="carousel-list">
-        <div id="carousel-thumbnail-1" class="carousel-thumbnail">
-          <img src="{% static 'images/website.png' %}" alt="Website" \>
-        </div>
-
-        <div id="carousel-thumbnail-2" class="carousel-thumbnail">
-          <img src="{% static 'images/analysis_portal.png' %}" alt="Analysis Portal" \>
-        </div>
-        
-        <div id="carousel-thumbnail-3" class="carousel-thumbnail">
-          <img src="{% static 'images/image_analysis.png' %}" alt="Image Analysis" \>
-        </div>
-        
-        <div id="carousel-thumbnail-4" class="carousel-thumbnail">
-          <img src="{% static 'images/scopal.png' %}" alt="Scopal" \>
-        </div>
-        
-        <div id="carousel-thumbnail-5" class="carousel-thumbnail">
-          <img src="{% static 'images/muscleminer.png' %}" alt="MuscleMiner" \>
-        </div>
-      </div>
     </div>
   </div>
 {% endblock content %}
@@ -199,7 +199,9 @@
               var idx = target.id.split('-').slice(-1)[0];
 
               $('#carousel-canvas').children().addClass('hidden');
+              $('#carousel-canvas').children().removeClass('appear');
               $('#project-' + idx).removeClass('hidden');
+              $('#project-' + idx).addClass('appear');
           }
       })
   </script>
