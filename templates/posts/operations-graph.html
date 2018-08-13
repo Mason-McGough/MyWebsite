@@ -49,29 +49,27 @@
   <p>We can devise a simple graph traversal scheme to walk from roots to leaves, depth-first, and ascribe an order to each node. The following Python functions will assign a depth to each node using this method:</p>
 
   <div class="code-block">
-    <div>def get_root_nodes(nodes):</div>
-    <div>&emsp;rootnodes = []</div>
-    <div>&emsp;for node in nodes:</div>
-    <div>&emsp;&emsp;if node.is_root():</div>
-    <div>&emsp;&emsp;&emsp;rootnodes.append(node)</div>
-    <div><br \></div>
-    <div>&emsp;return rootnodes</div>
-    <div><br \></div>
-    <div>def walk_pipes(node, depth=0):</div>
-    <div>&emsp;new_depth = depth</div>
-    <div>&emsp;for output in node.outputs:</div>
-    <div>&emsp;&emsp;if output.contains_pipe():</div>
-    <div>&emsp;&emsp;&emsp;dest_node = output.node</div>
-    <div>&emsp;&emsp;&emsp;new_depth = min(depth, walk_pipes(dest_node, depth + 1))</div>
-    <div><br \></div>
-    <div>&emsp;node.depth = new_depth</div>
-    <div>&emsp;return new_depth</div>
-    <div><br \></div>
-    <div>def compute_depths():</div>
-    <div>&emsp;rootnodes = get_root_nodes()</div>
-    <div><br \></div>
-    <div>&emsp;for rootnode in rootnodes:</div>
-    <div>&emsp;&emsp;walk_pipes(rootnode)</div>
+<pre><code>def get_root_nodes(nodes):
+  rootnodes = []
+  for node in nodes:
+    if node.is_root():
+      rootnodes.append(node)
+      
+  return rootnodes
+
+def walk_pipes(node, depth=0):
+  new_depth = depth
+  for output in node.outputs:
+    if output.contains_pipe():
+      dest_node = output.node
+      new_depth = min(depth, walk_pipes(dest_node, depth + 1))
+  node.depth = new_depth
+  return new_depth
+
+def compute_depths():
+  rootnodes = get_root_nodes()
+  for rootnode in rootnodes:
+    walk_pipes(rootnode)</code></pre>
   </div>
 
   <p>One thing to keep in mind with this implementation is that it does not handle loops. A simple way of fixing this is to keep track of which nodes have been visited during each recursion and stop the recursion when the same node has been traversed twice. It might also be a good idea to prevent the user from forming any loop connections on the interface side. 
@@ -83,22 +81,22 @@
   <h4>Clone Graph Demo</h4>
 
   <div class="code-block">
-    <div>git clone https://github.com/JimBoonie/OpsGraph.git</div>
-    <div>cd OpsGraph</div>
+<pre><code>git clone https://github.com/JimBoonie/OpsGraph.git
+cd OpsGraph</code></pre>
   </div>
 
   <h4>Using Conda Environment (Optional)</h4>
 
   <div class="code-block">
-    <div>conda create -n opsgraph python=3.6</div>
-    <div>source activate opsgraph</div>
+<pre><code>conda create -n opsgraph python=3.6
+source activate opsgraph</code></pre>
   </div>
 
   <h4>Install Flask and Run Server</h4>
 
   <div class="code-block">
-    <div>conda install Flask</div>
-    <div>python run.py</div>
+<pre><code>conda install Flask
+python run.py</code></pre>
   </div>
 
   <p>Now, navigate to <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a> in your browser. If all is in order, it should look like the following:</p>

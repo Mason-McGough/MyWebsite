@@ -34,13 +34,13 @@
   <p>Open up a fresh console the way you prefer (I use <i>ctrl+alt+t</i> on my Ubuntu machine). Then, locate the private key you downloaded in the previous section and enter the following into the terminal:</p>
 
   <div class="code-block">
-    <div>ssh -i /path/to/private_key.pem ubuntu@ip.address</div>
+<pre><code>ssh -i /path/to/private_key.pem ubuntu@ip.address</code></pre>
   </div>
 
   <p>replacing "ip.address" with the address you copied from the EC2 Dashboard. You might get "UNPROTECTED PRIVATE KEY FILE" or a similar warning. This can be easily fixed by changing the permissions on the file:</p>
 
   <div class="code-block">
-    <div>chmod 0600 /path/to/private_key.pem</div>
+<pre><code>chmod 0600 /path/to/private_key.pem</code></pre>
   </div>
 
   <p>Try the <i>ssh</i> command again and it should let you in this time.</p>
@@ -60,15 +60,15 @@
   <p>Now that we have a console to our server open, let's install some things from the Ubuntu software repositories:</p>
 
   <div class="code-block">
-    <div>sudo apt-get update</div>
-    <div>sudo apt-get install python3-pip apache2 apache2-dev libapache2-mod-wsgi-py3</div>
+<pre><code>sudo apt-get update
+sudo apt-get install python3-pip apache2 apache2-dev libapache2-mod-wsgi-py3</code></pre>
   </div>
 
   <p>This will update all of the links in your installation manager, then install the Apache web server and Python3. Next we will install virtualenv:</p>
 
   <div class="code-block">
-    <div>sudo pip3 install --upgrade pip</div>
-    <div>sudo pip3 install virtualenv</div>
+<pre><code>sudo pip3 install --upgrade pip
+sudo pip3 install virtualenv</code></pre>
   </div>
 
   <p>Using a virtual environment will allow you to freely install and modify your application-specific packages without interfering with the system's Python environment. It also makes dependency management much cleaner when you are running multiple applications on the same device.</p>
@@ -76,12 +76,12 @@
   <p>Now let's clone a copy of the website from Github. Then, we will create a virtualenv and install the packages necessary for handling requests to the website:</p>
 
   <div class="code-block">
-    <div>mkdir thiswebsite</div>
-    <div>cd thiswebsite</div>
-    <div>git clone https://github.com/JimBoonie/MyWebsite.git</div>
-    <div>virtualenv thiswebsite-env</div>
-    <div>source thiswebsite-env/bin/activate</div>
-    <div>pip install mod_wsgi django</div>
+<pre><code>mkdir thiswebsite
+cd thiswebsite
+git clone https://github.com/JimBoonie/MyWebsite.git
+virtualenv thiswebsite-env
+source thiswebsite-env/bin/activate
+pip install mod_wsgi django</code></pre>
   </div>
 
   <p>Now that we have the server environment set up and all of the required packages installed, let's go ahead and see if we can view it in a browser. First, we will need to modify the server's <b>Security Group</b> to enable HTTP access via port 80.</p>
@@ -93,26 +93,26 @@
   <p>We would prefer, however, to have Apache serve the website that you just downloaded from my GitHub rather than serving its own default page. For that, we will need to edit the file <span class="code-inline">/etc/apache2/sites-available/000-default.conf</span>. Open this file using <span class="code-inline">nano</span> or your preferred text editor and add the following to the bottom, right above the <span class="code-inline">&lt;/VirtualHost&gt;</span> line:</p>
 
   <div class="code-block">
-    <div>Alias /static /home/ubuntu/thiswebsite/MyWebsite/static</div>
-    <div>&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/static&gt;</div>
-    <div>&emsp;Require all granted</div>
-    <div>&lt;/Directory&gt;</div>
-    <div><br \></div>
-    <div>&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/mywebsite&gt;</div>
-    <div>&emsp;&lt;Files wsgi.py&gt;</div>
-    <div>&emsp;&emsp;Require all granted</div>
-    <div>&emsp;&lt;/Files&gt;</div>
-    <div>&lt;/Directory&gt;</div>
-    <div><br \></div>
-    <div>WSGIDaemonProcess thiswebsite python-home=/home/ubuntu/thiswebsite/thiswebsite-env python-path=/home/ubuntu/thiswebsite/MyWebsite</div>
-    <div>WSGIProcessGroup thiswebsite</div>
-    <div>WSGIScriptAlias / /home/ubuntu/thiswebsite/MyWebsite/mywebsite/wsgi.py</div>
+<pre><code>Alias /static /home/ubuntu/thiswebsite/MyWebsite/static
+&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/static&gt;
+    Require all granted
+&lt;/Directory&gt;
+
+&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/mywebsite&gt;
+    &lt;Files wsgi.py&gt;
+        Require all granted
+    &lt;/Files&gt;
+&lt;/Directory&gt;
+
+WSGIDaemonProcess thiswebsite python-home=/home/ubuntu/thiswebsite/thiswebsite-env python-path=/home/ubuntu/thiswebsite/MyWebsite
+WSGIProcessGroup thiswebsite
+WSGIScriptAlias / /home/ubuntu/thiswebsite/MyWebsite/mywebsite/wsgi.py</code></pre>
   </div>
 
   <p>Real quick, check that this configuration is correct by running the following:</p>
 
   <div class="code-block">
-    <div>sudo apache2ctl configtest</div>
+<pre><code>sudo apache2ctl configtest</code></pre>
   </div>
 
   <p>That will tell you if the file has been configured correctly.</p>
@@ -120,44 +120,44 @@
   <p>In addition, we will need to prepare the Django code to be run via the WSGI interface rather than manually by command line. Open <span class="code-inline">/home/ubuntu/thiswebsite/MyWebsite/mywebsite/settings.py</span> and make the following modifications:</p>
 
   <div class="code-block">
-    <div>...</div>
-    <div># change DEBUG to False</div>
-    <div>DEBUG = False</div>
-    <div><br \></div>
-    <div># replace the previous value for ALLOWED_HOSTS with the server IP</div>
-    <div>ALLOWED_HOSTS = ["ip.address"]</div>
-    <div>...</div>
-    <div># replace the line containing STATICFILES_DIRS with this one</div>
-    <div>STATIC_ROOT = os.path.join(BASE_DIR, 'static/')</div>
+<pre><code>...
+# change DEBUG to False
+DEBUG = False
+
+# replace the previous value for ALLOWED_HOSTS with the server IP
+ALLOWED_HOSTS = ["ip.address"]
+...
+# replace the line containing STATICFILES_DIRS with this one
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')</code></pre>
   </div>
 
   <p>Just a few more things. Since Apache uses the <span class="code-inline">www-data</span> user instead of <span class="code-inline">ubuntu</span> or <span class="code-inline">root</span>, we will need to modify some file and folder permissions so the server can access them. Run the following:</p>
 
   <div class="code-block">
-    <div>cd MyWebsite</div>
-    <div>python manage.py makemigrations</div>
-    <div>python manage.py migrate --run-syncdb</div>
-    <div>sudo chmod 664 db.sqlite3</div>
-    <div>sudo chown :www-data db.sqlite3</div>
-    <div>sudo chown :www-data .</div>
+<pre><code>cd MyWebsite
+python manage.py makemigrations
+python manage.py migrate --run-syncdb
+sudo chmod 664 db.sqlite3
+sudo chown :www-data db.sqlite3
+sudo chown :www-data .</code></pre>
   </div>
 
   <p>Now, enter this:</p>
 
   <div class="code-block">
-    <div>sudo ufw allow 'Apache Full'</div>
+<pre><code>sudo ufw allow 'Apache Full'</code></pre>
   </div>
 
   <p>... and this:</p>
 
   <div class="code-block">
-    <div>python3 manage.py collectstatic</div>
+<pre><code>python3 manage.py collectstatic</code></pre>
   </div>
 
   <p>And lastly, let's restart the Apache2 server to make sure it reloads those changes we made.</p>
 
   <div class="code-block">
-    <div>sudo systemctl restart apache2</div>
+<pre><code>sudo systemctl restart apache2</code></pre>
   </div>
 
   <p>That should be it! Try navigating to the IP address of the server in your computer's browser. If all went well, you should see a copy of the home page for this website.</p>

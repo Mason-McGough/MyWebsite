@@ -499,21 +499,14 @@ a {
 }
 
 .code-block {
-    padding: 8px 0 8px 0;
-    border: 3px inset gray;
-    background-color: #dddddd;
+    padding: 0.5em 1em 0 1em;
+    border-radius: 0.5em;
     overflow: auto;
+    
     text-align: left;
-    white-space: nowrap;
     font-family: 'Roboto Mono', monospace;
-}
-
-.code-block div {
-    padding: 0 8px 0 16px;
-}
-
-.code-block div:nth-child(even) {
-    background-color: #cccccc;
+    font-size: 1.2em;
+    background-color: #dddddd;
 }
 
 .code-inline {
