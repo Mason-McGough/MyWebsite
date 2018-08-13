@@ -90,7 +90,7 @@ pip install mod_wsgi django</code></pre>
 
   <p>Now let's test out this server to make sure everything is in order. Copy and paste the server IP address into your browser. It should take you to the <b>Apache2 Default Page</b>. That's great! That means the Apache server is working.</p>
 
-  <p>We would prefer, however, to have Apache serve the website that you just downloaded from my GitHub rather than serving its own default page. For that, we will need to edit the file <span class="code-inline">/etc/apache2/sites-available/000-default.conf</span>. Open this file using <span class="code-inline">nano</span> or your preferred text editor and add the following to the bottom, right above the <span class="code-inline">&lt;/VirtualHost&gt;</span> line:</p>
+  <p>We would prefer, however, to have Apache serve the website that you just downloaded from my GitHub rather than serving its own default page. For that, we will need to edit the file <code>/etc/apache2/sites-available/000-default.conf</code>. Open this file using <code>nano</code> or your preferred text editor and add the following to the bottom, right above the <code>&lt;/VirtualHost&gt;</code> line:</p>
 
   <div class="code-block">
 <pre><code>Alias /static /home/ubuntu/thiswebsite/MyWebsite/static
@@ -117,7 +117,7 @@ WSGIScriptAlias / /home/ubuntu/thiswebsite/MyWebsite/mywebsite/wsgi.py</code></p
 
   <p>That will tell you if the file has been configured correctly.</p>
 
-  <p>In addition, we will need to prepare the Django code to be run via the WSGI interface rather than manually by command line. Open <span class="code-inline">/home/ubuntu/thiswebsite/MyWebsite/mywebsite/settings.py</span> and make the following modifications:</p>
+  <p>In addition, we will need to prepare the Django code to be run via the WSGI interface rather than manually by command line. Open <code>/home/ubuntu/thiswebsite/MyWebsite/mywebsite/settings.py</code> and make the following modifications:</p>
 
   <div class="code-block">
 <pre><code>...
@@ -131,7 +131,7 @@ ALLOWED_HOSTS = ["ip.address"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')</code></pre>
   </div>
 
-  <p>Just a few more things. Since Apache uses the <span class="code-inline">www-data</span> user instead of <span class="code-inline">ubuntu</span> or <span class="code-inline">root</span>, we will need to modify some file and folder permissions so the server can access them. Run the following:</p>
+  <p>Just a few more things. Since Apache uses the <code>www-data</code> user instead of <code>ubuntu</code> or <code>root</code>, we will need to modify some file and folder permissions so the server can access them. Run the following:</p>
 
   <div class="code-block">
 <pre><code>cd MyWebsite

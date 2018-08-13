@@ -509,8 +509,10 @@ a {
     background-color: #dddddd;
 }
 
-.code-inline {
+p > code {
+    border-radius: 0.2em;
     font-family: 'Roboto Mono', monospace;
+    background-color: #dddddd;
 }
 
 .share-blog-post-button {
