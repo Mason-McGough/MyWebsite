@@ -1,10 +1,6 @@
 {% load static %}
 
 <div class="text-container">
-  <h1 id="title-tag">{{ post.title }}</h1>
-</div>
-
-<div class="text-container">
   <a id="blog-return-link" href="#">
     <img class="link-icon-mirror-horz" src="{% static 'vectors/iconmonstr-arrow-61.svg' %}" alt="Return" />
   </a>
@@ -19,6 +15,7 @@
     <div class="copied-message">Copied!</div>
   </a>
 
+  <h1 id="title-tag">{{ post.title }}</h1>
 
   <div class="separator"></div>
 
