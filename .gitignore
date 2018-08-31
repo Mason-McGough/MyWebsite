@@ -6,5 +6,6 @@ to-do.md
 **/MyWebsiteEnv
 **/workspace
 **/static/admin
+**.vscode/
 
 *.pyc

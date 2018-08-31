@@ -1,0 +1,32 @@
+#navbar {
+    padding: 12px 20px 12px 20px;
+}
+
+.navbar-table {
+    width: 100%;
+}
+
+#navbar-home-link {
+    font-size: 2em;
+}
+
+.navbar-menu-left {
+    text-align: left;
+}
+
+.navbar-menu-right {
+    text-align: right;
+}
+
+.navbar-menu-list-item {
+    display: inline-block;
+    margin: 0 0 0 18px;
+}
+
+.navbar-menu-list-item a {
+    font-size: 1.25em;
+}
+
+a:hover {
+    color: #00ddff;
+}

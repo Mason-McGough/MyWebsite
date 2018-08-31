@@ -1,0 +1,31 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: #101320;
+}
+
+#img-container {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 70% 1fr;
+}
+
+#img-container > div {
+    border: 2px solid black;
+    margin: 10px;
+}

@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^blog/(?P<pk>\d+)/$', views.blog_post, name='blog_post'),
     url(r'^blog/', views.blog, name='blog'),
+    url(r'^photos/', views.photos, name='photos'),
     url(r'^admin/', admin.site.urls),
 ]
