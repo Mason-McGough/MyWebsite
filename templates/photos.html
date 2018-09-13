@@ -12,7 +12,7 @@
       {% include 'navbar.html' %}
       <div id="img-container">
         <div id="img-carousel">
-          <img v-bind:src='src' alt='Image' />
+          <!-- <img v-bind:src='src' alt='Image' /> -->
         </div>
         <div id="filmstrip">
           
@@ -21,13 +21,26 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{% static 'openseadragon-bin-2.4.0/openseadragon.min.js' %}"></script>
     <script>
       var imgCarousel = new Vue({
         el: '#img-carousel',
         data: {
-          src: 'https://www.lvzoo.org/wp-content/themes/lvzoo/timthumb.php?src=https://www.lvzoo.org/wp-content/uploads/2016/08/Nubian-Goat-Banner.jpg&w=1210&h=771'
+          src: 'egret.jpg'
         }
       })
+      console.log(imgCarousel);
+
+      var viewer = OpenSeadragon({
+        id: 'img-carousel',
+        prefixUrl: "{% static 'openseadragon-bin-2.4.0/images/' %}",
+        tileSources: {
+          type: 'image',
+          url: "{% static 'images/zoom/goat.jpeg' %}"
+        }
+      });
+
+      
     </script>
   </body>
 
