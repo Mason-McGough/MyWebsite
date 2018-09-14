@@ -59,3 +59,9 @@ a:hover {
     width: 100%;
     object-fit: contain;
 }
+
+#filmstrip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

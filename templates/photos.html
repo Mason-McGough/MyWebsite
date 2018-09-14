@@ -13,7 +13,11 @@
       <div id="img-container">
         <div id="img-carousel"></div>
         <div id="filmstrip">
-          
+          <filmstrip-thumbnail 
+            v-for="img in images"
+            v-bind:thumb="img"
+            v-bind:key="img.id"
+          ></filmstrip-thumbnail>
         </div>
       </div>
     </div>
@@ -27,7 +31,6 @@
           src: "{% static 'images/zoom/goat.jpeg' %}"
         }
       })
-      console.log(imgCarousel);
 
       var viewer = OpenSeadragon({
         id: 'img-carousel',
@@ -38,7 +41,31 @@
         }
       });
 
-      
+      Vue.component('filmstrip-thumbnail', {
+        props: ['thumb'],
+        template: "\
+        <div> \
+          <img width=50 height=50 src='{{ thumb.src }}' alt='{{ thumb.alt }}' \> \
+        </div>"
+      })
+
+      var filmstrip = new Vue({
+        el: '#filmstrip',
+        data: {
+          images: [
+            {
+              id: 0,
+              src: "{% static 'images/zoom/goat.jpeg' %}",
+              alt: "Goat"
+            },
+            {
+              id: 1,
+              src: "{% static 'images/zoom/egret.jpg' %}",
+              alt: "Egret"
+            }
+          ]
+        }
+      })
     </script>
   </body>
 
