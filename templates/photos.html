@@ -11,9 +11,7 @@
     <div id="app">
       {% include 'navbar.html' %}
       <div id="img-container">
-        <div id="img-carousel">
-          <!-- <img v-bind:src='src' alt='Image' /> -->
-        </div>
+        <div id="img-carousel"></div>
         <div id="filmstrip">
           
         </div>
@@ -26,7 +24,7 @@
       var imgCarousel = new Vue({
         el: '#img-carousel',
         data: {
-          src: 'egret.jpg'
+          src: "{% static 'images/zoom/goat.jpeg' %}"
         }
       })
       console.log(imgCarousel);
@@ -36,7 +34,7 @@
         prefixUrl: "{% static 'openseadragon-bin-2.4.0/images/' %}",
         tileSources: {
           type: 'image',
-          url: "{% static 'images/zoom/goat.jpeg' %}"
+          url: imgCarousel.src
         }
       });
 
