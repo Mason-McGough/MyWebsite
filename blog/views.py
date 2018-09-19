@@ -14,6 +14,3 @@ def blog(request):
 def blog_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog_post.html', {'post': post})
-
-def photos(request):
-    return render(request, 'photos.html', {})

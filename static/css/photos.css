@@ -64,4 +64,15 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    overflow-y: auto;
+}
+
+.filmstrip-thumbnail {
+    height: 80px;
+    width: auto;
+    max-width: 120px;
+}
+
+.filmstrip-thumbnail > img {
+    height: 100%;
 }
