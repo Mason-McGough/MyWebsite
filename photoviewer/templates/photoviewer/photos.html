@@ -35,30 +35,27 @@
           </div>"
       })
 
+      var imgs_list = {{ imgs_list | safe }};
+      imgs_list.forEach((currentValue, index, list) => {
+        list[index] = {
+          id: index,
+          source: currentValue
+        }
+      })
+      
       var filmstrip = new Vue({
         el: '#filmstrip',
         data: {
-          images: [
-            {
-              id: 0,
-              source: "{% static 'photoviewer/zoom/goat.jpeg' %}",
-              alttext: "Goat"
-            },
-            {
-              id: 1,
-              source: "{% static 'photoviewer/zoom/egret.jpg' %}",
-              alttext: "Egret"
-            }
-          ]
+          images: imgs_list
         }
-      })
+      });
 
       var imgCarousel = new Vue({
         el: '#img-carousel',
         data: {
-          src: filmstrip.images[1].source
+          src: filmstrip.images[0].source
         }
-      })
+      });
 
       var viewer = OpenSeadragon({
         id: 'img-carousel',
