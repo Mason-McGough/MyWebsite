@@ -27,22 +27,6 @@
     <script>
       Vue.options.delimiters = ['{V', 'V}']; // standalone only
 
-      var imgCarousel = new Vue({
-        el: '#img-carousel',
-        data: {
-          src: "{% static 'photoviewer/zoom/goat.jpeg' %}"
-        }
-      })
-
-      var viewer = OpenSeadragon({
-        id: 'img-carousel',
-        prefixUrl: "{% static 'photoviewer/openseadragon-bin-2.4.0/images/' %}",
-        tileSources: {
-          type: 'image',
-          url: imgCarousel.src
-        }
-      });
-
       Vue.component('filmstrip-thumbnail', {
         props: ['im'],
         template: " \
@@ -68,6 +52,22 @@
           ]
         }
       })
+
+      var imgCarousel = new Vue({
+        el: '#img-carousel',
+        data: {
+          src: filmstrip.images[1].source
+        }
+      })
+
+      var viewer = OpenSeadragon({
+        id: 'img-carousel',
+        prefixUrl: "{% static 'photoviewer/openseadragon-bin-2.4.0/images/' %}",
+        tileSources: {
+          type: 'image',
+          url: imgCarousel.src
+        }
+      });
     </script>
   </body>
 
