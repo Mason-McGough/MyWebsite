@@ -2,22 +2,22 @@
   <table class="navbar-table">
     <tr>
       <td class="navbar-menu-left">
-        <a class="color-white" id="navbar-home-link" href="{% url 'home' %}">Mason</a>
+        <a class="color-white" id="navbar-home-link" href="{{ url_for('index') }}">Mason</a>
       </td>
 
       <td class="navbar-menu-right">
         <ul>
           <li class="navbar-menu-list-item">
-            <a class="color-white" href="{% url 'home' %}">Home</a>
+            <a class="color-white" href="{{ url_for('index') }}">Home</a>
           </li>
           <li class="navbar-menu-list-item">
-            <a class="color-white" href="{% url 'blog' %}">Blog</a>
+            <a class="color-white" href="{{ url_for('blog.index') }}">Blog</a>
           </li>
   <!--         <li class="navbar-menu-list-item">
-            <a class="color-white" href="{% url 'blog' %}">Research</a>
+            <a class="color-white" href="{{ url_for('blog.index') }}">Research</a>
           </li>
           <li class="navbar-menu-list-item">
-            <a class="color-white" href="{% url 'blog' %}">Hobbies</a>
+            <a class="color-white" href="{{ url_for('blog.index') }}">Hobbies</a>
           </li> -->
         </ul>
       </td>

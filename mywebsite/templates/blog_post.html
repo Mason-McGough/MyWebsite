@@ -1,0 +1,29 @@
+<div class="text-container">
+  <a id="blog-return-link" href="#">
+    <img class="link-icon-mirror-horz" src="{{ url_for('static', 'vectors/iconmonstr-arrow-61.svg') }}" alt="Return" />
+  </a>
+
+  <a class="share-blog-post-button" href="{{ url_for('blog.post') }}?post-id={{ post['id'] }}" onclick="copyLinkToClipboard(this)">
+    <img class="link-icon" src="{{ url_for('static', 'vectors/iconmonstr-share-1.svg') }}" alt="Share" />
+    <div class="copied-message">Copied!</div>
+  </a>
+
+  <a id="copy-button-template" class="hidden" href="#">
+    <img class="link-icon copy-button" src="{{ url_for('static', 'vectors/iconmonstr-copy-14.svg') }}" alt="Copy" />
+    <div class="copied-message">Copied!</div>
+  </a>
+
+  <h1 id="title-tag">{{ post['title'] }}</h1>
+
+  <div class="separator"></div>
+
+  <div class="page-content">
+    {% if post['get_html'] %}
+      {{ post['get_html'] }}
+    {% else %}
+      ERROR
+    {% endif %}
+
+    <!-- INCLUDE DISQUS COMMENTS LATER -->
+  </div>
+</div>

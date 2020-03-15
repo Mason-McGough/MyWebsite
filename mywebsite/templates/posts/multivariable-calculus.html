@@ -1,6 +1,5 @@
-{% load static %}
 <div class="text-container">
-  <img class="post-img" height=400 src="{% static 'images/blog/jacobian.gif' %}" alt="Multivariable Calculus" />
+  <img class="post-img" height=400 src="{{ url_for('static', filename='images/blog/jacobian.gif') }}" alt="Multivariable Calculus" />
 
   <p>A couple of weeks ago, I revisited some old concepts from my multivariable 
   calculus courses to refresh my memory. To demonstrate to myself that I fully 

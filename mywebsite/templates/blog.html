@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}Blog - {{ block.super }}{% endblock %}
 
@@ -14,12 +13,12 @@
         {% for post in posts %}
           <li>
             <div class="post-thumbnail">
-              <img src="{% static 'images/blog/' %}{{ post.thumbnail }}" alt="{{ post.title }}" width="100px" height="100px" />
+              <img src="{{ url_for('static', 'images/blog/')}}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
             </div>
             <div class="post-text">
-              <a class="post-link" id="{{ post.pk }}" href="#">{{ post.title }}</a>
-              <div class="post-date">{{ post.date_posted }}</div>
-              <div class="post-description">{{ post.description }}</div>
+              <a class="post-link" id="{{ post['pk'] }}" href="#">{{ post['title'] }}</a>
+              <div class="post-date">{{ post['date_posted'] }}</div>
+              <div class="post-description">{{ post['description'] }}</div>
             </div>
           </li>
         {% endfor %}
@@ -49,7 +48,7 @@
       function loadBlogPost(post_id) {
           $.ajax({
               method: "GET",
-              url: "{% url 'blog' %}" + post_id + '/',
+              url: "{{ url_for('blog.post') }}" + post_id + '/',
               success: function(response) {
                   $("#blog-holder").html(response);
 

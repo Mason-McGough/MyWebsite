@@ -1,10 +1,10 @@
-{% load static %}<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" charset="utf-8">
     <title>{% block title %}Mason McGough{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins|Roboto+Mono" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/mycss.css' %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mycss.css') }}">
   </head>
   <body>
     {% block body %}
@@ -22,22 +22,22 @@
   </body>
   
   <!-- JQUERY -->
-  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
   
   {% block extra_js %}
   {% endblock extra_js %}
 
   {% block backdrop_js %}
-    <script src="{% static 'js/three/three.min.js' %}"></script>
-    <script src="{% static 'js/three/FBXLoader2.js' %}"></script>
-    <script src="{% static 'js/three/FresnelShader.js' %}"></script>
-    <script src="{% static 'js/three/HorseThreeHelpers.js' %}"></script>
+    <script src="{{ url_for('static', filename='js/three/three.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/three/FBXLoader2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/three/FresnelShader.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/three/HorseThreeHelpers.js') }}"></script>
   
     <!-- STATIC RESOURCES -->
     <script>
-        var audio_url = "{% static '3d_assets/audio/aquaticAmbience.mp3' %}";
-        var seafloor_url = "{% static '3d_assets/seafloor.fbx' %}";
-        var cubemap = "{% static '3d_assets/cubemaps/ame_nebula/' %}";
+        var audio_url = "{{ url_for('static', filename='3d_assets/audio/aquaticAmbience.mp3') }}";
+        var seafloor_url = "{{ url_for('static', filename='3d_assets/seafloor.fbx') }}";
+        var cubemap = "{{ url_for('static', filename='3d_assets/cubemaps/ame_nebula/') }}";
         var format = ".png";
         var cubemap_urls = [ 
             cubemap + 'posx' + format, cubemap + 'negx' + format,
@@ -45,7 +45,7 @@
             cubemap + 'posz' + format, cubemap + 'negz' + format
         ];
     </script>
-    <script src="{% static 'js/pages/basepage.js' %}"></script>
+    <script src="{{ url_for('static', filename='js/pages/basepage.js') }}"></script>
   {% endblock backdrop_js %}
 </html>
 

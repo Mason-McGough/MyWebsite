@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %}{{ block.super }} - Home{% endblock %}
+{% block title %}{{ super() }} - Home{% endblock %}
 
 {% block content %}
   <div id="home-banner">
     <div id="home-banner-card">
       <div class="home-banner-portrait-div">
-        <img class="home-banner-portrait" src="{% static 'images/portrait.jpg' %}" alt="Mason McGough" />
+        <img class="home-banner-portrait" src="{{ url_for('static', filename='images/portrait.jpg') }}" alt="Mason McGough" />
       </div>
 
       <div id="home-banner-spacer">
@@ -18,16 +17,16 @@
   
           <div id="home-banner-social-icons">
             <a class="social-link" href="https://www.linkedin.com/in/mason-mcgough-74b37551">
-                <img class="link-icon" src="{% static 'vectors/iconmonstr-linkedin-4.svg' %}" alt="LinkedIn" />
+                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-linkedin-4.svg') }}" alt="LinkedIn" />
             </a>
             <a class="social-link" href="https://github.com/JimBoonie">
-                <img class="link-icon" src="{% static 'vectors/iconmonstr-github-4.svg' %}" alt="Github" />
+                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-github-4.svg') }}" alt="Github" />
             </a>
             <a class="social-link" href="https://www.instagram.com/deerclima/">
-                <img class="link-icon" src="{% static 'vectors/iconmonstr-instagram-14.svg' %}" alt="Instagram" />
+                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-instagram-14.svg') }}" alt="Instagram" />
             </a>
             <a class="social-link" href="https://www.researchgate.net/profile/Mason_Mcgough2">
-                <img class="link-icon" src="{% static 'vectors/iconmonstr-school-16.svg' %}" alt="ResearchGate" />
+                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-school-16.svg') }}" alt="ResearchGate" />
             </a>
           </div>
         </div>
@@ -40,15 +39,15 @@
   
     <ul id="posts-list" class="posts">
       {% for post in posts %}
-        {% if forloop.counter0 < max_posts %}
+        {% if loop.index0 < max_posts %}
           <li>
             <div class="post-thumbnail">
-              <img src="{% static 'images/blog/' %}{{ post.thumbnail }}" alt="{{ post.title }}" width="100px" height="100px" />
+              <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
             </div>
             <div class="post-text">
-              <a class="post-link" href="{% url 'blog' %}?post-id={{ post.pk }}">{{ post.title }}</a>
-              <div class="post-date">{{ post.date_posted }}</div>
-              <div class="post-description">{{ post.description }}</div>
+              <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
+              <div class="post-date">{{ post['date_posted'] }}</div>
+              <div class="post-description">{{ post['description'] }}</div>
             </div>
           </li>
         {% endif %}
@@ -59,7 +58,7 @@
   <div class="text-container">
     <h2>Biography</h2>
 
-    <p>I am the chief technology officer of CytoInformatics, LLC, a medical imaging informatics startup geared towards assisting pathologists and drug analysts to solve challenging image analysis tasks. Not too long ago, I obtained my Master of Science in Biomedical Engineering from the University of Florida. While pursuing my degree, I also volunteered, and was eventually employed, as a research assistant for the <a href="https://www.bme.ufl.edu/labs/yang/index.html">Biomedical Image Computing and Imaging Informatics (BICI2) Lab</a> under the instruction of <a href="https://scholar.google.com/citations?user=fskm0zEAAAAJ&hl=en">Dr. Lin Yang</a>. My research focus was on discovering features for myositis diagnosis in whole-slide images, which led to my thesis "<a href="http://uf.catalog.fcla.edu/permalink.jsp?20UF035292811">Selection of Salient Morphological and Network Features for Computational Diagnosis of Myositis</a>." In the meantime, I co-authored two papers: "<a href="{% static 'pdfs/mdnet2017.pdf' %}">MDNet: A Semantically and Visually Interpretable Medical Image Diagnosis Network</a>" and "<a href="{% static 'pdfs/miccai2015' %}">Robust Muscle Cell Quantification Using Structured Edge Detection and Hierarchical Segmentation</a>."</p>
+    <p>I am the chief technology officer of CytoInformatics, LLC, a medical imaging informatics startup geared towards assisting pathologists and drug analysts to solve challenging image analysis tasks. Not too long ago, I obtained my Master of Science in Biomedical Engineering from the University of Florida. While pursuing my degree, I also volunteered, and was eventually employed, as a research assistant for the <a href="https://www.bme.ufl.edu/labs/yang/index.html">Biomedical Image Computing and Imaging Informatics (BICI2) Lab</a> under the instruction of <a href="https://scholar.google.com/citations?user=fskm0zEAAAAJ&hl=en">Dr. Lin Yang</a>. My research focus was on discovering features for myositis diagnosis in whole-slide images, which led to my thesis "<a href="http://uf.catalog.fcla.edu/permalink.jsp?20UF035292811">Selection of Salient Morphological and Network Features for Computational Diagnosis of Myositis</a>." In the meantime, I co-authored two papers: "<a href="{{ url_for('static', filename='pdfs/mdnet2017.pdf') }}">MDNet: A Semantically and Visually Interpretable Medical Image Diagnosis Network</a>" and "<a href="{{ url_for('static', filename='pdfs/miccai2015') }}">Robust Muscle Cell Quantification Using Structured Edge Detection and Hierarchical Segmentation</a>."</p>
 
     <p>In my spare time, I enjoy learning to use new skills and software development tools, such as TensorFlow, Django, Paper.js, and three.js. I also have experience using creative software like Autodesk Maya, FL Studio, and Adobe Photoshop. While pursuing my M.S. degree, I received 2nd place in the <a href="https://www.bme.ufl.edu/node/1724">2015 Biomedical Engineering Art of Research contest</a> and two honorable mentions in the <a href="https://www.floridamuseum.ufl.edu/elegance-science/art/2015-entries/">2015 Elegance of Science</a> contest for several images I created (sometimes inadvertently) during my research at BICI2 Lab. Traveling is a passion of mine and I have visited four continents (North America, South America, Africa, and Europe) and fully intend on visiting all seven, including Antarctica.</p>
   </div>
@@ -100,34 +99,34 @@
     <div id="carousel-gallery">
       <div id="carousel-list">
         <div id="carousel-thumbnail-1" class="carousel-thumbnail selected">
-          <img src="{% static 'images/website.png' %}" alt="Website" \>
+          <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
         </div>
 
         <div id="carousel-thumbnail-2" class="carousel-thumbnail">
-          <img src="{% static 'images/analysis_portal.png' %}" alt="Analysis Portal" \>
+          <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
         </div>
         
         <div id="carousel-thumbnail-3" class="carousel-thumbnail">
-          <img src="{% static 'images/image_analysis.png' %}" alt="Image Analysis" \>
+          <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
         </div>
         
         <div id="carousel-thumbnail-4" class="carousel-thumbnail">
-          <img src="{% static 'images/scopal.png' %}" alt="Scopal" \>
+          <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
         </div>
         
         <div id="carousel-thumbnail-5" class="carousel-thumbnail">
-          <img src="{% static 'images/computoolkit.png' %}" alt="CompuToolkit" \>
+          <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
         </div>
         
         <div id="carousel-thumbnail-6" class="carousel-thumbnail">
-          <img src="{% static 'images/muscleminer.png' %}" alt="MuscleMiner" \>
+          <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
         </div>
       </div>
 
       <div id="carousel-canvas" class="project-container">
         <div id="project-1" class="project">
           <div class="project-thumbnail">
-            <img src="{% static 'images/website.png' %}" alt="Website" \>
+            <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
           </div>
 
           <div class="project-description">
@@ -139,7 +138,7 @@
 
         <div id="project-2" class="project hidden">
           <div class="project-thumbnail">
-            <img src="{% static 'images/analysis_portal.png' %}" alt="Analysis Portal" \>
+            <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
           </div>
 
           <div class="project-description">
@@ -151,7 +150,7 @@
         
         <div id="project-3" class="project hidden">
           <div class="project-thumbnail"> 
-            <img src="{% static 'images/image_analysis.png' %}" alt="Image Analysis" \>
+            <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
           </div>
 
           <div class="project-description">
@@ -163,7 +162,7 @@
         
         <div id="project-4" class="project hidden">
           <div class="project-thumbnail">
-            <img src="{% static 'images/scopal.png' %}" alt="Scopal" \>
+            <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
           </div>
 
           <div class="project-description">
@@ -176,7 +175,7 @@
         
         <div id="project-5" class="project hidden">
           <div class="project-thumbnail">
-            <img src="{% static 'images/computoolkit.png' %}" alt="CompuToolkit" \>
+            <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
           </div>
 
           <div class="project-description">
@@ -189,7 +188,7 @@
         
         <div id="project-6" class="project hidden">
           <div class="project-thumbnail">
-            <img src="{% static 'images/muscleminer.png' %}" alt="MuscleMiner" \>
+            <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
           </div>
 
           <div class="project-description">

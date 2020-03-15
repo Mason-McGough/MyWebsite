@@ -1,6 +1,5 @@
-{% load static %}
 <div class="text-container">
-  <img class="post-img" src="{% static 'images/blog/ops-graph.png' %}" alt="Operations Graph" />
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/ops-graph.png') }}" alt="Operations Graph" />
 
   <p>If you have ever performed any data science or scientific computing, chances are your workflow went something like this:</p>
 
@@ -102,7 +101,7 @@ python run.py</code></pre>
   <p>Now, navigate to <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a> in your browser. If all is in order, it should look like the following:</p>
 
   <!-- IMG OF DEFAULT PAGE -->
-  <img class="post-img" src="{% static 'images/blog/ops-graph-simple.png' %}" alt="Ops Graph Simple Graph" />
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/ops-graph-simple.png') }}" alt="Ops Graph Simple Graph" />
 
   <p>On the right is the graph canvas. This is where the operations graph is depicted, complete with nodes and pipes. The complete application enables you to create, connect, and modify these nodes and pipes, however this heavily stripped-down version is good enough for demonstration.</p>
 
@@ -114,7 +113,7 @@ python run.py</code></pre>
 </div>
 
 {% block extra_js %}
-<script type="text/javascript" src="{% static 'js/paper-full.min.js' %}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/paper-full.min.js') }}"></script>
 <script type="text/javascript">
   var box_defaults = {
     strokeColor: 'black',

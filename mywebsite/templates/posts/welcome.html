@@ -1,7 +1,5 @@
-{% load static %}
-
 <div class="text-container">
-  <img class="post-img" src="{% static 'images/portrait.jpg' %}" alt="Welcome" />
+  <img class="post-img" src="{{ url_for('static', filename='images/portrait.jpg') }}" alt="Welcome" />
 
   <h1>Welcome to My Website</h1>
 
