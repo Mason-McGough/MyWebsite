@@ -11,16 +11,16 @@
   <div class="text-container">
     <ul id="posts-list" class="posts">
       {% for post in posts %}
-        <li>
-          <div class="post-thumbnail">
-            <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
-          </div>
-          <div class="post-text">
-            <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
-            <div class="post-date">{{ post['date_posted'] }}</div>
-            <div class="post-description">{{ post['description'] }}</div>
-          </div>
-        </li>
+      <li>
+        <div class="post-thumbnail">
+          <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
+        </div>
+        <div class="post-text">
+          <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
+          <div class="post-date">{{ post['date_posted'] }}</div>
+          <div class="post-description">{{ post['description'] }}</div>
+        </div>
+      </li>
       {% endfor %}
     </ul>
   </div>

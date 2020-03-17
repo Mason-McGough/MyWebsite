@@ -22,7 +22,7 @@
 
   <div class="page-content">
     {% block blog_post_content %}
-      Nothing to see here...
+    Nothing to see here...
     {% endblock %}
   </div>
 </div>
@@ -32,61 +32,61 @@
 
 {% block extra_js %}
 <script>
-    function getCopyButtonTemplate() {
-        var copy_button = $("#copy-button-template").clone();
-        copy_button.removeAttr("id");
-        copy_button.removeClass("hidden");
-        copy_button.click(copyCodeBlockToClipboard)
-        return copy_button;
-    };
+  function getCopyButtonTemplate() {
+    var copy_button = $("#copy-button-template").clone();
+    copy_button.removeAttr("id");
+    copy_button.removeClass("hidden");
+    copy_button.click(copyCodeBlockToClipboard)
+    return copy_button;
+  };
      
-    function addCopyButtons() {
-        $(".code-block").prepend(getCopyButtonTemplate());
-    };
+  function addCopyButtons() {
+    $(".code-block").prepend(getCopyButtonTemplate());
+  };
 
-    var copyToClipboard = function(contents) {
-        var copy_holder = document.getElementById("copy-holder");
-        copy_holder.value = contents;
-        copy_holder.select();
-        var success = document.execCommand("copy");
-        copy_holder.value = "";
-    };
+  var copyToClipboard = function(contents) {
+    var copy_holder = document.getElementById("copy-holder");
+    copy_holder.value = contents;
+    copy_holder.select();
+    var success = document.execCommand("copy");
+    copy_holder.value = "";
+  };
 
-    var copyLinkToClipboard = function(element) {
-        var contents = $(element).data('share-link');
-        copyToClipboard(contents);
-        var copied_message = $(element).children(".copied-message")[0];
-        fadeInFadeOut(copied_message);
-    }
+  var copyLinkToClipboard = function(element) {
+    var contents = $(element).data('share-link');
+    copyToClipboard(contents);
+    var copied_message = $(element).children(".copied-message")[0];
+    fadeInFadeOut(copied_message);
+  }
 
-    var copyCodeBlockToClipboard = function() {
-        var contents = "";
-        $(this).siblings().each(function() {
-            contents += this.innerText + "\n";
-        });
-        copyToClipboard(contents);
-        var copied_message = $(this).children(".copied-message")[0];
-        fadeInFadeOut(copied_message);
-    }
+  var copyCodeBlockToClipboard = function() {
+    var contents = "";
+    $(this).siblings().each(function() {
+      contents += this.innerText + "\n";
+    });
+    copyToClipboard(contents);
+    var copied_message = $(this).children(".copied-message")[0];
+    fadeInFadeOut(copied_message);
+  }
 
-    var fadeInFadeOut = function(element) {
-      var _fadeOut = function() {
-        $(element).animate(
-          {opacity: 0.0},
-          {duration: 500}
-        )
-      };
-
+  var fadeInFadeOut = function(element) {
+    var _fadeOut = function() {
       $(element).animate(
-        {opacity: 1.0},
-        {duration: 500, done: function() {
-          setTimeout(_fadeOut, 1000);
-        }}
-      );
-    }
-
-    window.onload = function() {
-        addCopyButtons();
+        {opacity: 0.0},
+        {duration: 500}
+      )
     };
+
+    $(element).animate(
+      {opacity: 1.0},
+      {duration: 500, done: function() {
+        setTimeout(_fadeOut, 1000);
+      }}
+    );
+  }
+
+  window.onload = function() {
+    addCopyButtons();
+  };
 </script>
 {% endblock extra_js %}

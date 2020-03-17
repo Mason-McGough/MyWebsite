@@ -117,130 +117,130 @@ python run.py</code></pre>
 {% endblock %}
 
 {% block extra_js %}
-  {{ super() }}
-  <script type="text/javascript" src="{{ url_for('static', filename='js/paper-full.min.js') }}"></script>
-  <script type="text/javascript">
-    var box_defaults = {
-      strokeColor: 'black',
-      fillColor: 'white',
-      strokeWidth: 10,
-      hoverStrokeColor: 'green'
+{{ super() }}
+<script type="text/javascript" src="{{ url_for('static', filename='js/paper-full.min.js') }}"></script>
+<script type="text/javascript">
+  var box_defaults = {
+    strokeColor: 'black',
+    fillColor: 'white',
+    strokeWidth: 10,
+    hoverStrokeColor: 'green'
+  };
+
+  var port_defaults = {
+    fillColor: 'black',
+    hoverFillColor: 'green'
+  };
+
+  var line_defaults = {
+    strokeColor: 'black',
+    strokeWidth: 10
+  };
+
+  var text_defaults = {
+    justification: 'center',
+    fillColor: 'black',
+    fontSize: '16px'
+  };
+
+  function assignProperties(path, properties) {
+    for (key in properties) {
+      path[key] = properties[key];
+    }
+  }
+
+  function newBox(position, dimensions) {
+    var box = new paper.Path.Rectangle({
+      point: position,
+      size: dimensions,
+    }); 
+    assignProperties(box, box_defaults);
+    box.onMouseEnter = function(event) {
+      this.previousStrokeColor = this.strokeColor;
+      this.strokeColor = this.hoverStrokeColor;
     };
-  
-    var port_defaults = {
-      fillColor: 'black',
-      hoverFillColor: 'green'
+    box.onMouseLeave = function(event) {
+      this.strokeColor = this.previousStrokeColor;
     };
-  
-    var line_defaults = {
-      strokeColor: 'black',
-      strokeWidth: 10
+
+    return box;
+  }
+
+  function newPort(center, radius, output) {
+    var port_path = new paper.Path.Circle({
+      center: center, 
+      radius: radius
+    });
+    assignProperties(port_path, port_defaults);
+    if (output) {
+      port_path.hoverFillColor = 'red';
+    }
+    port_path.onMouseEnter = function(event) {
+      this.previousFillColor = this.fillColor;
+      this.fillColor = this.hoverFillColor;
     };
-  
-    var text_defaults = {
-      justification: 'center',
-      fillColor: 'black',
-      fontSize: '16px'
+    port_path.onMouseLeave = function(event) {
+      this.fillColor = this.previousFillColor;
     };
-  
-    function assignProperties(path, properties) {
-        for (key in properties) {
-            path[key] = properties[key];
-        }
-    }
-  
-    function newBox(position, dimensions) {
-      var box = new paper.Path.Rectangle({
-        point: position,
-        size: dimensions,
-      }); 
-      assignProperties(box, box_defaults);
-      box.onMouseEnter = function(event) {
-          this.previousStrokeColor = this.strokeColor;
-          this.strokeColor = this.hoverStrokeColor;
-      };
-      box.onMouseLeave = function(event) {
-          this.strokeColor = this.previousStrokeColor;
-      };
-  
-      return box;
-    }
-  
-    function newPort(center, radius, output) {
-      var port_path = new paper.Path.Circle({
-          center: center, 
-          radius: radius
-      });
-      assignProperties(port_path, port_defaults);
-      if (output) {
-        port_path.hoverFillColor = 'red';
-      }
-      port_path.onMouseEnter = function(event) {
-          this.previousFillColor = this.fillColor;
-          this.fillColor = this.hoverFillColor;
-      };
-      port_path.onMouseLeave = function(event) {
-          this.fillColor = this.previousFillColor;
-      };
-  
-      return port_path;
-    }
-  
-    function newLine(startpoint, endpoint) {
-      var line = new paper.Path.Line(startpoint, endpoint);
-      assignProperties(line, line_defaults);
-  
-      return line;
-    }
-  
-    function newText(position, value) {
-      var text = new paper.PointText({
-        point: position,
-        content: value  
-      });
-      assignProperties(text, text_defaults);
-  
-      return text;
-    }
-  </script>
-  <script type="text/paperscript" canvas="canvas-1">
-    var line1 = newLine([180, 150], [320, 150]);
-    var box1 = newBox([80, 100], [100, 100]);
-    var box2 = newBox([320, 100], [100, 100]);
-    var port1 = newPort([180, 150], 20, true);
-    var port2 = newPort([320, 150], 20, false);
-  
-    var box_text = newText([130, 80], "Node");
-    var pipe_text = newText([250, 130], "Pipe");
-    var out_text = newText([215, 180], "Output");
-    var in_text = newText([285, 180], "Input");
-  </script>
-  <script type="text/paperscript" canvas="canvas-2">
-    var line1 = newLine([250, 120], [130, 180]);
-    var line2 = newLine([130, 280], [130, 350]);
-    var line3 = newLine([180, 400], [300, 400]);
-    var line4 = newLine([250, 120], [300, 400]);
-    var load_box = newBox([200, 20], [100, 100]);
-    var rgb2gray_box = newBox([80, 180], [100, 100]);
-    var thresh_box = newBox([80, 350], [100, 100]);
-    var blend_box = newBox([300, 350], [100, 100]);
-    var port1 = newPort([250, 120], 20, true);
-    var port2 = newPort([130, 180], 20, false);
-    var port3 = newPort([130, 280], 20, true);
-    var port4 = newPort([130, 350], 20, false);
-    var port5 = newPort([180, 400], 20, true);
-    var port6 = newPort([300, 400], 20, false);
-    var port6 = newPort([300, 400], 20, false);
-    var port7 = newPort([200, 70], 20, false);
-    var port8 = newPort([80, 400], 20, false);
-    var port8 = newPort([400, 400], 20, true);
-  
-    var loadimage_input_text = newText([150, 75], "path");
-    var thresh_input_text = newText([50, 405], "t");
-    var loadimage_text = newText([250, 70], "load()");
-    var rgb2gray_text = newText([130, 230], "rgb2gray()");
-    var thresh_text = newText([130, 400], "thresh()");
-    var blend_text = newText([350, 400], "blend()");
-    var output_text = newText([450, 405], "output");
-  </script>
+
+    return port_path;
+  }
+
+  function newLine(startpoint, endpoint) {
+    var line = new paper.Path.Line(startpoint, endpoint);
+    assignProperties(line, line_defaults);
+
+    return line;
+  }
+
+  function newText(position, value) {
+    var text = new paper.PointText({
+      point: position,
+      content: value  
+    });
+    assignProperties(text, text_defaults);
+
+    return text;
+  }
+</script>
+<script type="text/paperscript" canvas="canvas-1">
+  var line1 = newLine([180, 150], [320, 150]);
+  var box1 = newBox([80, 100], [100, 100]);
+  var box2 = newBox([320, 100], [100, 100]);
+  var port1 = newPort([180, 150], 20, true);
+  var port2 = newPort([320, 150], 20, false);
+
+  var box_text = newText([130, 80], "Node");
+  var pipe_text = newText([250, 130], "Pipe");
+  var out_text = newText([215, 180], "Output");
+  var in_text = newText([285, 180], "Input");
+</script>
+<script type="text/paperscript" canvas="canvas-2">
+  var line1 = newLine([250, 120], [130, 180]);
+  var line2 = newLine([130, 280], [130, 350]);
+  var line3 = newLine([180, 400], [300, 400]);
+  var line4 = newLine([250, 120], [300, 400]);
+  var load_box = newBox([200, 20], [100, 100]);
+  var rgb2gray_box = newBox([80, 180], [100, 100]);
+  var thresh_box = newBox([80, 350], [100, 100]);
+  var blend_box = newBox([300, 350], [100, 100]);
+  var port1 = newPort([250, 120], 20, true);
+  var port2 = newPort([130, 180], 20, false);
+  var port3 = newPort([130, 280], 20, true);
+  var port4 = newPort([130, 350], 20, false);
+  var port5 = newPort([180, 400], 20, true);
+  var port6 = newPort([300, 400], 20, false);
+  var port6 = newPort([300, 400], 20, false);
+  var port7 = newPort([200, 70], 20, false);
+  var port8 = newPort([80, 400], 20, false);
+  var port8 = newPort([400, 400], 20, true);
+
+  var loadimage_input_text = newText([150, 75], "path");
+  var thresh_input_text = newText([50, 405], "t");
+  var loadimage_text = newText([250, 70], "load()");
+  var rgb2gray_text = newText([130, 230], "rgb2gray()");
+  var thresh_text = newText([130, 400], "thresh()");
+  var blend_text = newText([350, 400], "blend()");
+  var output_text = newText([450, 405], "output");
+</script>
 {% endblock extra_js %}

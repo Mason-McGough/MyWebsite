@@ -16,16 +16,16 @@
 
         <div id="home-banner-social-icons">
           <a class="social-link" href="https://www.linkedin.com/in/mason-mcgough-74b37551">
-              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-linkedin-4.svg') }}" alt="LinkedIn" />
+            <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-linkedin-4.svg') }}" alt="LinkedIn" />
           </a>
           <a class="social-link" href="https://github.com/JimBoonie">
-              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-github-4.svg') }}" alt="Github" />
+            <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-github-4.svg') }}" alt="Github" />
           </a>
           <a class="social-link" href="https://www.instagram.com/deerclima/">
-              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-instagram-14.svg') }}" alt="Instagram" />
+            <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-instagram-14.svg') }}" alt="Instagram" />
           </a>
           <a class="social-link" href="https://www.researchgate.net/profile/Mason_Mcgough2">
-              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-school-16.svg') }}" alt="ResearchGate" />
+            <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-school-16.svg') }}" alt="ResearchGate" />
           </a>
         </div>
       </div>
@@ -37,16 +37,16 @@
 
   <ul id="posts-list" class="posts">
     {% for post in posts %}
-        <li>
-          <div class="post-thumbnail">
-            <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
-          </div>
-          <div class="post-text">
-            <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
-            <div class="post-date">{{ post['date_posted'] }}</div>
-            <div class="post-description">{{ post['description'] }}</div>
-          </div>
-        </li>
+    <li>
+      <div class="post-thumbnail">
+        <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
+      </div>
+      <div class="post-text">
+        <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
+        <div class="post-date">{{ post['date_posted'] }}</div>
+        <div class="post-description">{{ post['description'] }}</div>
+      </div>
+    </li>
     {% endfor %}
   </ul>
 </div>
@@ -188,29 +188,29 @@
 {% endblock content %}
 
 {% block extra_js %}
-  <script>
-      $('#carousel-list').click(function(event) {
-          event.preventDefault();
+<script>
+  $('#carousel-list').click(function(event) {
+    event.preventDefault();
 
-          if (event.target !== event.currentTarget) {
-              var target;
-              if ($(event.target).hasClass('carousel-thumbnail')) {
-                  target = event.target;
-              } else if ($(event.target).parents('.carousel-thumbnail')[0]) {
-                  target = $(event.target).parents('.carousel-thumbnail')[0];
-              } else {
-                  return;
-              }
-              var idx = target.id.split('-').slice(-1)[0];
-
-              $('#carousel-list').children().removeClass('selected');
-              $(target).addClass('selected');
-
-              $('#carousel-canvas').children().addClass('hidden');
-              $('#carousel-canvas').children().removeClass('appear');
-              $('#project-' + idx).removeClass('hidden');
-              $('#project-' + idx).addClass('appear');
-          }
-      })
-  </script>
+    if (event.target !== event.currentTarget) {
+      var target;
+      if ($(event.target).hasClass('carousel-thumbnail')) {
+        target = event.target;
+      } else if ($(event.target).parents('.carousel-thumbnail')[0]) {
+        target = $(event.target).parents('.carousel-thumbnail')[0];
+      } else {
+        return;
+      }
+      var idx = target.id.split('-').slice(-1)[0];
+      
+      $('#carousel-list').children().removeClass('selected');
+      $(target).addClass('selected');
+      
+      $('#carousel-canvas').children().addClass('hidden');
+      $('#carousel-canvas').children().removeClass('appear');
+      $('#project-' + idx).removeClass('hidden');
+      $('#project-' + idx).addClass('appear');
+    }
+  })
+</script>
 {% endblock extra_js %}
