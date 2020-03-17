@@ -1,29 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <div class="text-container">
-  <a id="blog-return-link" href="#">
-    <img class="link-icon-mirror-horz" src="{{ url_for('static', 'vectors/iconmonstr-arrow-61.svg') }}" alt="Return" />
-  </a>
-
-  <a class="share-blog-post-button" href="{{ url_for('blog.post') }}?post-id={{ post['id'] }}" onclick="copyLinkToClipboard(this)">
-    <img class="link-icon" src="{{ url_for('static', 'vectors/iconmonstr-share-1.svg') }}" alt="Share" />
-    <div class="copied-message">Copied!</div>
-  </a>
-
-  <a id="copy-button-template" class="hidden" href="#">
-    <img class="link-icon copy-button" src="{{ url_for('static', 'vectors/iconmonstr-copy-14.svg') }}" alt="Copy" />
-    <div class="copied-message">Copied!</div>
-  </a>
-
   <h1 id="title-tag">{{ post['title'] }}</h1>
+
+  <a id="blog-return-link" href="{{ url_for('blog.index') }}">
+    <img class="link-icon-mirror-horz" src="{{ url_for('static', filename='vectors/iconmonstr-arrow-61.svg') }}" alt="Return" />
+  </a>
+
+  <a class="share-blog-post-button" data-share-link="{{ url_for('blog.post', id=post['id']) }}" onclick="copyLinkToClipboard(this)">
+    <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-share-1.svg') }}" alt="Share" />
+    <div class="copied-message">Copied!</div>
+  </a>
+
+  <a id="copy-button-template" class="hidden">
+    <img class="link-icon copy-button" src="{{ url_for('static', filename='vectors/iconmonstr-copy-14.svg') }}" alt="Copy" />
+    <div class="copied-message">Copied!</div>
+  </a>
 
   <div class="separator"></div>
 
   <div class="page-content">
-    {% if post['get_html'] %}
-      {{ post['get_html'] }}
-    {% else %}
-      ERROR
-    {% endif %}
-
-    <!-- INCLUDE DISQUS COMMENTS LATER -->
+    {% block blog_post_content %}
+      Nothing to see here...
+    {% endblock %}
   </div>
 </div>
+
+<textarea id="copy-holder"></textarea>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function getCopyButtonTemplate() {
+        var copy_button = $("#copy-button-template").clone();
+        copy_button.removeAttr("id");
+        copy_button.removeClass("hidden");
+        copy_button.click(copyCodeBlockToClipboard)
+        return copy_button;
+    };
+     
+    function addCopyButtons() {
+        $(".code-block").prepend(getCopyButtonTemplate());
+    };
+
+    var copyToClipboard = function(contents) {
+        var copy_holder = document.getElementById("copy-holder");
+        copy_holder.value = contents;
+        copy_holder.select();
+        var success = document.execCommand("copy");
+        copy_holder.value = "";
+    };
+
+    var copyLinkToClipboard = function(element) {
+        var contents = $(element).data('share-link');
+        copyToClipboard(contents);
+        var copied_message = $(element).children(".copied-message")[0];
+        fadeInFadeOut(copied_message);
+    }
+
+    var copyCodeBlockToClipboard = function() {
+        var contents = "";
+        $(this).siblings().each(function() {
+            contents += this.innerText + "\n";
+        });
+        copyToClipboard(contents);
+        var copied_message = $(this).children(".copied-message")[0];
+        fadeInFadeOut(copied_message);
+    }
+
+    var fadeInFadeOut = function(element) {
+      var _fadeOut = function() {
+        $(element).animate(
+          {opacity: 0.0},
+          {duration: 500}
+        )
+      };
+
+      $(element).animate(
+        {opacity: 1.0},
+        {duration: 500, done: function() {
+          setTimeout(_fadeOut, 1000);
+        }}
+      );
+    }
+
+    window.onload = function() {
+        addCopyButtons();
+    };
+</script>
+{% endblock extra_js %}

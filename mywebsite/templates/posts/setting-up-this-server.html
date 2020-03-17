@@ -1,3 +1,6 @@
+{% extends 'blog_post.html' %}
+
+{% block blog_post_content %}
 <div class="text-container">
   <img class="post-img" src="{{ url_for('static', filename='images/blog/homepage.png') }}" alt="Setting Up This Server" />
 
@@ -13,7 +16,7 @@
 
   <h2>Launching Your EC2 Server</h2>
 
-  <img class="post-img" src="{{ url_for('static', filename='images/blog/aws homepage.png') }}" alt="AWS" />
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/aws-homepage.png') }}" alt="AWS" />
 
   <p>Once you have registered your account and logged in, you should be at the AWS Console. From here you can see a list of the many services that AWS has to offer. Click on the EC2 service from the list or search for EC2 in the search bar. This will take you to the EC2 Dashboard, from which you can see your running EC2 servers, manage their security settings in <b>Security Groups</b>, manage the <b>Key Pairs</b> that will allow you to connect to EC2 servers via SSH, and plenty more. Here is where you will probably spend most of your time on AWS, and where we will launch our first EC2 server.</p>
 
@@ -162,3 +165,4 @@ sudo chown :www-data .</code></pre>
 
   <p>Thanks a lot for the visit. I hope that you like what you see and that this may help you make something of your own creation in the future.</p>
 </div>
+{% endblock %}

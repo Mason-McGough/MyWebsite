@@ -540,6 +540,7 @@ p > code {
 
 .share-blog-post-button {
     position: relative;
+    cursor: pointer;
 }
 
 .copy-button {

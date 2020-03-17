@@ -3,203 +3,188 @@
 {% block title %}{{ super() }} - Home{% endblock %}
 
 {% block content %}
-  <div id="home-banner">
-    <div id="home-banner-card">
-      <div class="home-banner-portrait-div">
-        <img class="home-banner-portrait" src="{{ url_for('static', filename='images/portrait.jpg') }}" alt="Mason McGough" />
-      </div>
+<div id="home-banner">
+  <div id="home-banner-card">
+    <div class="home-banner-portrait-div">
+      <img class="home-banner-portrait" src="{{ url_for('static', filename='images/portrait.jpg') }}" alt="Mason McGough" />
+    </div>
+    <div id="home-banner-spacer">
+      <div id="home-banner-textbox">
+        <div id="home-banner-name">Mason McGough</div>
 
-      <div id="home-banner-spacer">
-        <div id="home-banner-textbox">
-          <div id="home-banner-name">Mason McGough</div>
-  
-          <div id="home-banner-description">M.S. in Biomedical Engineering</div>
-  
-          <div id="home-banner-social-icons">
-            <a class="social-link" href="https://www.linkedin.com/in/mason-mcgough-74b37551">
-                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-linkedin-4.svg') }}" alt="LinkedIn" />
-            </a>
-            <a class="social-link" href="https://github.com/JimBoonie">
-                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-github-4.svg') }}" alt="Github" />
-            </a>
-            <a class="social-link" href="https://www.instagram.com/deerclima/">
-                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-instagram-14.svg') }}" alt="Instagram" />
-            </a>
-            <a class="social-link" href="https://www.researchgate.net/profile/Mason_Mcgough2">
-                <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-school-16.svg') }}" alt="ResearchGate" />
-            </a>
-          </div>
+        <div id="home-banner-description">M.S. in Biomedical Engineering</div>
+
+        <div id="home-banner-social-icons">
+          <a class="social-link" href="https://www.linkedin.com/in/mason-mcgough-74b37551">
+              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-linkedin-4.svg') }}" alt="LinkedIn" />
+          </a>
+          <a class="social-link" href="https://github.com/JimBoonie">
+              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-github-4.svg') }}" alt="Github" />
+          </a>
+          <a class="social-link" href="https://www.instagram.com/deerclima/">
+              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-instagram-14.svg') }}" alt="Instagram" />
+          </a>
+          <a class="social-link" href="https://www.researchgate.net/profile/Mason_Mcgough2">
+              <img class="link-icon" src="{{ url_for('static', filename='vectors/iconmonstr-school-16.svg') }}" alt="ResearchGate" />
+          </a>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="text-container">
+  <h2>Recent Posts</h2>
 
-  <div class="text-container">
-    <h2>Recent Posts</h2>
-  
-    <ul id="posts-list" class="posts">
-      {% for post in posts %}
-        {% if loop.index0 < max_posts %}
-          <li>
-            <div class="post-thumbnail">
-              <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
-            </div>
-            <div class="post-text">
-              <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
-              <div class="post-date">{{ post['date_posted'] }}</div>
-              <div class="post-description">{{ post['description'] }}</div>
-            </div>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
+  <ul id="posts-list" class="posts">
+    {% for post in posts %}
+        <li>
+          <div class="post-thumbnail">
+            <img src="{{ url_for('static', filename='images/blog/') }}{{ post['thumbnail'] }}" alt="{{ post['title'] }}" width="100px" height="100px" />
+          </div>
+          <div class="post-text">
+            <a class="post-link" href="{{ url_for('blog.post', id=post['id']) }}">{{ post['title'] }}</a>
+            <div class="post-date">{{ post['date_posted'] }}</div>
+            <div class="post-description">{{ post['description'] }}</div>
+          </div>
+        </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="text-container">
+  <h2>Biography</h2>
+  <p>I am the chief technology officer of CytoInformatics, LLC, a medical imaging informatics startup geared towards assisting pathologists and drug analysts to solve challenging image analysis tasks. Not too long ago, I obtained my Master of Science in Biomedical Engineering from the University of Florida. While pursuing my degree, I also volunteered, and was eventually employed, as a research assistant for the <a href="https://www.bme.ufl.edu/labs/yang/index.html">Biomedical Image Computing and Imaging Informatics (BICI2) Lab</a> under the instruction of <a href="https://scholar.google.com/citations?user=fskm0zEAAAAJ&hl=en">Dr. Lin Yang</a>. My research focus was on discovering features for myositis diagnosis in whole-slide images, which led to my thesis "<a href="http://uf.catalog.fcla.edu/permalink.jsp?20UF035292811">Selection of Salient Morphological and Network Features for Computational Diagnosis of Myositis</a>." In the meantime, I co-authored two papers: "<a href="{{ url_for('static', filename='pdfs/mdnet2017.pdf') }}">MDNet: A Semantically and Visually Interpretable Medical Image Diagnosis Network</a>" and "<a href="{{ url_for('static', filename='pdfs/miccai2015') }}">Robust Muscle Cell Quantification Using Structured Edge Detection and Hierarchical Segmentation</a>."</p>
+  <p>In my spare time, I enjoy learning to use new skills and software development tools, such as TensorFlow, Django, Paper.js, and three.js. I also have experience using creative software like Autodesk Maya, FL Studio, and Adobe Photoshop. While pursuing my M.S. degree, I received 2nd place in the <a href="https://www.bme.ufl.edu/node/1724">2015 Biomedical Engineering Art of Research contest</a> and two honorable mentions in the <a href="https://www.floridamuseum.ufl.edu/elegance-science/art/2015-entries/">2015 Elegance of Science</a> contest for several images I created (sometimes inadvertently) during my research at BICI2 Lab. Traveling is a passion of mine and I have visited four continents (North America, South America, Africa, and Europe) and fully intend on visiting all seven, including Antarctica.</p>
+</div>
+<div class="text-container">
+  <h2>Timeline</h2>
+  <div class="timeline-row">
+    <b class="timeline-when">2018-Present:</b>
+    <em class="timeline-what">Machine Learning Engineer</em>
+    <span class="timeline-where">at <a href="https://www.lowesinnovationlabs.com/">Lowe's Innovation Labs</a></span>
   </div>
-
-  <div class="text-container">
-    <h2>Biography</h2>
-
-    <p>I am the chief technology officer of CytoInformatics, LLC, a medical imaging informatics startup geared towards assisting pathologists and drug analysts to solve challenging image analysis tasks. Not too long ago, I obtained my Master of Science in Biomedical Engineering from the University of Florida. While pursuing my degree, I also volunteered, and was eventually employed, as a research assistant for the <a href="https://www.bme.ufl.edu/labs/yang/index.html">Biomedical Image Computing and Imaging Informatics (BICI2) Lab</a> under the instruction of <a href="https://scholar.google.com/citations?user=fskm0zEAAAAJ&hl=en">Dr. Lin Yang</a>. My research focus was on discovering features for myositis diagnosis in whole-slide images, which led to my thesis "<a href="http://uf.catalog.fcla.edu/permalink.jsp?20UF035292811">Selection of Salient Morphological and Network Features for Computational Diagnosis of Myositis</a>." In the meantime, I co-authored two papers: "<a href="{{ url_for('static', filename='pdfs/mdnet2017.pdf') }}">MDNet: A Semantically and Visually Interpretable Medical Image Diagnosis Network</a>" and "<a href="{{ url_for('static', filename='pdfs/miccai2015') }}">Robust Muscle Cell Quantification Using Structured Edge Detection and Hierarchical Segmentation</a>."</p>
-
-    <p>In my spare time, I enjoy learning to use new skills and software development tools, such as TensorFlow, Django, Paper.js, and three.js. I also have experience using creative software like Autodesk Maya, FL Studio, and Adobe Photoshop. While pursuing my M.S. degree, I received 2nd place in the <a href="https://www.bme.ufl.edu/node/1724">2015 Biomedical Engineering Art of Research contest</a> and two honorable mentions in the <a href="https://www.floridamuseum.ufl.edu/elegance-science/art/2015-entries/">2015 Elegance of Science</a> contest for several images I created (sometimes inadvertently) during my research at BICI2 Lab. Traveling is a passion of mine and I have visited four continents (North America, South America, Africa, and Europe) and fully intend on visiting all seven, including Antarctica.</p>
+  <div class="timeline-row">
+    <b class="timeline-when">2017-2018:</b>
+    <em class="timeline-what">Chief Technology Officer</em>
+    <span class="timeline-where">at CytoInformatics, LLC</span>
   </div>
-
-  <div class="text-container">
-    <h2>Timeline</h2>
-
-    <div class="timeline-row">
-      <b class="timeline-when">2017-Present:</b>
-      <em class="timeline-what">Chief Technology Officer</em>
-      <span class="timeline-where">at CytoInformatics, LLC</span>
-    </div>
-    <div class="timeline-row">
-      <b class="timeline-when">2015-2016:</b>
-      <em class="timeline-what">Research Assistant</em>
-      <span class="timeline-where">at BICI2 Lab</span>
-    </div>
-    <div class="timeline-row">
-      <b class="timeline-when">2015-2016:</b>
-      <em class="timeline-what">MS in Biomedical Engineering</em>
-      <span class="timeline-where">at University of Florida</span>
-    </div>
-    <div class="timeline-row">
-      <b class="timeline-when">2014:</b>
-      <em class="timeline-what">Image Processing Research Assistant</em>
-      <span class="timeline-where">at University of North Florida</span>
-    </div>
-    <div class="timeline-row">
-      <b class="timeline-when">2009-2013:</b>
-      <em class="timeline-what">BSc in Electrical Engineering</em>
-      <span class="timeline-where">at University of North Florida</span>
-    </div>
+  <div class="timeline-row">
+    <b class="timeline-when">2015-2016:</b>
+    <em class="timeline-what">Research Assistant</em>
+    <span class="timeline-where">at BICI2 Lab</span>
   </div>
-
-  <div class="text-container">
-    <h2>Projects</h2>
-
-    <div id="carousel-gallery">
-      <div id="carousel-list">
-        <div id="carousel-thumbnail-1" class="carousel-thumbnail selected">
+  <div class="timeline-row">
+    <b class="timeline-when">2015-2016:</b>
+    <em class="timeline-what">MS in Biomedical Engineering</em>
+    <span class="timeline-where">at University of Florida</span>
+  </div>
+  <div class="timeline-row">
+    <b class="timeline-when">2014:</b>
+    <em class="timeline-what">Image Processing Research Assistant</em>
+    <span class="timeline-where">at University of North Florida</span>
+  </div>
+  <div class="timeline-row">
+    <b class="timeline-when">2009-2013:</b>
+    <em class="timeline-what">BSc in Electrical Engineering</em>
+    <span class="timeline-where">at University of North Florida</span>
+  </div>
+</div>
+<div class="text-container">
+  <h2>Projects</h2>
+  <div id="carousel-gallery">
+    <div id="carousel-list">
+      <div id="carousel-thumbnail-1" class="carousel-thumbnail selected">
+        <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
+      </div>
+      <div id="carousel-thumbnail-2" class="carousel-thumbnail">
+        <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
+      </div>
+      
+      <div id="carousel-thumbnail-3" class="carousel-thumbnail">
+        <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
+      </div>
+      
+      <div id="carousel-thumbnail-4" class="carousel-thumbnail">
+        <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
+      </div>
+      
+      <div id="carousel-thumbnail-5" class="carousel-thumbnail">
+        <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
+      </div>
+      
+      <div id="carousel-thumbnail-6" class="carousel-thumbnail">
+        <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
+      </div>
+    </div>
+    <div id="carousel-canvas" class="project-container">
+      <div id="project-1" class="project">
+        <div class="project-thumbnail">
           <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
         </div>
-
-        <div id="carousel-thumbnail-2" class="carousel-thumbnail">
-          <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
-        </div>
-        
-        <div id="carousel-thumbnail-3" class="carousel-thumbnail">
-          <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
-        </div>
-        
-        <div id="carousel-thumbnail-4" class="carousel-thumbnail">
-          <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
-        </div>
-        
-        <div id="carousel-thumbnail-5" class="carousel-thumbnail">
-          <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
-        </div>
-        
-        <div id="carousel-thumbnail-6" class="carousel-thumbnail">
-          <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
+        <div class="project-description">
+          <h3>CytoInformatics.com</h3>
+          <p>When I first became CTO of CytoInformatics, my first priority was to create <a href="https://cytoinformatics.com/">cytoinformatics.com</a>, a mobile-responsive website for the company. The site allows visitors to create an account, submit quotes for service, pay for services rendered, and even access a functional demo of our analysis portal. It is also SEO-optimized, allowing us to track user statistics and inform our marketing decisions.</p>
+          <b class="skills-label">Skills:</b><span>HTML/CSS/JavaScript, MySQL, PHP, CodeIgniter, AWS</span>
         </div>
       </div>
-
-      <div id="carousel-canvas" class="project-container">
-        <div id="project-1" class="project">
-          <div class="project-thumbnail">
-            <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
-          </div>
-
-          <div class="project-description">
-            <h3>CytoInformatics.com</h3>
-            <p>When I first became CTO of CytoInformatics, my first priority was to create <a href="https://cytoinformatics.com/">cytoinformatics.com</a>, a mobile-responsive website for the company. The site allows visitors to create an account, submit quotes for service, pay for services rendered, and even access a functional demo of our analysis portal. It is also SEO-optimized, allowing us to track user statistics and inform our marketing decisions.</p>
-            <b class="skills-label">Skills:</b><span>HTML/CSS/JavaScript, MySQL, PHP, CodeIgniter, AWS</span>
-          </div>
+      <div id="project-2" class="project hidden">
+        <div class="project-thumbnail">
+          <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
         </div>
-
-        <div id="project-2" class="project hidden">
-          <div class="project-thumbnail">
-            <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
-          </div>
-
-          <div class="project-description">
-            <h3>CytoInformatics Analysis Portal</h3>
-            <p>In addition to requesting and paying for services, the CytoInformatics website allows registered users to view the images and data we have analyzed for them in our online Analysis Portal, all in-browser and no installation required. Customers can view their whole-slide images, view computed statistics such as mean cell area or cell type, plot histograms and other plots, and even compare measurements across subsets of their images.</p>
-            <b class="skills-label">Skills:</b><span>Python, Flask, MongoDB, JavaScript, OpenSeadragon</span>
-          </div>
+        <div class="project-description">
+          <h3>CytoInformatics Analysis Portal</h3>
+          <p>In addition to requesting and paying for services, the CytoInformatics website allows registered users to view the images and data we have analyzed for them in our online Analysis Portal, all in-browser and no installation required. Customers can view their whole-slide images, view computed statistics such as mean cell area or cell type, plot histograms and other plots, and even compare measurements across subsets of their images.</p>
+          <b class="skills-label">Skills:</b><span>Python, Flask, MongoDB, JavaScript, OpenSeadragon</span>
         </div>
-        
-        <div id="project-3" class="project hidden">
-          <div class="project-thumbnail"> 
-            <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
-          </div>
-
-          <div class="project-description">
-            <h3>CytoInformatics Image Analysis Services</h3>
-            <p>At CytoInformatics, the primary service we provide is skilled histology and cytology image analysis. Whether for muscle fiber segmentation, bladder carcinoma typing, Ki-67 immunostained cell staining quantification, or something else, we address a variety of client needs with precision and flexibility, thanks in part to our powerful convolutional and recurrent neural networks.</p>
-            <b class="skills-label">Skills:</b><span>Python, CNNs, TensorFlow, OpenSlide, ImageJ</span>
-          </div>
+      </div>
+      
+      <div id="project-3" class="project hidden">
+        <div class="project-thumbnail"> 
+          <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
         </div>
-        
-        <div id="project-4" class="project hidden">
-          <div class="project-thumbnail">
-            <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
-          </div>
-
-          <div class="project-description">
-            <h3>Scopal: In-Browser Medical Image Analysis Tool</h3>
-            <p>During my transition from BICI2 Lab to CytoInformatics, I worked on Scopal, a browser-based whole-slide image viewer and analysis tool. The app features a responsive design and intuitive user interface and supports a variety of features for image annotation including region-of-interest annotation, speech-to-text transcription, and even deep learning-based cell segmentation.</p>
-            <p>Github: <a href="https://github.com/JimBoonie/Scopal">https://github.com/JimBoonie/Scopal</a></p>
-            <b class="skills-label">Skills:</b><span>JavaScript, OpenSeadragon, Paper.js, Python, Flask, Tensorflow</span>
-          </div>
+        <div class="project-description">
+          <h3>CytoInformatics Image Analysis Services</h3>
+          <p>At CytoInformatics, the primary service we provide is skilled histology and cytology image analysis. Whether for muscle fiber segmentation, bladder carcinoma typing, Ki-67 immunostained cell staining quantification, or something else, we address a variety of client needs with precision and flexibility, thanks in part to our powerful convolutional and recurrent neural networks.</p>
+          <b class="skills-label">Skills:</b><span>Python, CNNs, TensorFlow, OpenSlide, ImageJ</span>
         </div>
-        
-        <div id="project-5" class="project hidden">
-          <div class="project-thumbnail">
-            <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
-          </div>
-
-          <div class="project-description">
-            <h3>CompuToolkit</h3>
-            <p>CompuToolkit is a tool for graphically prototyping image processing workflows for histology images. Functions are represented as "nodes" and their inputs and outputs are connected via "conduits." The user can import functions from Python modules by simply adding the name of the module to a configuration file. Initially started as a personal project of mine, I aspire to eventually use it for rapidly experimenting with image processing tasks.</p>
-            <p>Github: <a href="https://github.com/JimBoonie/CompuToolkit">https://github.com/JimBoonie/CompuToolkit</a></p>
-            <b class="skills-label">Skills:</b><span>Python, Flask, OpenSeadragon, Paper.js</span>
-          </div>
+      </div>
+      
+      <div id="project-4" class="project hidden">
+        <div class="project-thumbnail">
+          <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
         </div>
-        
-        <div id="project-6" class="project hidden">
-          <div class="project-thumbnail">
-            <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
-          </div>
-
-          <div class="project-description">
-            <h3>MuscleMiner C++ Refactor</h3>
-            <p>MuscleMiner is a desktop application developed at BICI2 Lab for the segmentation and analysis of muscle tissue images. To optimize the segmentation speed, our team converted the original MATLAB code into optimized C++.</p>
-            <b class="skills-label">Skills:</b><span>C++, OpenCV, MATLAB</span>
-          </div>
+        <div class="project-description">
+          <h3>Scopal: In-Browser Medical Image Analysis Tool</h3>
+          <p>During my transition from BICI2 Lab to CytoInformatics, I worked on Scopal, a browser-based whole-slide image viewer and analysis tool. The app features a responsive design and intuitive user interface and supports a variety of features for image annotation including region-of-interest annotation, speech-to-text transcription, and even deep learning-based cell segmentation.</p>
+          <p>Github: <a href="https://github.com/JimBoonie/Scopal">https://github.com/JimBoonie/Scopal</a></p>
+          <b class="skills-label">Skills:</b><span>JavaScript, OpenSeadragon, Paper.js, Python, Flask, Tensorflow</span>
+        </div>
+      </div>
+      
+      <div id="project-5" class="project hidden">
+        <div class="project-thumbnail">
+          <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
+        </div>
+        <div class="project-description">
+          <h3>CompuToolkit</h3>
+          <p>CompuToolkit is a tool for graphically prototyping image processing workflows for histology images. Functions are represented as "nodes" and their inputs and outputs are connected via "conduits." The user can import functions from Python modules by simply adding the name of the module to a configuration file. Initially started as a personal project of mine, I aspire to eventually use it for rapidly experimenting with image processing tasks.</p>
+          <p>Github: <a href="https://github.com/JimBoonie/CompuToolkit">https://github.com/JimBoonie/CompuToolkit</a></p>
+          <b class="skills-label">Skills:</b><span>Python, Flask, OpenSeadragon, Paper.js</span>
+        </div>
+      </div>
+      
+      <div id="project-6" class="project hidden">
+        <div class="project-thumbnail">
+          <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
+        </div>
+        <div class="project-description">
+          <h3>MuscleMiner C++ Refactor</h3>
+          <p>MuscleMiner is a desktop application developed at BICI2 Lab for the segmentation and analysis of muscle tissue images. To optimize the segmentation speed, our team converted the original MATLAB code into optimized C++.</p>
+          <b class="skills-label">Skills:</b><span>C++, OpenCV, MATLAB</span>
         </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}
 
 {% block extra_js %}

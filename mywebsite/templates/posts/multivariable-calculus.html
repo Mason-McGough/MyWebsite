@@ -1,3 +1,6 @@
+{% extends 'blog_post.html' %}
+
+{% block blog_post_content %}
 <div class="text-container">
   <img class="post-img" height=400 src="{{ url_for('static', filename='images/blog/jacobian.gif') }}" alt="Multivariable Calculus" />
 
@@ -28,3 +31,4 @@
 
   <p><a href="https://github.com/JimBoonie/MultivariableCalculus">Download from Github</a></p>
 </div>
+{% endblock %}

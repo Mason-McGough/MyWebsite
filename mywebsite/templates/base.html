@@ -28,24 +28,22 @@
   {% endblock extra_js %}
 
   {% block backdrop_js %}
-    <script src="{{ url_for('static', filename='js/three/three.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/three/FBXLoader2.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/three/FresnelShader.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/three/HorseThreeHelpers.js') }}"></script>
-  
-    <!-- STATIC RESOURCES -->
-    <script>
-        var audio_url = "{{ url_for('static', filename='3d_assets/audio/aquaticAmbience.mp3') }}";
-        var seafloor_url = "{{ url_for('static', filename='3d_assets/seafloor.fbx') }}";
-        var cubemap = "{{ url_for('static', filename='3d_assets/cubemaps/ame_nebula/') }}";
-        var format = ".png";
-        var cubemap_urls = [ 
-            cubemap + 'posx' + format, cubemap + 'negx' + format,
-            cubemap + 'posy' + format, cubemap + 'negy' + format,
-            cubemap + 'posz' + format, cubemap + 'negz' + format
-        ];
-    </script>
-    <script src="{{ url_for('static', filename='js/pages/basepage.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/three/three.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/three/FBXLoader2.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/three/FresnelShader.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/three/HorseThreeHelpers.js') }}"></script>
+  <script>
+      var audio_url = "{{ url_for('static', filename='3d_assets/audio/aquaticAmbience.mp3') }}";
+      var seafloor_url = "{{ url_for('static', filename='3d_assets/seafloor.fbx') }}";
+      var cubemap = "{{ url_for('static', filename='3d_assets/cubemaps/ame_nebula/') }}";
+      var format = ".png";
+      var cubemap_urls = [ 
+          cubemap + 'posx' + format, cubemap + 'negx' + format,
+          cubemap + 'posy' + format, cubemap + 'negy' + format,
+          cubemap + 'posz' + format, cubemap + 'negz' + format
+      ];
+  </script>
+  <script src="{{ url_for('static', filename='js/pages/basepage.js') }}"></script>
   {% endblock backdrop_js %}
 </html>
 

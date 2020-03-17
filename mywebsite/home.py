@@ -9,5 +9,4 @@ bp = Blueprint('home', __name__)
 def index():
     return render_template(
         'home.html', 
-        posts=get_blog_posts(),
-        max_posts=3)
+        posts=get_blog_posts(max_posts=3))
