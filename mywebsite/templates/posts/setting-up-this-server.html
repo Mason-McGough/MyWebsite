@@ -2,7 +2,7 @@
 
 {% block blog_post_content %}
 <div class="text-container">
-  <img class="post-img" src="{{ url_for('static', filename='images/blog/homepage.png') }}" alt="Setting Up This Server" />
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/setting-up-this-server/homepage.png') }}" alt="Setting Up This Server" />
 
   <p>As the first full post I will be making on this blog, I figured it would be interesting for me to discuss how I made this website in the first place. This post will introduce you to setting up a simple server on <a href="https://aws.amazon.com/">Amazon AWS</a> using their <b>Elastic Compute Cloud (EC2)</b> service and getting a fork of this website running.</p>
 
@@ -16,7 +16,7 @@
 
   <h2>Launching Your EC2 Server</h2>
 
-  <img class="post-img" src="{{ url_for('static', filename='images/blog/aws-homepage.png') }}" alt="AWS" />
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/setting-up-this-server/aws-homepage.png') }}" alt="AWS" />
 
   <p>Once you have registered your account and logged in, you should be at the AWS Console. From here you can see a list of the many services that AWS has to offer. Click on the EC2 service from the list or search for EC2 in the search bar. This will take you to the EC2 Dashboard, from which you can see your running EC2 servers, manage their security settings in <b>Security Groups</b>, manage the <b>Key Pairs</b> that will allow you to connect to EC2 servers via SSH, and plenty more. Here is where you will probably spend most of your time on AWS, and where we will launch our first EC2 server.</p>
 
@@ -52,7 +52,7 @@
 
   <p>Install PuTTY, then launch PuTTYgen. Click the "Load" button and find and select your <i>.pem</i> file. Next click "Save private key" to create your new <i>.ppk</i> file. If it asks you if you wish to save it without a passphrase, select "Yes."</p>
 
-  <img class="post-img" src="{{ url_for('static', filename='images/blog/putty.png') }}" alt="PuTTY" />
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/setting-up-this-server/putty.png') }}" alt="PuTTY" />
 
   <p>*exhales* Almost there. Lastly, launch PuTTY. In the "Category" menu, select "Session" if it is not already selected. Enter the IP address you copied under "Host Name (or IP address). Now load the <i>.ppk</i> file by selecting "Connection->SSH->Auth" and then clicking "Browse..." next to the "Private key file for authentication" field. Go back to "Session" and hit "Open." If you so wish, you can even give this session a name under "Saved Sessions" and click "Save" to store these settings for later. If the fates are smiling upon you, a terminal should open to ask you which user you would like to use. Type "ubuntu," hit enter, and whisper "I'm in" just loud enough so that nobody else asks what you just said.</p> 
 

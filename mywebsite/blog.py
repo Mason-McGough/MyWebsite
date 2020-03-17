@@ -8,7 +8,7 @@ BLOG_POSTS = [
         'title': 'Multivariable Calculus with Python',
         'description': 'A review of fundamental multivariable calculus concepts with Python and Jupyter notebooks',
         'date_posted': 'Aug. 21, 2018',
-        'thumbnail': 'laplacian-of-f.png',
+        'thumbnail': 'multivariable-calculus/multivariable-calculus-thumbnail.png',
         'filename': 'multivariable-calculus.html'
     },
     {
@@ -16,7 +16,7 @@ BLOG_POSTS = [
         'title': 'Operations Graph',
         'description': 'A method for running function operations in sequence with piped outputs',
         'date_posted': 'May 7, 2018',
-        'thumbnail': 'ops-graph-thumb.png',
+        'thumbnail': 'operations-graph/operations-graph-thumbnail.png',
         'filename': 'operations-graph.html'
     },
     {
@@ -24,7 +24,7 @@ BLOG_POSTS = [
         'title': 'Setting Up This Server',
         'description': 'How and why I created the server running this website',
         'date_posted': 'Feb. 25, 2018',
-        'thumbnail': 'setting-up-this-server.png',
+        'thumbnail': 'setting-up-this-server/setting-up-this-server-thumbnail.png',
         'filename': 'setting-up-this-server.html'
     },
     {
@@ -32,7 +32,7 @@ BLOG_POSTS = [
         'title': 'Welcome',
         'description': 'An introduction to the creation of this website',
         'date_posted': 'Feb. 17, 2018',
-        'thumbnail': 'welcome.jpg',
+        'thumbnail': 'welcome/welcome-thumbnail.jpg',
         'filename': 'welcome.html'
     }
 ]
