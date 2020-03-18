@@ -1,63 +1,57 @@
 import os
+from datetime import datetime
 
 from flask import Blueprint, flash, current_app, g, render_template
 
-BLOG_POSTS = [
-    {
-        'id': 0,
-        'title': 'Multivariable Calculus with Python',
-        'description': 'A review of fundamental multivariable calculus concepts with Python and Jupyter notebooks',
-        'date_posted': 'Aug. 21, 2018',
-        'thumbnail': 'multivariable-calculus/multivariable-calculus-thumbnail.png',
-        'filename': 'multivariable-calculus.html'
-    },
-    {
-        'id': 1,
-        'title': 'Operations Graph',
-        'description': 'A method for running function operations in sequence with piped outputs',
-        'date_posted': 'May 7, 2018',
-        'thumbnail': 'operations-graph/operations-graph-thumbnail.png',
-        'filename': 'operations-graph.html'
-    },
-    {
-        'id': 2,
-        'title': 'Setting Up This Server',
-        'description': 'How and why I created the server running this website',
-        'date_posted': 'Feb. 25, 2018',
-        'thumbnail': 'setting-up-this-server/setting-up-this-server-thumbnail.png',
-        'filename': 'setting-up-this-server.html'
-    },
-    {
-        'id': 3,
-        'title': 'Welcome',
-        'description': 'An introduction to the creation of this website',
-        'date_posted': 'Feb. 17, 2018',
-        'thumbnail': 'welcome/welcome-thumbnail.jpg',
-        'filename': 'welcome.html'
-    }
-]
+from mywebsite.db import get_db
 
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
 
+def get_blog_post(id):
+    db = get_db()
+    post = db.execute(
+        'SELECT * FROM post WHERE id=?',
+        (id,)
+    ).fetchone()
+    return post
+
 def get_blog_posts(max_posts=-1):
-    if 'blog_posts' not in g:
-        g.blog_posts = BLOG_POSTS
-
-    if max_posts < 0:
-        blog_posts = g.blog_posts
+    db = get_db()
+    posts_query = db.execute(
+        'SELECT * FROM post ORDER BY date_posted DESC'
+    )
+    if max_posts >= 0:
+        posts = posts_query.fetchmany(max_posts)
     else:
-        blog_posts = g.blog_posts[:max_posts]
+        posts = posts_query.fetchall()
 
-    return blog_posts
+    return posts
+
+def convert_post_sqlite_to_client(post):
+    return {
+        'id': post['id'],
+        'title': post['title'],
+        'description': post['description'],
+        'date_posted': post['date_posted'].strftime('%b %d, %Y'),
+        'thumbnail': post['thumbnail'],
+        'filename': post['filename']
+    }
 
 @bp.route('/')
 def index():
-    return render_template('blog.html', posts=get_blog_posts())
+    posts = get_blog_posts()
+    client_posts = []
+    for post in posts:
+        client_posts.append(convert_post_sqlite_to_client(post))
+
+    return render_template(
+        'blog.html', 
+        posts=client_posts)
 
 @bp.route('/post/<int:id>')
 def post(id):
-    post = get_blog_posts()[id]
+    post = convert_post_sqlite_to_client(get_blog_post(id))
     return render_template(
         os.path.join('posts', post['filename']),
         post=post)

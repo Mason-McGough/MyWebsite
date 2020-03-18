@@ -1,4 +1,4 @@
-My website
+# My website
 
 ## Installation Instructions
 1) Clone the repo to your computer
@@ -11,3 +11,10 @@ conda create -n mysite python=3.6 django
 ```
 source activate mysite
 ```
+
+## To-do
+* store blog posts list in sqlite
+* implement unit tests in flask
+* remove django code
+* update Introduction section
+* update Projects with new work
