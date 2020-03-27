@@ -13,8 +13,7 @@ source activate mysite
 ```
 
 ## To-do
-* store blog posts list in sqlite
 * implement unit tests in flask
-* remove django code
+* update README.md
 * update Introduction section
 * update Projects with new work
