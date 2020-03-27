@@ -33,5 +33,4 @@ flask run
 Verify that this worked by navigating to http://127.0.0.1:5000/. You should see the front page.
 
 ## To-do
-* update Introduction section
 * update Projects with new work
