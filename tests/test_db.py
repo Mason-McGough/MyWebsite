@@ -1,6 +1,6 @@
+import pytest
 import sqlite3
 
-import pytest
 from mywebsite.db import get_db
 
 
