@@ -53,8 +53,8 @@
 <div class="text-container">
   <h2>Biography</h2>
   <p>I am the machine learning engineer at <a href="http://www.lowesinnovationlabs.com/">Lowe's Innovation Labs (LIL)</a>. At LIL, I developed computer vision applications that accelerate the photogrammetry process underlying the generation of high-quality <a href="http://www.lowesinnovationlabs.com/lowes3d">3D product assets</a> featured on lowes.com and the View in your Space feature of the Lowe's app.</p>
-  <p>Formerly I was the chief technology officer of CytoInformatics, LLC, a medical imaging informatics startup that solved image analysis tasks for pathologists and drug analysts. Before that, I obtained my Master of Science in Biomedical Engineering from the University of Florida. I was employed as a research assistant for the <a href="https://www.bme.ufl.edu/labs/yang/index.html">Biomedical Image Computing and Imaging Informatics (BICI2) Lab</a>, where my research focus was on discovering features for myositis diagnosis in whole-slide images. This led to my thesis "<a href="http://uf.catalog.fcla.edu/permalink.jsp?20UF035292811">Selection of Salient Morphological and Network Features for Computational Diagnosis of Myositis</a>." In the meantime, I co-authored two papers: "<a href="{{ url_for('static', filename='pdfs/mdnet2017.pdf') }}">MDNet: A Semantically and Visually Interpretable Medical Image Diagnosis Network</a>" and "<a href="{{ url_for('static', filename='pdfs/miccai2015') }}">Robust Muscle Cell Quantification Using Structured Edge Detection and Hierarchical Segmentation</a>."</p>
-  <p>In my spare time, I enjoy learning new skills and technology, including photography, photogrammetry, 3D art, game development, and music production. While pursuing my M.S. degree, I received 2nd place in the <a href="https://www.bme.ufl.edu/node/1724">2015 Biomedical Engineering Art of Research contest</a> and two honorable mentions in the <a href="https://www.floridamuseum.ufl.edu/elegance-science/art/2015-entries/">2015 Elegance of Science</a> contest for several images I created (sometimes inadvertently) during my research at BICI2 Lab. Traveling is a passion of mine and I have visited four continents (North America, South America, Africa, and Europe) and fully intend on visiting all seven, including Antarctica.</p>
+  <p>Formerly I was the chief technology officer of CytoInformatics, LLC, a medical imaging informatics startup that solved image analysis tasks for pathologists and drug analysts. Before that, I obtained my Master of Science in Biomedical Engineering from the University of Florida. I was employed as a research assistant for the <a href="https://www.bme.ufl.edu/labs/yang/index.html">Biomedical Image Computing and Imaging Informatics (BICI2) Lab</a>, where my research focus was on discovering features for myositis diagnosis in whole-slide images. This led to my thesis "<a href="http://uf.catalog.fcla.edu/permalink.jsp?20UF035292811">Selection of Salient Morphological and Network Features for Computational Diagnosis of Myositis</a>." A complete list of my publications can be found on <a href="https://www.researchgate.net/profile/Mason_Mcgough2">ResearchGate</a>.</p>
+  <p>In my spare time, I enjoy learning new skills and technology, including photography, photogrammetry, 3D art, game development, and music production. While pursuing my M.S. degree, I received 2nd place in the <a href="https://www.bme.ufl.edu/node/1724">2015 Biomedical Engineering Art of Research contest</a> and two honorable mentions in the <a href="https://www.floridamuseum.ufl.edu/elegance-science/art/2015-entries/">2015 Elegance of Science</a> contest for several images I created during my research at BICI2 Lab. Traveling is a passion of mine. I have visited four continents (North America, South America, Africa, and Europe) and fully intend on visiting all seven.</p>
 </div>
 <div class="text-container">
   <h2>Timeline</h2>
@@ -94,30 +94,46 @@
   <div id="carousel-gallery">
     <div id="carousel-list">
       <div id="carousel-thumbnail-1" class="carousel-thumbnail selected">
+        <img src="{{ url_for('static', filename='images/3dscan.jpeg') }}" alt="3D Asset Pipeline" \>
+      </div>
+
+      <div id="carousel-thumbnail-2" class="carousel-thumbnail">
         <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
       </div>
-      <div id="carousel-thumbnail-2" class="carousel-thumbnail">
+
+      <div id="carousel-thumbnail-3" class="carousel-thumbnail">
         <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
       </div>
       
-      <div id="carousel-thumbnail-3" class="carousel-thumbnail">
+      <div id="carousel-thumbnail-4" class="carousel-thumbnail">
         <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
       </div>
       
-      <div id="carousel-thumbnail-4" class="carousel-thumbnail">
+      <div id="carousel-thumbnail-5" class="carousel-thumbnail">
         <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
       </div>
       
-      <div id="carousel-thumbnail-5" class="carousel-thumbnail">
+      <div id="carousel-thumbnail-6" class="carousel-thumbnail">
         <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
       </div>
       
-      <div id="carousel-thumbnail-6" class="carousel-thumbnail">
+      <div id="carousel-thumbnail-7" class="carousel-thumbnail">
         <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
       </div>
     </div>
     <div id="carousel-canvas" class="project-container">
       <div id="project-1" class="project">
+        <div class="project-thumbnail">
+          <img src="{{ url_for('static', filename='images/3dscan.jpeg') }}" alt="3D Asset Pipeline" \>
+        </div>
+        <div class="project-description">
+          <h3>3D Asset Pipeline</h3>
+          <p>The product 3D assets found on the Lowe's app and website are produced by a proprietary photogrammetry pipeline developed at Lowe's Innovation Labs. I introduced several optimizations to enrich and accelerate the photogrammetry scan production process.</p>
+          <b class="skills-label">Skills:</b><span>Photogrammetry, TensorFlow, Apache Airflow, Docker, Kubernetes</span>
+        </div>
+      </div>
+
+      <div id="project-2" class="project hidden">
         <div class="project-thumbnail">
           <img src="{{ url_for('static', filename='images/website.png') }}" alt="Website" \>
         </div>
@@ -127,7 +143,7 @@
           <b class="skills-label">Skills:</b><span>HTML/CSS/JavaScript, MySQL, PHP, CodeIgniter, AWS</span>
         </div>
       </div>
-      <div id="project-2" class="project hidden">
+      <div id="project-3" class="project hidden">
         <div class="project-thumbnail">
           <img src="{{ url_for('static', filename='images/analysis_portal.png') }}" alt="Analysis Portal" \>
         </div>
@@ -138,7 +154,7 @@
         </div>
       </div>
       
-      <div id="project-3" class="project hidden">
+      <div id="project-4" class="project hidden">
         <div class="project-thumbnail"> 
           <img src="{{ url_for('static', filename='images/image_analysis.png') }}" alt="Image Analysis" \>
         </div>
@@ -149,7 +165,7 @@
         </div>
       </div>
       
-      <div id="project-4" class="project hidden">
+      <div id="project-5" class="project hidden">
         <div class="project-thumbnail">
           <img src="{{ url_for('static', filename='images/scopal.png') }}" alt="Scopal" \>
         </div>
@@ -161,7 +177,7 @@
         </div>
       </div>
       
-      <div id="project-5" class="project hidden">
+      <div id="project-6" class="project hidden">
         <div class="project-thumbnail">
           <img src="{{ url_for('static', filename='images/computoolkit.png') }}" alt="CompuToolkit" \>
         </div>
@@ -173,7 +189,7 @@
         </div>
       </div>
       
-      <div id="project-6" class="project hidden">
+      <div id="project-7" class="project hidden">
         <div class="project-thumbnail">
           <img src="{{ url_for('static', filename='images/muscleminer.png') }}" alt="MuscleMiner" \>
         </div>
