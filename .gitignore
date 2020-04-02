@@ -1,10 +1,18 @@
-db.sqlite3
-to-do.md
+venv/
 
-**/migrations
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
+
 **/__pycache__
-**/MyWebsiteEnv
 **/workspace
-**/static/admin
 
 *.pyc
+*.sqlite
+*.sqlite3

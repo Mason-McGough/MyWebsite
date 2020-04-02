@@ -1,0 +1,168 @@
+{% extends 'blog_post.html' %}
+
+{% block blog_post_content %}
+<div class="text-container">
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/setting-up-this-server/homepage.png') }}" alt="Setting Up This Server" />
+
+  <p>As the first full post I will be making on this blog, I figured it would be interesting for me to discuss how I made this website in the first place. This post will introduce you to setting up a simple server on <a href="https://aws.amazon.com/">Amazon AWS</a> using their <b>Elastic Compute Cloud (EC2)</b> service and getting a fork of this website running.</p>
+
+  <p>Although AWS has another very powerful service called <a href="https://aws.amazon.com/elasticbeanstalk/">Elastic Beanstalk</a> which makes server configuration and auto-scaling a (comparatively) trivial task, I opted to use a plain-old EC2 server running Ubuntu 16.04. But why? Why forgo the virtues of quick deployment for dozens of boring console commands just to arrive at the same place?</p> 
+
+  <p>From my experience Elastic Beanstalk often behaves unpredictably, resetting and generating new instances often without much warning. This is all a part of its autoscaling paradigm, which makes it a powerful option for applications that need to scale dynamically to changing demands and loads. As a consequence, performing low-level server maintenance such as changing file permissions, copying folders, or manually configuring server settings becomes a non-trivial task, as each reset restores the server to its default state (from a machine image, which you can specify). If you want specific, persistent server configurations, you can do one of two things: either specify your changes in a configuration file and upload it with your application source code (preferred) or make your desired changes to the server, <i>quickly</i> create a machine image, and then replace the previous image in the Elastic Beanstalk  with this new image.</p>
+
+  <p>Running Elastic Beanstalk makes it straightforward to get relatively standard server configurations up-and-running almost immediately and, most importantly, allows the server infrastructure to adjust dynamically to fluctuations in demand. It's remarkably useful for applications like my company website, but overkill for a personal website like this and can be a pain to work with during the experimentation phase.</p>
+
+  <p>With that bit of explanation out of the way, it's time to get our AWS server started. Go ahead to the <a href="https://aws.amazon.com/">aws.amazon.com</a> and create your account. Don't worry, everything we will be using is covered under the Free Tier, so nothing to pay out-of-pocket.</p>
+
+  <h2>Launching Your EC2 Server</h2>
+
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/setting-up-this-server/aws-homepage.png') }}" alt="AWS" />
+
+  <p>Once you have registered your account and logged in, you should be at the AWS Console. From here you can see a list of the many services that AWS has to offer. Click on the EC2 service from the list or search for EC2 in the search bar. This will take you to the EC2 Dashboard, from which you can see your running EC2 servers, manage their security settings in <b>Security Groups</b>, manage the <b>Key Pairs</b> that will allow you to connect to EC2 servers via SSH, and plenty more. Here is where you will probably spend most of your time on AWS, and where we will launch our first EC2 server.</p>
+
+  <p>You should see a big "Launch Instance" button. Press it. A wizard should begin, asking you to pick from a variety of <b>Amazon Machine Images (AMI)</b>, preconfigured servers with different operating systems, settings, and hardware. Pick the "Ubuntu Server 16.04 LTS" option.</p>
+
+  <p>Next it will ask for an instance type, which determines the CPU, memory, and disk space of your instance. Go with the Free Tier "t2.micro" since we want to keep this cheap. For now, use the default settings for the other options, including the Security Groups, which we will modify later.</p>
+
+  <p>Once you have reviewed your settings, click "Launch." It should ask you for one more thing: to create a new Key Pair or select an existing one. Let us create a new one. This will generate a <b>public key</b> on AWS corresponding to this instance and a <b>private key</b> which you can and should download. Give it a name, download it, and keep it safe.</p>
+
+  <h2>Connect To Your Server</h2>
+
+  <p>AWS should now be hard at work to generate your new instance. Go back to the EC2 Dashboard and click "Instances." You should see your new fella there, hopefully with an <b>Instance State</b> of "running." Click on your instance to view information about the little rascal. Under the "Description" tab, go ahead and copy the value under "IPv4 Public IP."</p>
+
+  <p>Next we will try to connect to the instance using SSH. If you are on a Mac or Linux-based machine, this is a fairly straightforward process. If you're running Windows, I sincerely apologize because this will get a bit more complicated. Skip on ahead to the next section. Otherwise, complete this section and skip the following section once you're done.</p>
+
+  <p>Open up a fresh console the way you prefer (I use <i>ctrl+alt+t</i> on my Ubuntu machine). Then, locate the private key you downloaded in the previous section and enter the following into the terminal:</p>
+
+  <div class="code-block">
+<pre><code>ssh -i /path/to/private_key.pem ubuntu@ip.address</code></pre>
+  </div>
+
+  <p>replacing "ip.address" with the address you copied from the EC2 Dashboard. You might get "UNPROTECTED PRIVATE KEY FILE" or a similar warning. This can be easily fixed by changing the permissions on the file:</p>
+
+  <div class="code-block">
+<pre><code>chmod 0600 /path/to/private_key.pem</code></pre>
+  </div>
+
+  <p>Try the <i>ssh</i> command again and it should let you in this time.</p>
+
+  <h3>(Windows) Connect To Your Server</h3>
+
+  <p>Windows, unlike Linux systems, doesn't support the use of OpenSSH from the command line. Instead, you will have to download and install <b><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a></b>, an SSH client with a helpful GUI made for Windows users. This installer should also install <b>PuTTYgen</b>, which you will need to convert your private key <i>.pem</i> file (which PuTTY doesn't like) to a <i>.ppk</i> file (which PuTTY does like).</p>
+
+  <p>Install PuTTY, then launch PuTTYgen. Click the "Load" button and find and select your <i>.pem</i> file. Next click "Save private key" to create your new <i>.ppk</i> file. If it asks you if you wish to save it without a passphrase, select "Yes."</p>
+
+  <img class="post-img" src="{{ url_for('static', filename='images/blog/setting-up-this-server/putty.png') }}" alt="PuTTY" />
+
+  <p>*exhales* Almost there. Lastly, launch PuTTY. In the "Category" menu, select "Session" if it is not already selected. Enter the IP address you copied under "Host Name (or IP address). Now load the <i>.ppk</i> file by selecting "Connection->SSH->Auth" and then clicking "Browse..." next to the "Private key file for authentication" field. Go back to "Session" and hit "Open." If you so wish, you can even give this session a name under "Saved Sessions" and click "Save" to store these settings for later. If the fates are smiling upon you, a terminal should open to ask you which user you would like to use. Type "ubuntu," hit enter, and whisper "I'm in" just loud enough so that nobody else asks what you just said.</p> 
+
+  <h2>Setting Up Python And Your Web Server</h2> 
+
+  <p>Now that we have a console to our server open, let's install some things from the Ubuntu software repositories:</p>
+
+  <div class="code-block">
+<pre><code>sudo apt-get update
+sudo apt-get install python3-pip apache2 apache2-dev libapache2-mod-wsgi-py3</code></pre>
+  </div>
+
+  <p>This will update all of the links in your installation manager, then install the Apache web server and Python3. Next we will install virtualenv:</p>
+
+  <div class="code-block">
+<pre><code>sudo pip3 install --upgrade pip
+sudo pip3 install virtualenv</code></pre>
+  </div>
+
+  <p>Using a virtual environment will allow you to freely install and modify your application-specific packages without interfering with the system's Python environment. It also makes dependency management much cleaner when you are running multiple applications on the same device.</p>
+
+  <p>Now let's clone a copy of the website from Github. Then, we will create a virtualenv and install the packages necessary for handling requests to the website:</p>
+
+  <div class="code-block">
+<pre><code>mkdir thiswebsite
+cd thiswebsite
+git clone https://github.com/JimBoonie/MyWebsite.git
+virtualenv thiswebsite-env
+source thiswebsite-env/bin/activate
+pip install mod_wsgi django</code></pre>
+  </div>
+
+  <p>Now that we have the server environment set up and all of the required packages installed, let's go ahead and see if we can view it in a browser. First, we will need to modify the server's <b>Security Group</b> to enable HTTP access via port 80.</p>
+
+  <p>Go back to the EC2 Dashboard and select your instance. Under "Description," find the field "Security Groups" and click on the link corresponding to the name of its Security Group. This will take you to the Security Group menu. Select the Security Group, then click on the "Inbound" tab next to the "Description" tab. You should see a table with only one rule for SSH using port 22. Click "Edit" so that we can add an additional rule for HTTP access. Click "Add Rule" to add a new row to the table, then change the Type to "HTTP." This will set the port to 80 and should set the port to "0.0.0.0/0, ::/0." This will allow access to port 80 from any IP address. This is generally considered unsafe, so if it makes you feel better, you can select "My IP" from the Source menu and it will fill the field with your own IP address. However you will only be able to access it from the computer you are currently using. Either option will work for this tutorial.</p>
+
+  <p>Now let's test out this server to make sure everything is in order. Copy and paste the server IP address into your browser. It should take you to the <b>Apache2 Default Page</b>. That's great! That means the Apache server is working.</p>
+
+  <p>We would prefer, however, to have Apache serve the website that you just downloaded from my GitHub rather than serving its own default page. For that, we will need to edit the file <code>/etc/apache2/sites-available/000-default.conf</code>. Open this file using <code>nano</code> or your preferred text editor and add the following to the bottom, right above the <code>&lt;/VirtualHost&gt;</code> line:</p>
+
+  <div class="code-block">
+<pre><code>Alias /static /home/ubuntu/thiswebsite/MyWebsite/static
+&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/static&gt;
+    Require all granted
+&lt;/Directory&gt;
+
+&lt;Directory /home/ubuntu/thiswebsite/MyWebsite/mywebsite&gt;
+    &lt;Files wsgi.py&gt;
+        Require all granted
+    &lt;/Files&gt;
+&lt;/Directory&gt;
+
+WSGIDaemonProcess thiswebsite python-home=/home/ubuntu/thiswebsite/thiswebsite-env python-path=/home/ubuntu/thiswebsite/MyWebsite
+WSGIProcessGroup thiswebsite
+WSGIScriptAlias / /home/ubuntu/thiswebsite/MyWebsite/mywebsite/wsgi.py</code></pre>
+  </div>
+
+  <p>Real quick, check that this configuration is correct by running the following:</p>
+
+  <div class="code-block">
+<pre><code>sudo apache2ctl configtest</code></pre>
+  </div>
+
+  <p>That will tell you if the file has been configured correctly.</p>
+
+  <p>In addition, we will need to prepare the Django code to be run via the WSGI interface rather than manually by command line. Open <code>/home/ubuntu/thiswebsite/MyWebsite/mywebsite/settings.py</code> and make the following modifications:</p>
+
+  <div class="code-block">
+<pre><code>...
+# change DEBUG to False
+DEBUG = False
+
+# replace the previous value for ALLOWED_HOSTS with the server IP
+ALLOWED_HOSTS = ["ip.address"]
+...
+# replace the line containing STATICFILES_DIRS with this one
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')</code></pre>
+  </div>
+
+  <p>Just a few more things. Since Apache uses the <code>www-data</code> user instead of <code>ubuntu</code> or <code>root</code>, we will need to modify some file and folder permissions so the server can access them. Run the following:</p>
+
+  <div class="code-block">
+<pre><code>cd MyWebsite
+python manage.py makemigrations
+python manage.py migrate --run-syncdb
+sudo chmod 664 db.sqlite3
+sudo chown :www-data db.sqlite3
+sudo chown :www-data .</code></pre>
+  </div>
+
+  <p>Now, enter this:</p>
+
+  <div class="code-block">
+<pre><code>sudo ufw allow 'Apache Full'</code></pre>
+  </div>
+
+  <p>... and this:</p>
+
+  <div class="code-block">
+<pre><code>python3 manage.py collectstatic</code></pre>
+  </div>
+
+  <p>And lastly, let's restart the Apache2 server to make sure it reloads those changes we made.</p>
+
+  <div class="code-block">
+<pre><code>sudo systemctl restart apache2</code></pre>
+  </div>
+
+  <p>That should be it! Try navigating to the IP address of the server in your computer's browser. If all went well, you should see a copy of the home page for this website.</p>
+
+  <p>Thanks a lot for the visit. I hope that you like what you see and that this may help you make something of your own creation in the future.</p>
+</div>
+{% endblock %}

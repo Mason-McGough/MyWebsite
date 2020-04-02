@@ -1,0 +1,15 @@
+{% extends 'blog_post.html' %}
+
+{% block blog_post_content %}
+<div class="text-container">
+  <img class="post-img" src="{{ url_for('static', filename='images/portrait.jpg') }}" alt="Welcome" />
+
+  <h1>Welcome to My Website</h1>
+
+  <p>Hello and welcome to my website! My intention is to use this website as a reference for my professional information as well as ongoing hobbies and interests. As I work on new projects or research new interesting topics, expect to see new posts about it on this blog.</p>
+
+  <p>Soon you should find a post / tutorial detailing how I made this website. It will likely be split into multiple parts to cover all of the details.</p>
+
+  <p>Thanks for visiting! Stay tuned.</p>
+</div>
+{% endblock %}
