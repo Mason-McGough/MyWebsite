@@ -22,9 +22,17 @@ Flask uses a few variables to run this application. `FLASK_APP` tells Flask wher
 source ./set_envs.sh
 ```
 
-### 3. Launch application
+### 3. Initialize database
 
-This step will launch the web application in a Flask app instance.
+Before we can access the website, we need to initialize the database and fill it with a few posts. This website comes with a simple command line interface powered by [Click](https://click.palletsprojects.com/). Run the following command to initialize the database.
+
+```
+flask init-db
+```
+
+### 4. Launch application
+
+We should be good to start now. This step will launch the web application in a Flask app instance.
 
 ```
 flask run
